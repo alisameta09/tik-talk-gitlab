@@ -1,6 +1,6 @@
 import {Component, forwardRef, HostBinding, HostListener} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {SvgIconComponent} from '../svg-icon/svg-icon.component';
+import {SvgIconComponent} from '../index';
 import {BehaviorSubject} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 
@@ -16,8 +16,8 @@ import {AsyncPipe} from '@angular/common';
     multi: true,
     useExisting: forwardRef(() => StackInputComponent)
   }],
-  templateUrl: './stack-input.component.ts.html',
-  styleUrl: './stack-input.component.ts.css'
+  templateUrl: './stack-input.component.html',
+  styleUrl: './stack-input.component.scss'
 })
 export class StackInputComponent implements ControlValueAccessor {
   innerInput = '';

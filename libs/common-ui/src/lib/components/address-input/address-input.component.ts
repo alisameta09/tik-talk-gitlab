@@ -4,7 +4,7 @@ import {TtInputComponent} from '../tt-input/tt-input.component';
 import {debounceTime, switchMap, tap} from 'rxjs';
 import {DadataService, DadataSuggestion} from '@tt/data-access/profile';
 import {AsyncPipe} from '@angular/common';
-import {SvgIconComponent} from '@tt/common-ui';
+import {SvgIconComponent} from '../index';
 
 @Component({
   selector: 'address-input',
