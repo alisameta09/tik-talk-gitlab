@@ -8,6 +8,7 @@ import {LayoutComponent} from '@tt/layout';
 import {FormsExperimentComponent} from '@tt/experimental';
 import {ProfileEffects, profileFeature} from '@tt/data-access/profile';
 import {PostEffects, postFeature} from '@tt/data-access/posts';
+import { CommunitiesSearchPageComponent } from '@tt/communities';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,7 @@ export const routes: Routes = [
         path: 'chats',
         loadChildren: () => chatsRoutes,
       },
+      {path: 'communities', component: CommunitiesSearchPageComponent}
     ],
     canActivate: [canActivateAuth],
   },
