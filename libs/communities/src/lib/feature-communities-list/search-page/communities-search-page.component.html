@@ -8,4 +8,10 @@
 
 <app-communities-filters></app-communities-filters>
 
-<app-community-card></app-community-card>
+<div class="communities-list__wrapper">
+  @for (community of communities$ | async; track community.id) {
+    <app-community-card
+      [community]="community"
+    ></app-community-card>
+  }
+</div>

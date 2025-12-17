@@ -29,8 +29,10 @@
   grid-gap: 4px;
 }
 
-.skill-tag {
-  height: 26px;
+.community-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .community-card-button__wrapper {

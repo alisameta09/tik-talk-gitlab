@@ -1,7 +1,7 @@
 import {inject, Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs';
-import {baseApiUrl} from '@tt/shared';
+import {profileUrl} from '@tt/shared';
 import {GlobalStoreService, Profile} from '../index';
 import {Pageble} from '../interfaces/pageble.interface';
 
@@ -15,7 +15,7 @@ export class ProfileService {
   me = signal<Profile | null>(null);
 
   getMe() {
-    return this.http.get<Profile>(`${baseApiUrl}account/me`)
+    return this.http.get<Profile>(`${profileUrl}me`)
       .pipe(tap((res) => {
         this.me.set(res);
         this.#globalStoreService.me.set(res);
@@ -23,16 +23,16 @@ export class ProfileService {
   }
 
   getAccount(id: string) {
-    return this.http.get<Profile>(`${baseApiUrl}account/${id}`);
+    return this.http.get<Profile>(`${profileUrl}${id}`);
   }
 
   getSubscribersShortList(subsAmount = 3) {
-    return this.http.get<Pageble<Profile>>(`${baseApiUrl}account/subscribers/`)
+    return this.http.get<Pageble<Profile>>(`${profileUrl}subscribers/`)
       .pipe(map((res) => res.items.slice(0, subsAmount)));
   }
 
   patchProfile(profile: Partial<Profile>) {
-    return this.http.patch<Profile>(`${baseApiUrl}account/me`, profile)
+    return this.http.patch<Profile>(`${profileUrl}me`, profile)
       .pipe(
         tap(res => {
           this.me.set(res);
@@ -45,10 +45,10 @@ export class ProfileService {
     const fd = new FormData();
     fd.append('image', file);
 
-    return this.http.post<Profile>(`${baseApiUrl}account/upload_image`, fd);
+    return this.http.post<Profile>(`${profileUrl}upload_image`, fd);
   }
 
   filterProfiles(params: Record<string, any>) {
-    return this.http.get<Pageble<Profile>>(`${baseApiUrl}account/accounts`, {params})
+    return this.http.get<Pageble<Profile>>(`${profileUrl}accounts`, {params})
   }
 }

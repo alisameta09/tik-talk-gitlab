@@ -1,4 +1,5 @@
 import { DadataSuggestion } from "./interfaces/dadata.interfaces";
+import { Pageble } from './interfaces/pageble.interface';
 import { Profile } from "./interfaces/profile.interface";
 import { DadataService } from "./services/dadata.service";
 import { GlobalStoreService } from "./services/global-store.service";
@@ -14,5 +15,6 @@ export {
 
 export type {
   Profile,
-  DadataSuggestion
+  DadataSuggestion,
+  Pageble
 }
