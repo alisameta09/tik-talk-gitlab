@@ -1,0 +1,59 @@
+.community-card__wrapper {
+  border: var(--light-border);
+  padding: 20px 0;
+  background: var(--dark-color);
+}
+
+.community-card {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr;
+  align-items: center;
+  gap: 29px;
+  padding: 24px;
+}
+
+.community-card__logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.community-card__description {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.community-card__info {
+  display: grid;
+  grid-gap: 4px;
+}
+
+.skill-tag {
+  height: 26px;
+}
+
+.community-card-button__wrapper {
+  display: flex;
+  justify-self: self-end;
+  gap: 6px;
+}
+
+.community-subscribe-btn {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  height: 44px;
+}
+
+.subscribe-svg {
+  padding: 2px 0;
+}
+
+.to-community-link {
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  width: 44px;
+  height: 44px;
+}

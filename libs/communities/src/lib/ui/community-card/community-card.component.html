@@ -1,0 +1,27 @@
+<div class="community-card__container">
+  <div class="community-card__wrapper">
+    <div class="community-card">
+
+      <img src="#" alt="Логотип сообщества" class="community-card__logo"/>
+
+      <div class="community-card__description">
+        <div class="community-card__info h6"
+        >Сообщество по Ангуляру
+          <span class="regular">5 000 подписчиков</span>
+        </div>
+        <div class="skill-tag">Angular</div>
+      </div>
+
+      <div class="community-card-button__wrapper">
+        <button class="btn community-subscribe-btn" type="button"
+        >Подписаться
+          <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
+        </button>
+        <a [routerLink]="['/community']" class="btn to-community-link">
+          <svg icon="go-arrow" class="svg16"></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
