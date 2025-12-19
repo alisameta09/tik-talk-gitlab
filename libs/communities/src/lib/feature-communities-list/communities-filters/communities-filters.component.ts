@@ -1,11 +1,26 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {SvgIconComponent} from '@tt/common-ui';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { TtFormInputComponent } from '@tt/common-ui'
 
 @Component({
   selector: 'app-communities-filters',
-  imports: [SvgIconComponent],
+  imports: [FormsModule, ReactiveFormsModule, TtFormInputComponent],
   templateUrl: './communities-filters.component.html',
   styleUrl: './communities-filters.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunitiesFiltersComponent {}
+export class CommunitiesFiltersComponent implements OnInit {
+
+  searchCommunityForm = new FormGroup({
+    communityName: new FormControl(''),
+    theme: new FormControl(''),
+    tags: new FormControl('')
+  })
+
+  ngOnInit() {
+    this.searchCommunityForm.valueChanges.subscribe(val => {
+      console.log(val)
+    })
+  }
+
+}

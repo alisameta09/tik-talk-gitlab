@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommunitiesFiltersComponent } from '../index';
-import { SvgIconComponent } from '@tt/common-ui';
-import { CommunityCardComponent } from '../../ui/community-card/community-card.component';
-import { CommunitiesService } from '@tt/data-access/communities';
-import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
+import { CommunitiesFiltersComponent } from '../index'
+import { SvgIconComponent } from '@tt/common-ui'
+import { CommunityCardComponent } from '../../ui/community-card/community-card.component'
+import { CommunitiesService } from '@tt/data-access/communities'
+import { AsyncPipe } from '@angular/common'
 
 @Component({
   selector: 'app-communities-search-page',
@@ -18,7 +18,7 @@ import { AsyncPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommunitiesSearchPageComponent {
-  communitiesService = inject(CommunitiesService);
+  communitiesService = inject(CommunitiesService)
 
-  communities$ = this.communitiesService.getCommunities();
+  communities$ = this.communitiesService.getCommunities()
 }

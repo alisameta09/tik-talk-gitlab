@@ -1,0 +1,16 @@
+<label class="tt-form-label">
+  <span class="tt-form-label__text">Название сообщества</span>
+  <div class="search-by-community-name">
+
+    <input
+      [ngModel]="value"
+      (ngModelChange)="onModelChange($event)"
+      [type]="type()"
+      [placeholder]="placeholder()"
+      class="tt-form-input"
+      (blur)="onTouched()"
+    />
+
+    <svg icon="search" class="search-icon"></svg>
+  </div>
+</label>
