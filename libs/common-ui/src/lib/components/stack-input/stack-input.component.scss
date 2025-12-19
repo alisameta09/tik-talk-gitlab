@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   border-bottom: var(--light-border);
-  padding: 10px 0;
+  padding: 0 0 10px 0;
   gap: 12px;
 }
 
@@ -17,15 +17,11 @@
   border: none;
   background: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .stack-ghost-input {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  font-family: 'JetBrains Mono', sans-serif;
-  color: var(--light-color);
-  background: none;
   border: none;
   outline: none;
 }

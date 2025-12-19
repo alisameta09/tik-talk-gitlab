@@ -8,15 +8,15 @@ import {
   inject,
   Renderer2,
   ViewChild
-} from '@angular/core';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {debounceTime, firstValueFrom, fromEvent} from 'rxjs';
-import {Router, RouterLink} from '@angular/router';
-import {AddressInputComponent, StackInputComponent, SvgIconComponent} from '@tt/common-ui';
-import {ProfileHeaderComponent} from '../../ui/profile-header/profile-header.component';
-import {AvatarUploadComponent} from '../../ui/avatar-upload/avatar-upload.component';
-import {ProfileService} from '@tt/data-access/profile';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+} from '@angular/core'
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms'
+import {debounceTime, firstValueFrom, fromEvent} from 'rxjs'
+import {Router, RouterLink} from '@angular/router'
+import {AddressInputComponent, StackInputComponent, SvgIconComponent} from '@tt/common-ui'
+import {ProfileHeaderComponent} from '../../ui/profile-header/profile-header.component'
+import {AvatarUploadComponent} from '../../ui/avatar-upload/avatar-upload.component'
+import {ProfileService} from '@tt/data-access/profile'
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'app-settings-page',
@@ -34,16 +34,16 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsPageComponent implements AfterViewInit {
-  private readonly PADDING = 24;
+  private readonly PADDING = 24
 
-  fb = inject(FormBuilder);
-  profileService = inject(ProfileService);
-  hostElement = inject(ElementRef);
-  r2 = inject(Renderer2);
-  destroyRef = inject(DestroyRef);
-  router = inject(Router);
+  fb = inject(FormBuilder)
+  profileService = inject(ProfileService)
+  hostElement = inject(ElementRef)
+  r2 = inject(Renderer2)
+  destroyRef = inject(DestroyRef)
+  router = inject(Router)
 
-  @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
+  @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
 
   form = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -52,35 +52,35 @@ export class SettingsPageComponent implements AfterViewInit {
     description: [''],
     stack: [''],
     city: [null]
-  });
+  })
 
   constructor() {
     effect(() => {
       // @ts-ignore
       this.form.patchValue({
         ...this.profileService.me()
-      });
-    });
+      })
+    })
   }
 
   ngAfterViewInit() {
-    this.resizeSettingPage();
+    this.resizeSettingPage()
 
     fromEvent(window, 'resize')
       .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => this.resizeSettingPage());
+      .subscribe(() => this.resizeSettingPage())
   }
 
   onSave(event: Event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    this.form.markAllAsTouched();
-    this.form.updateValueAndValidity();
+    this.form.markAllAsTouched()
+    this.form.updateValueAndValidity()
 
-    if (this.form.invalid) return;
+    if (this.form.invalid) return
 
     if (this.avatarUploader.avatar) {
-      firstValueFrom(this.profileService.uploadAvatar(this.avatarUploader.avatar));
+      firstValueFrom(this.profileService.uploadAvatar(this.avatarUploader.avatar))
     }
 
     firstValueFrom(
@@ -88,15 +88,15 @@ export class SettingsPageComponent implements AfterViewInit {
       this.profileService.patchProfile({
         ...this.form.value
       })
-    );
+    )
 
-    this.router.navigate(['/profile/me']);
+    this.router.navigate(['/profile/me'])
   }
 
   resizeSettingPage() {
-    const {top} = this.hostElement.nativeElement.getBoundingClientRect();
-    const height = window.innerHeight - top - this.PADDING;
+    const {top} = this.hostElement.nativeElement.getBoundingClientRect()
+    const height = window.innerHeight - top - this.PADDING
 
-    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
+    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`)
   }
 }

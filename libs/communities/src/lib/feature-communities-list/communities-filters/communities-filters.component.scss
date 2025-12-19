@@ -8,15 +8,12 @@
   box-shadow: 4px 4px 0 0 #FFFFFF40;
 }
 
-.search-by-community-name {
-  display: grid;
-  position: relative;
-  align-items: center;
+.theme-label {
+  padding: 0 0 10px 0;
+  border-bottom: var(--light-border);
 }
 
-.search-icon {
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  right: 0;
+.stack-ghost-input {
+  border: none;
+  outline: none;
 }

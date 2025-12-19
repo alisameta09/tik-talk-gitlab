@@ -6,14 +6,17 @@
     formControlName="communityName"
   ></tt-form-input>
 
-  <label class="tt-form-label">
+  <label class="tt-form-label theme-label">
     <span class="tt-form-label__text">Тема</span>
-    <input type="text" class="tt-form-input" formControlName="theme" placeholder="Выберите"/>
+    <input type="text" class="tt-form-input stack-ghost-input" formControlName="theme" placeholder="Выберите"/>
   </label>
 
   <label class="tt-form-label">
     <span class="tt-form-label__text">Теги</span>
-    <input type="text" class="tt-form-input" formControlName="tags" placeholder="Выберите"/>
+    <stack-input
+      placeholder="Выберите"
+      formControlName="tags"
+    ></stack-input>
   </label>
 
 </form>
