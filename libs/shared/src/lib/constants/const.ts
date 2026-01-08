@@ -1,9 +1,24 @@
 const DADATA_TOKEN = '214ea83875383a72a2d642c43447927343521bf7'
 
+enum CommunityTheme {
+  PROGRAMMING = 'PROGRAMMING',
+  TECHNOLOGY = 'TECHNOLOGY',
+  EDUCATION = 'EDUCATION',
+  SPORT = 'SPORT',
+  OTHER = 'OTHER'
+}
+
 const baseApiUrl = '/yt-course/';
 const authUrl = `${baseApiUrl}auth/`;
 const chatUrl = `${baseApiUrl}chat/`;
 const profileUrl = `${baseApiUrl}account/`;
 const communityUrl = `${baseApiUrl}community/`
 
-export { DADATA_TOKEN, baseApiUrl, authUrl, chatUrl, profileUrl, communityUrl };
+export {
+  DADATA_TOKEN,
+  baseApiUrl,
+  authUrl,
+  chatUrl,
+  profileUrl,
+  communityUrl,
+  CommunityTheme };

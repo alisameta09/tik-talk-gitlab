@@ -18,5 +18,6 @@
     class="stack-ghost-input tt-form-input"
     [(ngModel)]="innerInput"
     [placeholder]="placeholder()"
+    (blur)="onTouched()"
   />
 </div>

@@ -1,0 +1,47 @@
+<label class="tt-form-label theme-label">
+  <span class="tt-form-label__text">Тема</span>
+  <div class="tt-form-input theme-ghost-input">
+
+    @if (selectedTheme()) {
+      <div class="skill-tag theme-tag">
+        <button
+          (click)="onThemeDelete()"
+          type="button"
+          class="theme-btn__delete svg16"
+        >
+          <svg class="svg10" icon="cross"></svg>
+        </button>
+        {{ selectedTheme() }}
+      </div>
+    }
+
+    <input
+      [(ngModel)]="innerInput"
+      class="tt-form-input theme-ghost-input theme-input"
+      (click)="onDropdownOpen()"
+      [placeholder]="showPlaceholder ? placeholder() : ''"
+      (blur)="onTouched()"
+    />
+
+    @if (isDropdownOpened) {
+      <ul class="dropdown-list">
+        @for (theme of themes; track theme) {
+          <li
+            [value]="theme"
+            (click)="onSelectTheme(theme)"
+            [class.selected]="theme === selectedTheme()"
+            class="theme-item"
+          >
+            <div class="theme-item__wrapper">
+                <span class="buttons-text theme-item-label"
+                >{{ theme }}
+                </span>
+              <svg icon="checkbox" class="svg16 theme-checkbox-svg"></svg>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+
+  </div>
+</label>

@@ -7,13 +7,3 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   box-shadow: 4px 4px 0 0 #FFFFFF40;
 }
-
-.theme-label {
-  padding: 0 0 10px 0;
-  border-bottom: var(--light-border);
-}
-
-.stack-ghost-input {
-  border: none;
-  outline: none;
-}
