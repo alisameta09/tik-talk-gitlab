@@ -24,6 +24,8 @@ export class StackInputComponent implements ControlValueAccessor {
   #disabled = false
 
   placeholder = input<string>()
+  labelText = input<string>()
+
   value$ = new BehaviorSubject<string[]>([])
 
   @HostBinding('class.disabled')

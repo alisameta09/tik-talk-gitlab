@@ -1,7 +1,9 @@
 <app-profile-header></app-profile-header>
 
 <form class="profile-form__wrapper" [formGroup]="form">
+
   <div class="profile-form">
+
     <div class="two-columns">
       <label class="tt-form-label">
         <span class="tt-form-label__text">Имя</span>
@@ -46,18 +48,20 @@
       <app-avatar-upload></app-avatar-upload>
     </label>
 
-    <label class="tt-form-label">
-      <span class="tt-form-label__text">Навыки</span>
-    </label>
     <stack-input
       formControlName="stack"
       placeholder="Введите данные"
+      labelText="Навыки"
     ></stack-input>
 
-    <address-input formControlName="city"></address-input>
+    <address-input
+      formControlName="city"
+    ></address-input>
+
   </div>
 
   <div class="footer__wrapper">
+
     <div class="icon-btn__wrapper">
       <a>
         <svg icon="delete" class="icon-btn"></svg>
@@ -71,5 +75,7 @@
       <a class="btn cancel-btn" [routerLink]="['/profile/me']">Отмена</a>
       <button class="btn save-btn" (click)="onSave($event)">Сохранить</button>
     </div>
+
   </div>
+
 </form>
