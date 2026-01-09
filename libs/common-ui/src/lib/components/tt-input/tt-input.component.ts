@@ -24,7 +24,7 @@ import {SvgIconComponent} from '../svg-icon/svg-icon.component'
   }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tt-input.component.html',
-  styleUrl: './tt-input.component.css'
+  styleUrl: './tt-input.component.scss'
 })
 export class TtInputComponent implements ControlValueAccessor {
   @Input() showSvg = true

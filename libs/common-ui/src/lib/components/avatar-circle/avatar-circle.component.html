@@ -1,4 +1,5 @@
-@if (avatarUrl(); as avatarUrl) { @if (avatarUrl) {
+@if (avatarUrl(); as avatarUrl) {
+  @if (avatarUrl) {
 <img [src]="avatarUrl | imgUrl" alt="Фото профиля" class="profile-avatar" />
 } @else {
 <img

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { StackInputComponent, ThemeSelectComponent, TtFormInputComponent } from '@tt/common-ui'
+import { StackInputComponent, TtSelectComponent, TtFormInputComponent } from '@tt/common-ui'
 
 @Component({
   selector: 'app-communities-filters',
@@ -9,7 +9,7 @@ import { StackInputComponent, ThemeSelectComponent, TtFormInputComponent } from 
     ReactiveFormsModule,
     TtFormInputComponent,
     StackInputComponent,
-    ThemeSelectComponent,
+    TtSelectComponent,
   ],
   templateUrl: './communities-filters.component.html',
   styleUrl: './communities-filters.component.scss',

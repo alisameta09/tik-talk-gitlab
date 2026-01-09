@@ -1,0 +1,47 @@
+<label class="tt-form-label tt-select-label">
+  <span class="tt-form-label__text">Тема</span>
+
+  <div class="tt-form-input tt-select-ghost-input">
+
+    @if (selectedItem()) {
+      <div class="skill-tag tt-select-tag">
+        <button
+          type="button"
+          class="tt-select-btn__delete svg16"
+          (click)="onDeleteItem()"
+        >
+          <svg class="svg10" icon="cross"></svg>
+        </button>
+        <span>{{ selectedItem() }}</span>
+      </div>
+    }
+
+    <button
+      class="tt-select-dropdown__btn medium-text"
+      (click)="onDropdownOpen()"
+    >
+      <span>Выберите</span>
+    </button>
+
+    @if (isDropdownOpened()) {
+      <ul class="tt-select-dropdown-list">
+        @for (theme of themes; track theme) {
+          <li
+            [value]="theme"
+            (click)="onSelectItem(theme)"
+            [class.selected]="theme === selectedItem()"
+            class="tt-select-item"
+          >
+            <div class="tt-select-item__wrapper">
+                <span class="buttons-text tt-select-item-label"
+                >{{ theme }}
+                </span>
+              <svg icon="checkbox" class="svg16 tt-select-checkbox-svg"></svg>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+
+  </div>
+</label>
