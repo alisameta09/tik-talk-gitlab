@@ -1,4 +1,5 @@
-<label class="tt-form-label tt-select-label">
+<div class="tt-form-label tt-select-label">
+
   <span class="tt-form-label__text">Тема</span>
 
   <div class="tt-form-input tt-select-ghost-input">
@@ -19,8 +20,7 @@
     <button
       class="tt-select-dropdown__btn medium-text"
       (click)="onDropdownOpen()"
-    >
-      <span>Выберите</span>
+    >Выберите
     </button>
 
     @if (isDropdownOpened()) {
@@ -44,4 +44,5 @@
     }
 
   </div>
-</label>
+
+</div>
