@@ -43,15 +43,16 @@
       ></textarea>
     </label>
 
-    <label class="tt-form-label">
+    <div class="tt-form-label">
       <span class="tt-form-label__text">Аватарка</span>
       <app-avatar-upload></app-avatar-upload>
-    </label>
+    </div>
 
     <stack-input
       formControlName="stack"
       placeholder="Введите данные"
       labelText="Навыки"
+      errorMessageName="навык"
     ></stack-input>
 
     <address-input

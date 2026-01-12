@@ -1,4 +1,4 @@
-<label class="tt-form-label">
+<div class="tt-form-label">
   <span class="tt-form-label__text">{{ labelText() }}</span>
 
   <div class="skill-tag__container">
@@ -25,4 +25,8 @@
     />
   </div>
 
-</label>
+  @if (isDuplicate()) {
+    <span class="error-message medium-small-text">Такой {{ errorMessageName() }} уже добавлен!</span>
+  }
+
+</div>
