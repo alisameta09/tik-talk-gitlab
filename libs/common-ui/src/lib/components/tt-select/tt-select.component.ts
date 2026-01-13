@@ -62,14 +62,13 @@ export class TtSelectComponent implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {}
 
-  onDropdownOpen() {
-    this.isDropdownOpened.set(true)
+  onToggleDropdown() {
+    this.isDropdownOpened.set(!this.isDropdownOpened())
   }
 
   onSelectItem(theme: string) {
     this.selectedItem.set(theme)
     this.onChange(theme)
-    // this.isDropdownOpened.set(false)
   }
 
   onDeleteItem() {
