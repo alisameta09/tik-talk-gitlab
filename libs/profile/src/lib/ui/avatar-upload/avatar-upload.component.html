@@ -1,4 +1,4 @@
-<img [src]="preview()" alt="Аватарка" class="avatar" />
+<img [src]="preview()" alt="Аватарка" class="avatar"/>
 
 <div
   dnd
@@ -9,8 +9,14 @@
 >
   <div class="dropzone-content">
     <svg icon="upload" class="upload-icon"></svg>
-    <span class="dropzone-text"
-      >Перетащите изображение или <span class="upload-text">Загрузите</span> (разрешение до 5,000 x
+    <span class="dropzone-text medium-text"
+    >Перетащите изображение или
+      <button
+        class="upload-text medium-text"
+        (click)="fileDrop.click()"
+      >Загрузите
+      </button>
+      (разрешение до 5,000 x
       5,000 px)</span
     >
   </div>
