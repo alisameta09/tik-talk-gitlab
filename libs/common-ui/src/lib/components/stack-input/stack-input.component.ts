@@ -20,6 +20,7 @@ import { AsyncPipe } from '@angular/common'
 export class StackInputComponent implements ControlValueAccessor {
   innerInput = ''
   #disabled = false
+
   isDuplicate = signal<boolean>(false)
 
   placeholder = input<string>()

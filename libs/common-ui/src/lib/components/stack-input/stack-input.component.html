@@ -22,11 +22,13 @@
       [(ngModel)]="innerInput"
       [placeholder]="placeholder()"
       (blur)="onTouched()"
+      [class.ng-invalid]="isDuplicate()"
+      [class.ng-valid]="!isDuplicate()"
     />
+    @if (this.value$.value.includes(this.innerInput.toUpperCase())) {
+      <span class="validation medium-small-text">Такой {{ errorMessageName() }} уже добавлен!</span>
+    }
   </div>
 
-  @if (isDuplicate()) {
-    <span class="error-message medium-small-text">Такой {{ errorMessageName() }} уже добавлен!</span>
-  }
 
 </div>

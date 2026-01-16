@@ -33,6 +33,11 @@
   }
 }
 
-.error-message {
+.validation {
+  display: none;
+}
+
+.stack-ghost-input.ng-invalid + .validation {
+  display: block;
   color: tomato;
 }

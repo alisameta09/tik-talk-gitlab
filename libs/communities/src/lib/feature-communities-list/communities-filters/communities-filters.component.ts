@@ -26,7 +26,7 @@ export class CommunitiesFiltersComponent implements OnInit {
   searchCommunityForm = new FormGroup({
     name: new FormControl(''),
     themes: new FormControl(''),
-    tags: new FormControl('')
+    tags: new FormControl('', Validators.required),
   })
 
   ngOnInit() {
