@@ -1,6 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { StackInputComponent, TtSelectComponent, TtFormInputComponent } from '@tt/common-ui'
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { StackInputComponent, TtFormInputComponent, TtSelectComponent } from '@tt/common-ui'
+import { communityActions, selectCommunitiesFilters } from '@tt/data-access/communities'
+import { debounceTime, startWith } from 'rxjs'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'app-communities-filters',
@@ -16,15 +20,34 @@ import { StackInputComponent, TtSelectComponent, TtFormInputComponent } from '@t
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommunitiesFiltersComponent implements OnInit {
+  destroyRef = inject(DestroyRef)
+  store = inject(Store)
+
   searchCommunityForm = new FormGroup({
-    communityName: new FormControl(''),
-    theme: new FormControl(''),
-    tags: new FormControl(''),
+    name: new FormControl(''),
+    themes: new FormControl(''),
+    tags: new FormControl('')
   })
 
   ngOnInit() {
-    this.searchCommunityForm.valueChanges.subscribe((val) => {
-      console.log(val)
-    })
+    this.searchCommunityForm.valueChanges.pipe(
+      startWith(this.searchCommunityForm.getRawValue()),
+      debounceTime(300),
+      takeUntilDestroyed(this.destroyRef))
+      .subscribe((formValue) => {
+        this.store.dispatch(communityActions.saveFilters({ filters: formValue }))
+        this.store.dispatch(communityActions.filterCommunities({ filters: formValue }))
+      })
+  }
+
+  constructor() {
+    this.store
+      .select(selectCommunitiesFilters)
+      .pipe(takeUntilDestroyed())
+      .subscribe((filters) => {
+        if (filters) {
+          this.searchCommunityForm.patchValue(filters, { emitEvent: false })
+        }
+      })
   }
 }

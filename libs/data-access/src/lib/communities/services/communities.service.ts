@@ -1,9 +1,9 @@
-import { inject, Injectable } from '@angular/core'
+import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { communityUrl } from '@tt/shared'
 import { CommunityInterface } from '../index'
 import { Pageble } from 'libs/data-access/src'
-import { map } from 'rxjs'
+import { tap } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,7 @@ import { map } from 'rxjs'
 export class CommunitiesService {
   http = inject(HttpClient)
 
-  getCommunities() {
-    return this.http.get<Pageble<CommunityInterface>>(communityUrl)
-        .pipe(map(res => res.items))
+  filterCommunities(params: Record<string, any>) {
+    return this.http.get<Pageble<CommunityInterface>>(communityUrl, {params})
   }
 }

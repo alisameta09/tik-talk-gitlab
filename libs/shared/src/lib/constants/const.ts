@@ -8,10 +8,10 @@ enum CommunityTheme {
   OTHER = 'OTHER'
 }
 
-const baseApiUrl = '/yt-course/';
-const authUrl = `${baseApiUrl}auth/`;
-const chatUrl = `${baseApiUrl}chat/`;
-const profileUrl = `${baseApiUrl}account/`;
+const baseApiUrl = '/yt-course/'
+const authUrl = `${baseApiUrl}auth/`
+const chatUrl = `${baseApiUrl}chat/`
+const profileUrl = `${baseApiUrl}account/`
 const communityUrl = `${baseApiUrl}community/`
 
 export {
@@ -21,4 +21,4 @@ export {
   chatUrl,
   profileUrl,
   communityUrl,
-  CommunityTheme };
+  CommunityTheme }

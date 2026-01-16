@@ -72,7 +72,6 @@ export class TtSelectComponent implements ControlValueAccessor {
   }
 
   onDeleteItem() {
-    console.log('onThemeDelete', this.selectedItem())
     this.selectedItem.set('')
     this.onChange(this.selectedItem())
   }

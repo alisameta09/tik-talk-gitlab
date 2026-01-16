@@ -1,6 +1,6 @@
-import {createFeature, createReducer, on} from '@ngrx/store';
-import {Profile} from '../index';
-import {profileActions} from './actions';
+import {createFeature, createReducer, on} from '@ngrx/store'
+import {Profile} from '../index'
+import {profileActions} from './actions'
 
 export interface ProfileState {
   profiles: Profile[],
@@ -35,7 +35,7 @@ export const profileFeature = createFeature({
       }
     }),
     on(profileActions.setPage, (state, payload) => {
-      let page = payload.page;
+      let page = payload.page
 
       if (!page) page = state.page + 1
 

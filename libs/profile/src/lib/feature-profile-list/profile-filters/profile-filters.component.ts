@@ -4,7 +4,7 @@ import {debounceTime, startWith} from 'rxjs'
 import {Store} from '@ngrx/store'
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import {SvgIconComponent} from '@tt/common-ui'
-import {profileActions, selectSaveFilteredProfiles} from '@tt/data-access/profile'
+import { profileActions, selectProfileFilters } from '@tt/data-access/profile'
 
 @Component({
   selector: 'app-profile-filters',
@@ -36,7 +36,8 @@ export class ProfileFiltersComponent implements OnInit {
   }
 
   constructor() {
-    this.store.select(selectSaveFilteredProfiles)
+    this.store
+      .select(selectProfileFilters)
       .pipe(takeUntilDestroyed())
       .subscribe(filters => {
         if (filters) {

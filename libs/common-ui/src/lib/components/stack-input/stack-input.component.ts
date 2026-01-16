@@ -1,8 +1,8 @@
-import { Component, forwardRef, HostBinding, HostListener, input, signal } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SvgIconComponent } from '../index';
-import { BehaviorSubject } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { Component, forwardRef, HostBinding, HostListener, input, signal } from '@angular/core'
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { SvgIconComponent } from '../index'
+import { BehaviorSubject } from 'rxjs'
+import { AsyncPipe } from '@angular/common'
 
 @Component({
   selector: 'stack-input',
@@ -18,60 +18,60 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './stack-input.component.scss',
 })
 export class StackInputComponent implements ControlValueAccessor {
-  innerInput = '';
-  #disabled = false;
-  isDuplicate = signal<boolean>(false);
+  innerInput = ''
+  #disabled = false
+  isDuplicate = signal<boolean>(false)
 
-  placeholder = input<string>();
-  labelText = input<string>();
-  errorMessageName = input<string>();
+  placeholder = input<string>()
+  labelText = input<string>()
+  errorMessageName = input<string>()
 
-  value$ = new BehaviorSubject<string[]>([]);
+  value$ = new BehaviorSubject<string[]>([])
 
   @HostBinding('class.disabled')
   get disabled() {
-    return this.#disabled;
+    return this.#disabled
   }
 
   @HostListener('keydown.enter', ['$event'])
   onEnter(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
 
-    if (!this.innerInput) return;
+    if (!this.innerInput) return
 
-    if (this.value$.value.includes(this.innerInput)) {
-      event.preventDefault();
-      this.isDuplicate.set(true);
-      return;
+    if (this.value$.value.includes(this.innerInput.toUpperCase())) {
+      event.preventDefault()
+      this.isDuplicate.set(true)
+      return
     } else {
-      this.isDuplicate.set(false);
-      this.value$.next([...this.value$.value, this.innerInput]);
+      this.isDuplicate.set(false)
+      this.value$.next([...this.value$.value, this.innerInput.toUpperCase()])
     }
 
-    this.innerInput = '';
-    this.onChange(this.value$.value);
+    this.innerInput = ''
+    this.onChange(this.value$.value)
   }
 
   writeValue(stack: string[] | null): void {
     if (!stack) {
-      this.value$.next([]);
-      return;
+      this.value$.next([])
+      return
     }
 
-    this.value$.next(stack);
+    this.value$.next(stack)
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.onChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.onTouched = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.#disabled = isDisabled;
+    this.#disabled = isDisabled
   }
 
   onChange(value: string[] | null) {}
@@ -79,9 +79,9 @@ export class StackInputComponent implements ControlValueAccessor {
   onTouched() {}
 
   onTagDelete(index: number) {
-    const tags = this.value$.value;
-    tags.splice(index, 1);
-    this.value$.next(tags);
-    this.onChange(this.value$.value);
+    const tags = [...this.value$.value]
+    tags.splice(index, 1)
+    this.value$.next(tags)
+    this.onChange(this.value$.value)
   }
 }

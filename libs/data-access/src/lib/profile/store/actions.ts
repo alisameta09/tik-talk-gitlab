@@ -1,5 +1,5 @@
-import {createActionGroup, props} from '@ngrx/store';
-import {Profile} from '../index';
+import {createActionGroup, props} from '@ngrx/store'
+import {Profile} from '../index'
 
 export const profileActions = createActionGroup({
   source: 'profile',
