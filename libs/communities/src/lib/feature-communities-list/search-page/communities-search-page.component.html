@@ -8,7 +8,10 @@
 
 <app-communities-filters></app-communities-filters>
 
-<div class="communities-list__wrapper">
+<div
+  class="communities-list__wrapper"
+  resizePage
+>
   @for (community of communities$ | async; track community.id) {
     <app-community-card
       [community]="community"

@@ -1,5 +1,8 @@
 <app-post-input (postCreated)="onCreatePost($event)"></app-post-input>
 
-@for (post of feed(); track post.id) {
-<app-post [post]="post"></app-post>
-}
+<div class="post_wrapper" resizePage>
+  @for (post of feed(); track post.id) {
+    <app-post [post]="post"></app-post>
+  }
+</div>
+

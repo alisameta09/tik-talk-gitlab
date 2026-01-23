@@ -25,6 +25,7 @@ import { MaskitoDirective } from '@maskito/angular';
 import { DestinationName, ReceiverType } from '../../shared/const';
 import { dateMaskOptions, phoneMaskOptions, NameValidator } from '../../util';
 import {Feature, MockService, Tour} from '../../data';
+import { ResizePageDirective } from '@tt/common-ui'
 
 // function getContactForm() {
 //   return new FormGroup({
@@ -91,12 +92,12 @@ function validateDateRange({
 
 @Component({
   selector: 'app-forms-experiment',
-  imports: [ReactiveFormsModule, MaskitoDirective, RouterLink, KeyValuePipe],
+  imports: [ReactiveFormsModule, MaskitoDirective, RouterLink, KeyValuePipe, ResizePageDirective],
   templateUrl: './forms-experiment.component.html',
   styleUrl: './forms-experiment.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormsExperimentComponent implements AfterViewInit {
+export class FormsExperimentComponent {
   private readonly PADDING = 24 * 2;
 
   r2 = inject(Renderer2);
@@ -184,13 +185,13 @@ export class FormsExperimentComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-    this.resizePageForm();
-
-    fromEvent(window, 'resize')
-      .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => this.resizePageForm());
-  }
+  // ngAfterViewInit() {
+  //   this.resizePageForm();
+  //
+  //   fromEvent(window, 'resize')
+  //     .pipe(debounceTime(100), takeUntilDestroyed(this.destroyRef))
+  //     .subscribe(() => this.resizePageForm());
+  // }
 
   onTextAreaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
@@ -199,13 +200,13 @@ export class FormsExperimentComponent implements AfterViewInit {
     this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px');
   }
 
-  resizePageForm() {
-    const el = this.hostElement.nativeElement;
-    const { top } = el.getBoundingClientRect();
-    const height = window.innerHeight - top - this.PADDING;
-
-    this.r2.setStyle(el, 'height', `${height}px`);
-  }
+  // resizePageForm() {
+  //   const el = this.hostElement.nativeElement;
+  //   const { top } = el.getBoundingClientRect();
+  //   const height = window.innerHeight - top - this.PADDING;
+  //
+  //   this.r2.setStyle(el, 'height', `${height}px`);
+  // }
 
   onSubmit(event: SubmitEvent) {
     this.form.markAllAsTouched();

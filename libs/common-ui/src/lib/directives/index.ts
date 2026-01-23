@@ -1,5 +1,7 @@
-import { DndDirective } from "./dnd.directive";
+import { DndDirective } from "./dnd.directive"
+import { ResizePageDirective } from './resize-page.directive'
 
 export {
-  DndDirective
+  DndDirective,
+  ResizePageDirective
 }

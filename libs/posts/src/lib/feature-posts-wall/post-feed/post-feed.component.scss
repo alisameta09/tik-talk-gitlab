@@ -1,9 +1,14 @@
 :host {
   display: grid;
   grid-gap: 16px;
+}
+
+.post_wrapper {
+  display: grid;
+  grid-gap: 16px;
   overflow-y: auto;
 }
 
-:host::-webkit-scrollbar {
-  width: 0;
+.post_wrapper::-webkit-scrollbar {
+  display: none;
 }

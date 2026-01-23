@@ -1,14 +1,8 @@
 :host {
   display: grid;
   grid-template-columns: 640px;
-  height: 100%;
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
-}
-
-:host::-webkit-scrollbar {
-  display: none;
 }
 
 .logo-small {
@@ -21,6 +15,14 @@
 .header__wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.tour-info__wrapper {
+  overflow-y: auto;
+}
+
+.tour-info__wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .tour-info-grid {

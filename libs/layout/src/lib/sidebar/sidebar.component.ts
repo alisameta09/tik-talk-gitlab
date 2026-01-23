@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {SubscriberCardComponent} from './subscriber-card/subscriber-card.component';
-import {RouterLink, RouterLinkActive} from '@angular/router';
-import {AsyncPipe} from '@angular/common';
-import {firstValueFrom, Subscription, timer} from 'rxjs';
-import {ImgUrlPipe, SvgIconComponent} from '@tt/common-ui';
-import {ProfileService} from '@tt/data-access/profile';
-import {ChatService, isErrorMessage} from '@tt/data-access/chats';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core'
+import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component'
+import { RouterLink, RouterLinkActive } from '@angular/router'
+import { AsyncPipe } from '@angular/common'
+import { firstValueFrom, Subscription, timer } from 'rxjs'
+import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
+import { ProfileService } from '@tt/data-access/profile'
+import { ChatService, isErrorMessage } from '@tt/data-access/chats'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'app-sidebar',
@@ -20,19 +20,19 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent implements OnInit {
-  profileService = inject(ProfileService);
-  #chatService = inject(ChatService);
-  destroyRef = inject(DestroyRef);
+  profileService = inject(ProfileService)
+  #chatService = inject(ChatService)
+  destroyRef = inject(DestroyRef)
 
-  subscribers$ = this.profileService.getSubscribersShortList();
+  subscribers$ = this.profileService.getSubscribersShortList()
 
-  me = this.profileService.me;
+  me = this.profileService.me
   unreadMessages = this.#chatService.unreadMessagesCount
 
-  wsSubscribe!: Subscription;
+  wsSubscribe!: Subscription
 
   menuItems = [
     {
@@ -60,30 +60,31 @@ export class SidebarComponent implements OnInit {
       icon: 'experimental',
       link: 'experimental',
     },
-  ];
+  ]
 
   async reconnect() {
-    await firstValueFrom(this.profileService.getMe());
-    await firstValueFrom(timer(2000));
+    await firstValueFrom(this.profileService.getMe())
+    await firstValueFrom(timer(2000))
 
-    this.connect();
+    this.connect()
   }
 
   connect() {
-    this.wsSubscribe?.unsubscribe();
+    this.wsSubscribe?.unsubscribe()
 
-    this.wsSubscribe = this.#chatService.connectWs()
+    this.wsSubscribe = this.#chatService
+      .connectWs()
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(message => {
+      .subscribe((message) => {
         if (isErrorMessage(message) && message.message === 'Invalid token') {
           this.reconnect()
         }
-      });
+      })
   }
 
   ngOnInit(): void {
-    firstValueFrom(this.profileService.getMe());
+    firstValueFrom(this.profileService.getMe())
 
-    this.connect();
+    this.connect()
   }
 }

@@ -22,4 +22,9 @@
 .communities-list__wrapper {
   display: grid;
   grid-gap: 8px;
+  overflow: auto;
+}
+
+.communities-list__wrapper::-webkit-scrollbar {
+  display: none;
 }
