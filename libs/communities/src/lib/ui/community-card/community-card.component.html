@@ -21,20 +21,27 @@
           </span>
         </div>
         <div class="community-card__tags">
-        @for (skill of community.tags; track skill) {
-          <div class="skill-tag">{{ skill }}</div>
-        }
+          @for (skill of community.tags; track skill) {
+            <div class="skill-tag">{{ skill }}</div>
+          }
         </div>
       </div>
 
       <div class="community-card-button__wrapper">
-        <button class="btn community-subscribe-btn" type="button"
+
+        <button
+          class="btn community-subscribe-btn"
+          type="button"
         >Подписаться
           <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
         </button>
-        <a [routerLink]="['/communities', community.id]" class="btn to-community-link">
+
+        <button
+          class="btn to-community-link"
+          (click)="getCommunity(community.id)"
+        >
           <svg icon="go-arrow" class="svg16"></svg>
-        </a>
+        </button>
       </div>
 
     </div>

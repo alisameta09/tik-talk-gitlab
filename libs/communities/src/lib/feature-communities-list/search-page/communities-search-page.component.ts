@@ -5,6 +5,7 @@ import { CommunityCardComponent } from '../../ui/community-card/community-card.c
 import { selectFilteredCommunities } from '@tt/data-access/communities'
 import { Store } from '@ngrx/store'
 import { AsyncPipe } from '@angular/common'
+import { RouterOutlet } from '@angular/router'
 
 @Component({
   selector: 'app-communities-search-page',
@@ -14,6 +15,7 @@ import { AsyncPipe } from '@angular/common'
     CommunityCardComponent,
     AsyncPipe,
     ResizePageDirective,
+    RouterOutlet,
   ],
   templateUrl: './communities-search-page.component.html',
   styleUrl: './communities-search-page.component.scss',

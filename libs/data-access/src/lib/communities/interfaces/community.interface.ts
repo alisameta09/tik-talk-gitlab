@@ -24,3 +24,7 @@ interface Admin {
   city: string
   description: string
 }
+
+export interface CommunityPageInterface extends CommunityInterface {
+  posts: string[]
+}
