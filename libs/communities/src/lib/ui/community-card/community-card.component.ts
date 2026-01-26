@@ -3,6 +3,7 @@ import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { CommunitiesService, CommunityInterface } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
 import { firstValueFrom } from 'rxjs'
+import { GlobalStoreService } from '@tt/data-access/profile'
 
 @Component({
   selector: 'app-community-card',
@@ -15,8 +16,8 @@ export class CommunityCardComponent {
   @Input() community!: CommunityInterface
 
   router = inject(Router)
-
   communitiesService = inject(CommunitiesService)
+  me = inject(GlobalStoreService).me
 
   async getCommunity(communityId: number) {
     await firstValueFrom(this.communitiesService.getCommunityById(communityId)).then((res) =>

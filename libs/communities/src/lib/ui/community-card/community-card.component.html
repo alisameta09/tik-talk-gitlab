@@ -29,12 +29,14 @@
 
       <div class="community-card-button__wrapper">
 
+        @if (!(community.admin.id === me()?.id)) {
         <button
           class="btn community-subscribe-btn"
           type="button"
         >Подписаться
           <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
         </button>
+        }
 
         <button
           class="btn to-community-link"
