@@ -26,6 +26,7 @@ export class ProfilePageComponent {
   profileService = inject(ProfileService)
   route = inject(ActivatedRoute)
   router = inject(Router)
+
   me$ = toObservable(this.profileService.me)
   subscribers$ = this.profileService.getSubscribersShortList(5)
 

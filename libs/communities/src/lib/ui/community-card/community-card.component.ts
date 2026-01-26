@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject, Input, signal } from '@angular/core'
 import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { CommunitiesService, CommunityInterface } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
@@ -15,6 +15,8 @@ import { GlobalStoreService } from '@tt/data-access/profile'
 export class CommunityCardComponent {
   @Input() community!: CommunityInterface
 
+  isJoined = signal<boolean>(false)
+
   router = inject(Router)
   communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
@@ -24,4 +26,15 @@ export class CommunityCardComponent {
       this.router.navigate(['/communities', res.id])
     )
   }
+
+  async joinCommunity(communityId: number) {
+    await firstValueFrom(this.communitiesService.joinCommunity(communityId))
+    this.isJoined.set(true)
+  }
+
+  async leaveCommunity(communityId: number) {
+    await firstValueFrom(this.communitiesService.leaveCommunity(communityId))
+    this.isJoined.set(false)
+  }
+
 }

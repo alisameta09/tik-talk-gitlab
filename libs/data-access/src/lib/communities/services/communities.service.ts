@@ -18,4 +18,13 @@ export class CommunitiesService {
   getCommunityById(communityId: number) {
     return this.http.get<CommunityPageInterface>(`${communityUrl}${communityId}`)
   }
+
+  joinCommunity(communityId: number) {
+    return this.http.post(`${communityUrl}${communityId}/join`, {})
+  }
+
+  leaveCommunity(communityId: number) {
+    return this.http.delete(`${communityUrl}${communityId}/join`)
+  }
+
 }

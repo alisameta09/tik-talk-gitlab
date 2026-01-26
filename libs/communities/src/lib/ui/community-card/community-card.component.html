@@ -30,12 +30,22 @@
       <div class="community-card-button__wrapper">
 
         @if (!(community.admin.id === me()?.id)) {
-        <button
-          class="btn community-subscribe-btn"
-          type="button"
-        >Подписаться
-          <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
-        </button>
+          @if (!isJoined()) {
+            <button
+              class="btn community-subscribe-btn"
+              type="button"
+              (click)="joinCommunity(community.id)"
+            >Подписаться
+              <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
+            </button>
+          } @else {
+            <button
+              class="btn community-subscribe-btn"
+              type="button"
+              (click)="leaveCommunity(community.id)"
+            >Отписаться
+            </button>
+          }
         }
 
         <button
