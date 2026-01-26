@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ChatHeaderComponent } from './chat-header/chat-header.component'
 import { ChatMessagesWrapperComponent } from './chat-messages-wrapper/chat-messages-wrapper.component'
 import { ChatService } from '@tt/data-access/chats'
-import {ResizePageDirective} from "@tt/common-ui"
+import { ResizePageDirective } from '@tt/common-ui'
 
 @Component({
   selector: 'app-chat-workspace',

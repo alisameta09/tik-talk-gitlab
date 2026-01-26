@@ -28,8 +28,8 @@ export class ProfileFiltersComponent implements OnInit {
     this.searchForm.valueChanges.pipe(
       startWith(this.searchForm.getRawValue()),
       debounceTime(300),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe((formValue) => {
+      takeUntilDestroyed(this.destroyRef))
+      .subscribe((formValue) => {
       this.store.dispatch(profileActions.saveFilter({filters: formValue}))
       this.store.dispatch(profileActions.filterProfiles({filters: formValue}))
     })
