@@ -1,10 +1,9 @@
-@if (community) {
+@if (community(); as community) {
 
   <div class="community-card__wrapper">
     <div class="community-card">
-
       <img
-        [src]="community.avatarUrl | imgUrl"
+        [src]="(community.avatarUrl | imgUrl) ?? preview()"
         alt="Логотип сообщества"
         class="community-card__logo"
       />

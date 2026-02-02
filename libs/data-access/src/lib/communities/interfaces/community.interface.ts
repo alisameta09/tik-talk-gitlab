@@ -1,4 +1,4 @@
-export interface CommunityInterface {
+export interface Community {
   id: number
   admin: Admin
   name: string
@@ -25,6 +25,6 @@ interface Admin {
   description: string
 }
 
-export interface CommunityPageInterface extends CommunityInterface {
+export interface CommunityPageInterface extends Community {
   posts: string[]
 }

@@ -1,9 +1,9 @@
 import { createFeature, createReducer, on } from '@ngrx/store'
-import { CommunityInterface } from '../interfaces/community.interface'
+import { Community } from '../interfaces/community.interface'
 import { communityActions } from './actions'
 
 export interface CommunityState {
-  communities: CommunityInterface[]
+  communities: Community[]
   communityFilters: Record<string, any>
 }
 

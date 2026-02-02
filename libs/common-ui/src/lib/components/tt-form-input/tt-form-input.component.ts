@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core'
-import { SvgIconComponent } from '../index'
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
 
 @Component({
   selector: 'tt-form-input',
-  imports: [SvgIconComponent, FormsModule],
+  imports: [FormsModule],
   templateUrl: './tt-form-input.component.html',
   styleUrl: './tt-form-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

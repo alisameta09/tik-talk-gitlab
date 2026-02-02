@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, Input, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core'
 import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
-import { CommunitiesService, CommunityInterface } from '@tt/data-access/communities'
+import { CommunitiesService, Community } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
 import { firstValueFrom } from 'rxjs'
 import { GlobalStoreService } from '@tt/data-access/profile'
@@ -13,9 +13,10 @@ import { GlobalStoreService } from '@tt/data-access/profile'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommunityCardComponent {
-  @Input() community!: CommunityInterface
+  community = input<Community>()
 
   isJoined = signal<boolean>(false)
+  preview = signal<string>('/assets/images/avatar-placeholder.png')
 
   router = inject(Router)
   communitiesService = inject(CommunitiesService)
@@ -36,5 +37,4 @@ export class CommunityCardComponent {
     await firstValueFrom(this.communitiesService.leaveCommunity(communityId))
     this.isJoined.set(false)
   }
-
 }
