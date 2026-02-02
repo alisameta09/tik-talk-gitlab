@@ -24,7 +24,6 @@ export class StackInputComponent implements ControlValueAccessor {
   isDuplicate = signal<boolean>(false)
 
   placeholder = input<string>()
-  labelText = input<string>()
   errorMessageName = input<string>()
 
   value$ = new BehaviorSubject<string[]>([])
