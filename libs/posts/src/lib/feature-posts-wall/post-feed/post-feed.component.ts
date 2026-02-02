@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store'
 import { ResizePageDirective } from '@tt/common-ui'
 
 @Component({
-  selector: 'app-post-feed',
+  selector: 'tt-post-feed',
   imports: [PostInputComponent, PostComponent, ResizePageDirective],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',

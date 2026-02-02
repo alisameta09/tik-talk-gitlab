@@ -9,7 +9,7 @@ import { ChatService, isErrorMessage } from '@tt/data-access/chats'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'tt-sidebar',
   imports: [
     SvgIconComponent,
     SubscriberCardComponent,

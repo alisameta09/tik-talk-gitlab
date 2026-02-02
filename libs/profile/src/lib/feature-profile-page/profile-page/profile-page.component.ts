@@ -9,7 +9,7 @@ import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { ProfileService } from '@tt/data-access/profile'
 
 @Component({
-  selector: 'app-profile-page',
+  selector: 'tt-profile-page',
   imports: [
     ProfileHeaderComponent,
     AsyncPipe,

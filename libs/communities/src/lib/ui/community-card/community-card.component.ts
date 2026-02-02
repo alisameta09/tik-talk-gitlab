@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs'
 import { GlobalStoreService } from '@tt/data-access/profile'
 
 @Component({
-  selector: 'app-community-card',
+  selector: 'tt-community-card',
   imports: [SvgIconComponent, ImgUrlPipe],
   templateUrl: './community-card.component.html',
   styleUrl: './community-card.component.scss',

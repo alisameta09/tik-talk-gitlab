@@ -5,7 +5,7 @@ import {AuthService} from '@tt/data-access/auth';
 import {TtInputComponent} from '@tt/common-ui';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'tt-login-page',
   imports: [ReactiveFormsModule, TtInputComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',

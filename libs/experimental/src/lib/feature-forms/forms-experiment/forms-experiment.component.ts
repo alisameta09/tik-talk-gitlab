@@ -91,7 +91,7 @@ function validateDateRange({
 // }
 
 @Component({
-  selector: 'app-forms-experiment',
+  selector: 'tt-forms-experiment',
   imports: [ReactiveFormsModule, MaskitoDirective, RouterLink, KeyValuePipe, ResizePageDirective],
   templateUrl: './forms-experiment.component.html',
   styleUrl: './forms-experiment.component.scss',

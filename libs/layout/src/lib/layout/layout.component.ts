@@ -4,7 +4,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component'
 import { ResizePageDirective } from '@tt/common-ui'
 
 @Component({
-  selector: 'app-layout',
+  selector: 'tt-layout',
   imports: [RouterOutlet, SidebarComponent, ResizePageDirective],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',

@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common'
 import { RouterOutlet } from '@angular/router'
 
 @Component({
-  selector: 'app-communities-search-page',
+  selector: 'tt-communities-search-page',
   imports: [
     CommunitiesFiltersComponent,
     SvgIconComponent,

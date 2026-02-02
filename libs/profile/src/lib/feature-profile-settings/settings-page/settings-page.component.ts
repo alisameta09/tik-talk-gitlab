@@ -15,7 +15,7 @@ import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.comp
 import { ProfileService } from '@tt/data-access/profile'
 
 @Component({
-  selector: 'app-settings-page',
+  selector: 'tt-settings-page',
   imports: [
     ProfileHeaderComponent,
     ReactiveFormsModule,

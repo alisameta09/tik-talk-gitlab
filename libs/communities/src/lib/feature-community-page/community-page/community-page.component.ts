@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
-  selector: 'lib-community-page',
+  selector: 'tt-community-page',
   imports: [],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',

@@ -8,15 +8,15 @@
   </button>
 </div>
 
-<app-communities-filters></app-communities-filters>
+<tt-communities-filters></tt-communities-filters>
 
 <div
   class="communities-list__wrapper"
   resizePage
 >
   @for (community of communities$ | async; track community.id) {
-    <app-community-card
+    <tt-community-card
       [community]="community"
-    ></app-community-card>
+    ></tt-community-card>
   }
 </div>

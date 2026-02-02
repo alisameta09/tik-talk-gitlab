@@ -7,7 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { Store } from '@ngrx/store'
 
 @Component({
-  selector: 'app-communities-filters',
+  selector: 'tt-communities-filters',
   imports: [
     FormsModule,
     ReactiveFormsModule,

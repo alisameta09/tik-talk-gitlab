@@ -7,7 +7,7 @@ import { profileActions, selectFilteredProfiles } from '@tt/data-access/profile'
 import { ResizePageDirective } from '@tt/common-ui'
 
 @Component({
-  selector: 'app-search-page',
+  selector: 'tt-search-page',
   imports: [
     ProfileCardComponent,
     ProfileFiltersComponent,
