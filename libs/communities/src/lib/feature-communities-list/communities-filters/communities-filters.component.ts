@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core'
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { StackInputComponent, TtFormInputComponent, TtSelectComponent } from '@tt/common-ui'
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
+import { StackInputComponent, SvgIconComponent, TtFormInputComponent, TtSelectComponent } from '@tt/common-ui'
 import { communityActions, selectCommunitiesFilters } from '@tt/data-access/communities'
 import { debounceTime, startWith } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -14,6 +20,7 @@ import { Store } from '@ngrx/store'
     TtFormInputComponent,
     StackInputComponent,
     TtSelectComponent,
+    SvgIconComponent,
   ],
   templateUrl: './communities-filters.component.html',
   styleUrl: './communities-filters.component.scss',
@@ -30,10 +37,12 @@ export class CommunitiesFiltersComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.searchCommunityForm.valueChanges.pipe(
-      startWith(this.searchCommunityForm.getRawValue()),
-      debounceTime(300),
-      takeUntilDestroyed(this.destroyRef))
+    this.searchCommunityForm.valueChanges
+      .pipe(
+        startWith(this.searchCommunityForm.getRawValue()),
+        debounceTime(300),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe((formValue) => {
         this.store.dispatch(communityActions.saveFilters({ filters: formValue }))
         this.store.dispatch(communityActions.filterCommunities({ filters: formValue }))
