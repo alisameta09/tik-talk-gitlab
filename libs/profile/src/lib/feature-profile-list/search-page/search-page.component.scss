@@ -4,9 +4,8 @@
 }
 
 .profile-card__wrapper {
-  display: grid;
-  grid-gap: 8px;
   overflow-y: auto;
+  place-content: start;
 }
 
 .profile-card__wrapper::-webkit-scrollbar {
