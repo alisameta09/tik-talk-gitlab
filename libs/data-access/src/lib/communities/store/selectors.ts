@@ -6,6 +6,16 @@ export const selectFilteredCommunities = createSelector(
   (communities) => communities
 )
 
+export const selectCommunitiesPageble = createSelector(
+  communityFeature.selectCommunityFeatureState,
+  (state) => {
+    return {
+      page: state.page,
+      size: state.size
+    }
+  }
+)
+
 export const selectCommunitiesFilters = createSelector(
   communityFeature.selectCommunityFilters,
   (filters) => filters

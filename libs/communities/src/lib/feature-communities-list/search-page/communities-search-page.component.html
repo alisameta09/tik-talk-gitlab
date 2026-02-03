@@ -13,8 +13,14 @@
 <div
   class="communities-list__wrapper"
   resizePage
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  [infiniteScrollContainer]="'.communities-list__wrapper'"
+  [fromRoot]="true"
+  (scrolled)="onScroll()"
 >
-  @for (community of communities$ | async; track community.id) {
+  @for (community of communities$ | async; track community.id; let last = $last) {
     <tt-community-card
       [community]="community"
     ></tt-community-card>
