@@ -40,13 +40,11 @@ export class StackInputComponent implements ControlValueAccessor {
 
     if (!this.innerInput) return
 
-    if (this.value$.value.includes(this.innerInput.toUpperCase())) {
-      event.preventDefault()
+    const currentValue = this.value$.value
+
+    if (!new Set(currentValue).has(this.innerInput.toUpperCase())) {
       this.isDuplicate.set(true)
-      return
-    } else {
-      this.isDuplicate.set(false)
-      this.value$.next([...this.value$.value, this.innerInput.toUpperCase()])
+      this.value$.next([...currentValue, this.innerInput.toUpperCase()])
     }
 
     this.innerInput = ''

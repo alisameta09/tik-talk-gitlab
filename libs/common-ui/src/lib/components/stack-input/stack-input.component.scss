@@ -37,7 +37,7 @@
   display: none;
 }
 
-.stack-ghost-input.ng-invalid + .validation {
+.stack-ghost-input + .validation {
   display: block;
   color: tomato;
   place-content: center;
