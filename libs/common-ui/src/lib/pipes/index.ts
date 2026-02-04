@@ -1,7 +1,4 @@
-import { DateTransformPipe } from "./date-transform.pipe";
-import { ImgUrlPipe } from "./img-url.pipe";
+import { DateTransformPipe } from './date-transform.pipe'
+import { ImgUrlPipe } from './img-url.pipe'
 
-export {
-  DateTransformPipe,
-  ImgUrlPipe
-}
+export { DateTransformPipe, ImgUrlPipe }

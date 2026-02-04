@@ -12,11 +12,7 @@
         <div class="community-card__info h6"
         >{{ community.name }}
           <span class="regular">
-            {{ community.subscribersAmount }}
-            {{
-              community.subscribersAmount === 1 ? 'подписчик'
-                : (community.subscribersAmount > 1 && community.subscribersAmount < 5 ? 'подписчика' : 'подписчиков')
-            }}
+            {{ community.subscribersAmount | i18nPlural: subscriberCategories }}
           </span>
         </div>
         <div class="community-card__tags">
