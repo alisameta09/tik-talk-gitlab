@@ -24,7 +24,7 @@
 
       <div class="community-card-button__wrapper">
 
-        @if (!(community.admin.id === me()?.id)) {
+        @if (!isMine()) {
           @if (!isJoined()) {
             <button
               class="btn community-subscribe-btn"

@@ -20,7 +20,7 @@
   [fromRoot]="true"
   (scrolled)="onScroll()"
 >
-  @for (community of communities$ | async; track community.id; let last = $last) {
+  @for (community of communities$ | async; track community.id) {
     <tt-community-card
       [community]="community"
     ></tt-community-card>
