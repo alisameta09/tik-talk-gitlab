@@ -15,9 +15,9 @@ import {
 } from '@angular/forms';
 import { TtInputComponent } from '../tt-input/tt-input.component';
 import { debounceTime, switchMap, tap } from 'rxjs';
-import { DadataService, DadataSuggestion } from '@tt/data-access/profile';
 import { AsyncPipe } from '@angular/common';
-import { SvgIconComponent } from '../index';
+import { DadataSuggestion, SvgIconComponent } from '../index'
+import { DadataService } from './dadata.service'
 
 @Component({
   selector: 'address-input',

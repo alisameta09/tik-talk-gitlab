@@ -8,6 +8,7 @@ import { TtFormInputComponent } from './tt-form-input/tt-form-input.component'
 import { TtInputComponent } from "./tt-input/tt-input.component"
 import { PortalComponent } from './portal/portal.component'
 import { PortalService } from './portal/portal.service'
+import { DadataSuggestion } from './address-input/dadata.interfaces'
 
 export {
     AvatarCircleComponent,
@@ -21,3 +22,5 @@ export {
     PortalComponent,
     PortalService
 }
+
+export type { DadataSuggestion }

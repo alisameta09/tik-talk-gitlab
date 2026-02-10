@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DADATA_TOKEN} from '@tt/shared';
 import {map} from 'rxjs';
-import { DadataSuggestion } from '../index';
+import { DadataSuggestion } from './dadata.interfaces'
 
 @Injectable({
   providedIn: 'root'
