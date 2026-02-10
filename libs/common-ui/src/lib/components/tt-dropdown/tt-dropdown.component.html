@@ -1,0 +1,16 @@
+<ul class="tt-select-dropdown-list">
+  @for (item of items; track item) {
+    <li
+      [value]="item"
+      (click)="emitItem(item)"
+      class="tt-select-item"
+    >
+      <div class="tt-select-item__wrapper">
+      <span class="buttons-text tt-select-item-label"
+      >{{ item }}
+      </span>
+        <svg icon="checkbox" class="svg16 tt-select-checkbox-svg"></svg>
+      </div>
+    </li>
+  }
+</ul>

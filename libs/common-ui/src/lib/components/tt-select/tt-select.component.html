@@ -1,4 +1,7 @@
-<div class="tt-form-label tt-select-label tt-form-label__text">
+<div
+  #anchor
+  class="tt-form-label tt-select-label tt-form-label__text"
+>
 
   <ng-content></ng-content>
 
@@ -23,25 +26,13 @@
     >Выберите
     </button>
 
-    @if (isDropdownOpened()) {
-      <ul class="tt-select-dropdown-list">
-        @for (theme of themes; track theme) {
-          <li
-            [value]="theme"
-            (click)="onSelectItem(theme)"
-            [class.selected]="theme === selectedItem()"
-            class="tt-select-item"
-          >
-            <div class="tt-select-item__wrapper">
-                <span class="buttons-text tt-select-item-label"
-                >{{ theme }}
-                </span>
-              <svg icon="checkbox" class="svg16 tt-select-checkbox-svg"></svg>
-            </div>
-          </li>
-        }
-      </ul>
-    }
+      @if (isDropdownOpened()) {
+        <tt-portal [host]="anchor">
+          <tt-dropdown
+            (selectedItem)="onSelectItem($event)"
+          ></tt-dropdown>
+        </tt-portal>
+      }
 
   </div>
 

@@ -25,6 +25,6 @@ interface Admin {
   description: string
 }
 
-export interface CommunityPageInterface extends Community {
+export interface CommunityPage extends Community {
   posts: string[]
 }

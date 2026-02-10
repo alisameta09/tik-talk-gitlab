@@ -6,14 +6,18 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component'
 import { TtSelectComponent } from './tt-select/tt-select.component'
 import { TtFormInputComponent } from './tt-form-input/tt-form-input.component'
 import { TtInputComponent } from "./tt-input/tt-input.component"
+import { PortalComponent } from './portal/portal.component'
+import { PortalService } from './portal/portal.service'
 
 export {
-  AvatarCircleComponent,
-  SvgIconComponent,
-  InfiniteScrollTriggerComponent,
-  StackInputComponent,
-  TtInputComponent,
-  AddressInputComponent,
-  TtFormInputComponent,
-  TtSelectComponent
+    AvatarCircleComponent,
+    SvgIconComponent,
+    InfiniteScrollTriggerComponent,
+    StackInputComponent,
+    TtInputComponent,
+    AddressInputComponent,
+    TtFormInputComponent,
+    TtSelectComponent,
+    PortalComponent,
+    PortalService
 }

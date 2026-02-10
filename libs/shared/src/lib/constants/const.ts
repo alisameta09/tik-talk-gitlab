@@ -1,13 +1,5 @@
 const DADATA_TOKEN = '214ea83875383a72a2d642c43447927343521bf7'
 
-enum CommunityTheme {
-  PROGRAMMING = 'PROGRAMMING',
-  TECHNOLOGY = 'TECHNOLOGY',
-  EDUCATION = 'EDUCATION',
-  SPORT = 'SPORT',
-  OTHER = 'OTHER'
-}
-
 const baseApiUrl = '/yt-course/'
 const authUrl = `${baseApiUrl}auth/`
 const chatUrl = `${baseApiUrl}chat/`
@@ -20,5 +12,5 @@ export {
   authUrl,
   chatUrl,
   profileUrl,
-  communityUrl,
-  CommunityTheme }
+  communityUrl
+}
