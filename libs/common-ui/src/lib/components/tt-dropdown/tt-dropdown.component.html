@@ -3,6 +3,7 @@
     <li
       [value]="item"
       (click)="emitItem(item)"
+      [class.selected]="selectedItem() === item"
       class="tt-select-item"
     >
       <div class="tt-select-item__wrapper">

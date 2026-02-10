@@ -29,7 +29,8 @@
       @if (isDropdownOpened()) {
         <tt-portal [host]="anchor">
           <tt-dropdown
-            (selectedItem)="onSelectItem($event)"
+            [selectedItem]="selectedItem()"
+            (itemChange)="onSelectItem($event)"
           ></tt-dropdown>
         </tt-portal>
       }

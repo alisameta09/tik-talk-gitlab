@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core'
 import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 
 @Component({
@@ -11,9 +11,10 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 export class TtDropdownComponent {
   items = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
 
-  selectedItem = output<string>()
+  selectedItem = input<string>()
+  itemChange = output<string>()
 
-  emitItem(value: string) {
-    this.selectedItem.emit(value)
+  emitItem(item: string) {
+    this.itemChange.emit(item)
   }
 }
