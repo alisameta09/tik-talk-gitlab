@@ -6,9 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { StackInputComponent, SvgIconComponent, TtFormInputComponent, TtSelectComponent } from '@tt/common-ui'
+import {
+  StackInputComponent,
+  SvgIconComponent,
+  TtFormInputComponent,
+  TtSelectComponent,
+} from '@tt/common-ui'
 import { communityActions, selectCommunitiesFilters } from '@tt/data-access/communities'
-import { debounceTime, startWith } from 'rxjs'
+import { debounceTime, startWith, take } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { Store } from '@ngrx/store'
 
@@ -52,7 +57,7 @@ export class CommunitiesFiltersComponent implements OnInit {
   constructor() {
     this.store
       .select(selectCommunitiesFilters)
-      .pipe(takeUntilDestroyed())
+      .pipe(take(1), takeUntilDestroyed())
       .subscribe((filters) => {
         if (filters) {
           this.searchCommunityForm.patchValue(filters, { emitEvent: false })
