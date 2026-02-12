@@ -37,9 +37,8 @@ export class CommunityCardComponent {
   communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
 
-  isJoined = signal<boolean>(false)
   preview = signal<string>('/assets/images/avatar-placeholder.png')
-
+  isJoined = linkedSignal(() => this.community()?.isJoined)
   communityState = linkedSignal(this.community)
   communitySubscribers = computed(() => this.communityState()?.subscribersAmount)
   isMine = computed(() => this.me()?.id === this.community()?.admin.id)
