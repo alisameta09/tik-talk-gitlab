@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+  signal,
+} from '@angular/core'
 import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { CommunitiesService, Community } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
@@ -25,16 +33,16 @@ export class CommunityCardComponent {
 
   community = input<Community>()
 
-  isJoined = signal<boolean>(false)
-  preview = signal<string>('/assets/images/avatar-placeholder.png')
-
   router = inject(Router)
   communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
 
-  isMine = computed(() => {
-    return this.me()?.id === this.community()?.admin.id
-  })
+  isJoined = signal<boolean>(false)
+  preview = signal<string>('/assets/images/avatar-placeholder.png')
+
+  communityState = linkedSignal(this.community)
+  communitySubscribers = computed(() => this.communityState()?.subscribersAmount)
+  isMine = computed(() => this.me()?.id === this.community()?.admin.id)
 
   getCommunity(communityId: number) {
     firstValueFrom(this.communitiesService.getCommunityById(communityId)).then((res) =>
@@ -44,11 +52,25 @@ export class CommunityCardComponent {
 
   joinCommunity(communityId: number) {
     firstValueFrom(this.communitiesService.joinCommunity(communityId))
+
+    this.communityState.update((community) =>
+      community
+        ? { ...community, subscribersAmount: community.subscribersAmount + 1 }
+        : community
+    )
+
     this.isJoined.set(true)
   }
 
   leaveCommunity(communityId: number) {
     firstValueFrom(this.communitiesService.leaveCommunity(communityId))
+
+    this.communityState.update((community) =>
+      community
+        ? { ...community, subscribersAmount: community.subscribersAmount - 1 }
+        : community
+    )
+
     this.isJoined.set(false)
   }
 }

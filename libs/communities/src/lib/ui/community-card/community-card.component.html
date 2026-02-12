@@ -12,7 +12,7 @@
         <div class="community-card__info h6"
         >{{ community.name }}
           <span class="regular">
-            {{ community.subscribersAmount | i18nPlural: subscriberCategories }}
+            {{ communitySubscribers() | i18nPlural: subscriberCategories }}
           </span>
         </div>
         <div class="community-card__tags">

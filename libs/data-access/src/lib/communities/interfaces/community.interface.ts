@@ -12,7 +12,7 @@ export interface Community {
   isJoined: boolean
 }
 
-interface Admin {
+export interface Admin {
   id: number
   username: string
   avatarUrl: string | null
