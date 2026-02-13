@@ -1,12 +1,16 @@
 <form class="communities-search-form mb20" [formGroup]="searchCommunityForm">
 
-  <tt-form-input
+  <tt-input
     type="text"
     placeholder="Выберите"
     formControlName="name"
+    labelClass="tt-form-label tt-form-label__text"
+    wrapperClass="search-by-community-name"
+    inputClass="tt-form-input stack-ghost-input"
+    [showSvg]="false"
   >Название сообщества
     <svg icon="search" class="search-icon" svgSearch></svg>
-  </tt-form-input>
+  </tt-input>
 
   <tt-select
     type="text"

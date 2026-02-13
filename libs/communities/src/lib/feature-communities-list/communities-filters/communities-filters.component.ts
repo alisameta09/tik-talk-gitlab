@@ -1,17 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core'
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms'
-import {
-  StackInputComponent,
-  SvgIconComponent,
-  TtFormInputComponent,
-  TtSelectComponent,
-} from '@tt/common-ui'
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { StackInputComponent, SvgIconComponent, TtInputComponent, TtSelectComponent } from '@tt/common-ui'
 import { communityActions, selectCommunitiesFilters } from '@tt/data-access/communities'
 import { debounceTime, startWith, take } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -22,10 +11,10 @@ import { Store } from '@ngrx/store'
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    TtFormInputComponent,
     StackInputComponent,
     TtSelectComponent,
     SvgIconComponent,
+    TtInputComponent,
   ],
   templateUrl: './communities-filters.component.html',
   styleUrl: './communities-filters.component.scss',

@@ -1,9 +1,9 @@
-<label class="tt-control-label mb16">
+<label [ngClass]="labelClass()">
   <ng-content></ng-content>
 
-  <div class="username-input">
+  <div [ngClass]="wrapperClass()">
     <input
-      class="tt-input"
+      [ngClass]="inputClass()"
       [type]="type()"
       [placeholder]="placeholder()"
       [ngModel]="value"
@@ -12,9 +12,11 @@
       [disabled]="disabled()"
     />
     <button class="username-telegram-btn" type="button">
-      @if (showSvg) {
+      @if (showSvg()) {
         <svg icon="telegram" class="svg20"></svg>
       }
     </button>
+
+    <ng-content select="[svgSearch]"></ng-content>
   </div>
 </label>
