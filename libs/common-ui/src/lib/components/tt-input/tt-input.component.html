@@ -11,12 +11,9 @@
       (blur)="onTouched()"
       [disabled]="disabled()"
     />
-    <button class="username-telegram-btn" type="button">
-      @if (showSvg()) {
-        <svg icon="telegram" class="svg20"></svg>
-      }
+    <button class="tt-input-btn" type="button">
+      <ng-content select="[iconRight]"></ng-content>
     </button>
-
-    <ng-content select="[iconRight]"></ng-content>
   </div>
+
 </label>

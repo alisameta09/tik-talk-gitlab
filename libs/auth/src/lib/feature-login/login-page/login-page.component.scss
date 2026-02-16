@@ -17,7 +17,7 @@
 }
 
 .password-eye-btn,
-.username-telegram-btn {
+.tt-input-btn {
   position: absolute;
   top: 50%;
   right: 12px;
@@ -35,6 +35,6 @@
   color: var(--primary-color);
 }
 
-.username-telegram-btn.icon {
+.tt-input-btn.icon {
   color: var(--light-color);
 }

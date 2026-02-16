@@ -1,4 +1,4 @@
-.username-telegram-btn {
+.tt-input-btn {
   display: inline-block;
   position: absolute;
   top: 50%;
@@ -53,4 +53,9 @@
   background: none;
   height: 33px;
   outline: none;
+}
+
+:host(.community-input) .tt-input-btn {
+  cursor: none;
+  right: -2px;
 }

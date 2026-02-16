@@ -4,7 +4,7 @@ import { InfiniteScrollTriggerComponent } from './infinite-scroll-trigger/infini
 import { StackInputComponent } from './stack-input/stack-input.component'
 import { SvgIconComponent } from './svg-icon/svg-icon.component'
 import { TtSelectComponent } from './tt-select/tt-select.component'
-import { TtInputComponent } from './tt-input/tt-input.component'
+import TtInputComponent from './tt-input/tt-input.component'
 import { PortalComponent } from './portal/portal.component'
 import { PortalService } from './portal/portal.service'
 import { DadataSuggestion } from './address-input/dadata.interfaces'
