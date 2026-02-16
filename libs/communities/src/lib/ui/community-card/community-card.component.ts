@@ -1,13 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  linkedSignal,
-  signal,
-} from '@angular/core'
-import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal } from '@angular/core'
+import { PreviewPipe, SvgIconComponent } from '@tt/common-ui'
 import { CommunitiesService, Community } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
 import { firstValueFrom } from 'rxjs'
@@ -16,7 +8,7 @@ import { I18nPluralPipe } from '@angular/common'
 
 @Component({
   selector: 'tt-community-card',
-  imports: [SvgIconComponent, ImgUrlPipe, I18nPluralPipe],
+  imports: [SvgIconComponent, I18nPluralPipe, PreviewPipe],
   templateUrl: './community-card.component.html',
   styleUrl: './community-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,7 +29,6 @@ export class CommunityCardComponent {
   communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
 
-  preview = signal<string>('/assets/images/avatar-placeholder.png')
   isJoined = linkedSignal(() => this.community()?.isJoined)
   communityState = linkedSignal(this.community)
   communitySubscribers = computed(() => this.communityState()?.subscribersAmount)
@@ -53,9 +44,7 @@ export class CommunityCardComponent {
     firstValueFrom(this.communitiesService.joinCommunity(communityId))
 
     this.communityState.update((community) =>
-      community
-        ? { ...community, subscribersAmount: community.subscribersAmount + 1 }
-        : community
+      community ? { ...community, subscribersAmount: community.subscribersAmount + 1 } : community
     )
 
     this.isJoined.set(true)
@@ -65,9 +54,7 @@ export class CommunityCardComponent {
     firstValueFrom(this.communitiesService.leaveCommunity(communityId))
 
     this.communityState.update((community) =>
-      community
-        ? { ...community, subscribersAmount: community.subscribersAmount - 1 }
-        : community
+      community ? { ...community, subscribersAmount: community.subscribersAmount - 1 } : community
     )
 
     this.isJoined.set(false)

@@ -3,7 +3,7 @@
   <div class="community-card__wrapper mb8">
     <div class="community-card">
       <img
-        [src]="(community.avatarUrl | imgUrl) ?? preview()"
+        [src]="community.avatarUrl | preview"
         alt="Логотип сообщества"
         class="community-card__logo"
       />
