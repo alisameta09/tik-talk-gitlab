@@ -1,9 +1,9 @@
-<label [ngClass]="labelClass()">
+<label class="tt-label-input">
   <ng-content></ng-content>
 
-  <div [ngClass]="wrapperClass()">
+  <div class="tt-input-wrapper">
     <input
-      [ngClass]="inputClass()"
+      class="tt-input"
       [type]="type()"
       [placeholder]="placeholder()"
       [ngModel]="value"
@@ -17,6 +17,6 @@
       }
     </button>
 
-    <ng-content select="[svgSearch]"></ng-content>
+    <ng-content select="[iconRight]"></ng-content>
   </div>
 </label>

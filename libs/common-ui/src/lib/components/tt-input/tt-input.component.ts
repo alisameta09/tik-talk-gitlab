@@ -1,20 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  forwardRef,
-  inject,
-  Input,
-  input,
-  signal,
-} from '@angular/core'
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input, signal } from '@angular/core'
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { SvgIconComponent } from '../svg-icon/svg-icon.component'
-import { NgClass } from '@angular/common'
 
 @Component({
   selector: 'tt-input',
-  imports: [SvgIconComponent, FormsModule, NgClass],
+  imports: [FormsModule, SvgIconComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,9 +17,6 @@ import { NgClass } from '@angular/common'
   styleUrl: './tt-input.component.scss',
 })
 export class TtInputComponent implements ControlValueAccessor {
-  labelClass = input('')
-  wrapperClass = input('')
-  inputClass = input('')
   showSvg = input(true)
 
   value: string | null = null
