@@ -12,7 +12,7 @@
         <div class="community-card__info h6"
         >{{ community.name }}
           <span class="regular">
-            {{ communitySubscribers() | i18nPlural: subscriberCategories }}
+            {{ subscriptionState()?.subscribersAmount | i18nPlural: subscriberCategories }}
           </span>
         </div>
         <div class="community-card__tags">
@@ -25,7 +25,7 @@
       <div class="community-card-button__wrapper">
 
         @if (!isMine()) {
-          @if (!isJoined()) {
+          @if (!subscriptionState()?.isJoined) {
             <button
               class="btn community-subscribe-btn"
               type="button"

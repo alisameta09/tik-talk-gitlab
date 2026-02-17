@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+} from '@angular/core'
 import { PreviewPipe, SvgIconComponent } from '@tt/common-ui'
 import { CommunitiesService, Community } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
@@ -29,34 +36,32 @@ export class CommunityCardComponent {
   communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
 
-  isJoined = linkedSignal(() => this.community()?.isJoined)
-  communityState = linkedSignal(this.community)
-  communitySubscribers = computed(() => this.communityState()?.subscribersAmount)
+  subscriptionState = linkedSignal(this.community)
   isMine = computed(() => this.me()?.id === this.community()?.admin.id)
 
-  getCommunity(communityId: number) {
-    firstValueFrom(this.communitiesService.getCommunityById(communityId)).then((res) =>
+  async getCommunity(communityId: number) {
+    await firstValueFrom(this.communitiesService.getCommunityById(communityId)).then((res) =>
       this.router.navigate(['/communities', res.id])
     )
   }
 
-  joinCommunity(communityId: number) {
-    firstValueFrom(this.communitiesService.joinCommunity(communityId))
+  async joinCommunity(communityId: number) {
+    await firstValueFrom(this.communitiesService.joinCommunity(communityId))
 
-    this.communityState.update((community) =>
-      community ? { ...community, subscribersAmount: community.subscribersAmount + 1 } : community
+    this.subscriptionState.update((community) =>
+      community
+        ? { ...community, isJoined: true, subscribersAmount: community.subscribersAmount + 1 }
+        : community
     )
-
-    this.isJoined.set(true)
   }
 
-  leaveCommunity(communityId: number) {
-    firstValueFrom(this.communitiesService.leaveCommunity(communityId))
+  async leaveCommunity(communityId: number) {
+    await firstValueFrom(this.communitiesService.leaveCommunity(communityId))
 
-    this.communityState.update((community) =>
-      community ? { ...community, subscribersAmount: community.subscribersAmount - 1 } : community
+    this.subscriptionState.update((community) =>
+      community
+        ? { ...community, isJoined: false, subscribersAmount: community.subscribersAmount - 1 }
+        : community
     )
-
-    this.isJoined.set(false)
   }
 }
