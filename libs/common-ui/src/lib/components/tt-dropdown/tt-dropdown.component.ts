@@ -9,9 +9,9 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TtDropdownComponent {
-  items = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
+  item = input<string>('')
 
-  selectedItem = input<string>()
+  selectedItem = input<string>('')
   itemChange = output<string>()
 
   emitItem(item: string) {

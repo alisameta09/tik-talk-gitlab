@@ -28,6 +28,8 @@ import { PortalComponent } from '../portal/portal.component'
   ],
 })
 export class TtSelectComponent implements ControlValueAccessor {
+  items = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
+
   elementRef = inject(ElementRef)
 
   placeholder = input<string>('')
