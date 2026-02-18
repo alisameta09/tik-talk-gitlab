@@ -123,6 +123,12 @@ body {
   line-height: 16px;
 }
 
+.buttons-text {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
 .subtitle {
   font-size: 14px;
   line-height: 20px;
@@ -156,6 +162,10 @@ body {
   line-height: 21px;
   font-family: 'JetBrains Mono', sans-serif;
   color: var(--light-color);
+}
+
+.tt-input::placeholder {
+  color: var(--light-transparent-color);
 }
 
 .tt-form-label {

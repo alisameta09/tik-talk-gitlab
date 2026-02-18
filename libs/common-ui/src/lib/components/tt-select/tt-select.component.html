@@ -1,0 +1,45 @@
+<div
+  #anchor
+  class="tt-form-label tt-select-label tt-form-label__text"
+>
+
+  <ng-content></ng-content>
+
+  <div class="tt-form-input tt-select-ghost-input">
+
+    @if (selectedItem()) {
+      <div class="skill-tag tt-select-tag">
+        <button
+          type="button"
+          class="tt-select-btn__delete svg16"
+          (click)="onDeleteItem()"
+        >
+          <svg class="svg10" icon="cross"></svg>
+        </button>
+        <span>{{ selectedItem() }}</span>
+      </div>
+    }
+
+    <button
+      class="tt-select-dropdown__btn regular"
+      (click)="onToggleDropdown()"
+    >Выберите
+    </button>
+
+      @if (isDropdownOpened()) {
+        <tt-portal [host]="anchor">
+          <ul class="tt-select-dropdown-list">
+            @for (item of items; track item) {
+          <tt-dropdown
+            [item]="item"
+            [selectedItem]="selectedItem()"
+            (itemChange)="onSelectItem($event)"
+          ></tt-dropdown>
+            }
+          </ul>
+        </tt-portal>
+      }
+
+  </div>
+
+</div>

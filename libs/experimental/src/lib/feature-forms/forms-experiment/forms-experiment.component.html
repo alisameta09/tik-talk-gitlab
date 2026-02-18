@@ -1,15 +1,16 @@
 <a [routerLink]="['/profile/me']">
-  <img src="/assets/svg/logo-small.svg" alt="Логотип Tik-Talk" class="mt40 logo-small" />
+  <img src="/assets/svg/logo-small.svg" alt="Логотип Tik-Talk" class="mt20 logo-small" />
 </a>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-  <div class="header__wrapper mt40">
-    <h4 class="h4 mb20">Информация о туре</h4>
+<div class="header__wrapper mt20">
+  <h4 class="h4 mb20">Информация о туре</h4>
 
-    <button (click)="addTour()" class="btn mb20 add-tour-btn">Добавить тур</button>
-  </div>
+  <button (click)="addTour()" class="btn mb20 add-tour-btn">Добавить тур</button>
+</div>
 
-  <div class="tour-info__wrapper" formArrayName="tours">
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)" class="tour-info__wrapper" resizePage>
+
+  <div formArrayName="tours">
     @for (tour of form.controls.tours.controls; track tour; let i = $index) {
 
     <div [formGroup]="tour" class="tour-block">

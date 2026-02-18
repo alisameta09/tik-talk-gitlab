@@ -1,0 +1,29 @@
+:host {
+  padding: 24px;
+}
+
+.communities-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-community-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 216px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.communities-list__wrapper {
+  overflow-y: auto;
+  place-content: start;
+}
+
+.communities-list__wrapper::-webkit-scrollbar {
+  display: none;
+}

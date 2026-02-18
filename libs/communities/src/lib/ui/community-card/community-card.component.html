@@ -1,0 +1,56 @@
+@if (community(); as community) {
+
+  <div class="community-card__wrapper mb8">
+    <div class="community-card">
+      <img
+        [src]="community.avatarUrl | preview"
+        alt="Логотип сообщества"
+        class="community-card__logo"
+      />
+
+      <div class="community-card__description">
+        <div class="community-card__info h6"
+        >{{ community.name }}
+          <span class="regular">
+            {{ subscriptionState()!.subscribersAmount | plural }}
+          </span>
+        </div>
+        <div class="community-card__tags">
+          @for (skill of community.tags; track skill) {
+            <div class="skill-tag">{{ skill }}</div>
+          }
+        </div>
+      </div>
+
+      <div class="community-card-button__wrapper">
+
+        @if (!isMine()) {
+          @if (!subscriptionState()?.isJoined) {
+            <button
+              class="btn community-subscribe-btn"
+              type="button"
+              (click)="joinCommunity(community.id)"
+            >Подписаться
+              <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
+            </button>
+          } @else {
+            <button
+              class="btn community-subscribe-btn"
+              type="button"
+              (click)="leaveCommunity(community.id)"
+            >Отписаться
+            </button>
+          }
+        }
+
+        <button
+          class="btn to-community-link"
+          (click)="getCommunity(community.id)"
+        >
+          <svg icon="go-arrow" class="svg16"></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

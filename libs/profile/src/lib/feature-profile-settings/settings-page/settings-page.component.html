@@ -1,7 +1,13 @@
-<app-profile-header></app-profile-header>
+<tt-profile-header></tt-profile-header>
 
-<form class="profile-form__wrapper" [formGroup]="form">
+<form
+  class="profile-form__wrapper"
+  [formGroup]="form"
+  resizePage
+>
+
   <div class="profile-form">
+
     <div class="two-columns">
       <label class="tt-form-label">
         <span class="tt-form-label__text">Имя</span>
@@ -41,20 +47,25 @@
       ></textarea>
     </label>
 
-    <label class="tt-form-label">
+    <div class="tt-form-label">
       <span class="tt-form-label__text">Аватарка</span>
-      <app-avatar-upload></app-avatar-upload>
-    </label>
+      <tt-avatar-upload></tt-avatar-upload>
+    </div>
 
-    <label class="tt-form-label">
-      <span class="tt-form-label__text">Навыки</span>
-    </label>
-    <stack-input formControlName="stack"></stack-input>
+    <stack-input
+      formControlName="stack"
+      placeholder="Введите данные"
+      errorMessageName="навык"
+    >Навыки</stack-input>
 
-    <address-input formControlName="city"></address-input>
+    <address-input
+      formControlName="city"
+    ></address-input>
+
   </div>
 
   <div class="footer__wrapper">
+
     <div class="icon-btn__wrapper">
       <a>
         <svg icon="delete" class="icon-btn"></svg>
@@ -68,5 +79,7 @@
       <a class="btn cancel-btn" [routerLink]="['/profile/me']">Отмена</a>
       <button class="btn save-btn" (click)="onSave($event)">Сохранить</button>
     </div>
+
   </div>
+
 </form>

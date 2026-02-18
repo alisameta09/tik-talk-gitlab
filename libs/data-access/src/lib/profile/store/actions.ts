@@ -1,12 +1,12 @@
-import {createActionGroup, props} from '@ngrx/store';
-import {Profile} from '../index';
+import {createActionGroup, props} from '@ngrx/store'
+import {Profile} from '../index'
 
 export const profileActions = createActionGroup({
   source: 'profile',
   events: {
-    'save filter': props<{ filters: Record<string, any> }>(),
-    'filter profiles': props<{ filters: Record<string, any> }>(),
     'profiles loaded': props<{ profiles: Profile[] }>(),
+    'filter profiles': props<{ filters: Record<string, any> }>(),
+    'save filter': props<{ filters: Record<string, any> }>(),
     'set page': props<{ page?: number }>()
   }
 })

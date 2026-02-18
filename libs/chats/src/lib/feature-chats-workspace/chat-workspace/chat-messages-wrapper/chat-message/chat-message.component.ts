@@ -3,7 +3,7 @@ import {AvatarCircleComponent, DateTransformPipe} from '@tt/common-ui';
 import {Message} from '@tt/data-access/chats';
 
 @Component({
-  selector: 'app-chat-message',
+  selector: 'tt-chat-message',
   imports: [AvatarCircleComponent, DateTransformPipe],
   templateUrl: './chat-message.component.html',
   styleUrl: './chat-message.component.scss',

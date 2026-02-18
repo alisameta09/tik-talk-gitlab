@@ -1,0 +1,32 @@
+<div class="tt-form-label tt-form-label__text">
+
+  <ng-content></ng-content>
+
+  <div class="skill-tag__container">
+
+    @for (tech of value$ | async; track tech; let i = $index) {
+      <div class="skill-tag stack-tag">
+        <button
+          type="button"
+          class="stack-btn__delete svg16"
+          (click)="onTagDelete(i)"
+        >
+          <svg class="svg10" icon="cross"></svg>
+        </button>
+        {{ tech }}
+      </div>
+    }
+
+    <input
+      type="text"
+      class="stack-ghost-input tt-form-input"
+      [(ngModel)]="innerInput"
+      [placeholder]="placeholder()"
+      (blur)="onTouched()"
+    />
+    @if (this.value$.value.includes(this.innerInput.toUpperCase())) {
+      <span class="validation medium-small-text">Такой {{ errorMessageName() }} уже добавлен!</span>
+    }
+  </div>
+
+</div>

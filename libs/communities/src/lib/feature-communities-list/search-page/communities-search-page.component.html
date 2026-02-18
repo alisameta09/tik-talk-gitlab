@@ -1,0 +1,28 @@
+<router-outlet></router-outlet>
+
+<div class="communities-header mb24">
+  <h4 class="h4">Сообщества</h4>
+  <button class="btn create-community-btn" type="button"
+  >Создать сообщество
+    <svg icon="communities" class="svg16"></svg>
+  </button>
+</div>
+
+<tt-communities-filters></tt-communities-filters>
+
+<div
+  class="communities-list__wrapper"
+  resizePage
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  [infiniteScrollContainer]="'.communities-list__wrapper'"
+  [fromRoot]="true"
+  (scrolled)="onScroll()"
+>
+  @for (community of communities(); track community.id) {
+    <tt-community-card
+      [community]="community"
+    ></tt-community-card>
+  }
+</div>

@@ -1,64 +1,55 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  forwardRef,
-  inject,
-  Input,
-  input,
-  signal
-} from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {SvgIconComponent} from '../svg-icon/svg-icon.component';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input, signal } from '@angular/core'
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 
 @Component({
   selector: 'tt-input',
-  imports: [
-    SvgIconComponent,
-    FormsModule
+  imports: [FormsModule, SvgIconComponent],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => TtInputComponent),
+    },
   ],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    multi: true,
-    useExisting: forwardRef(() => TtInputComponent)
-  }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tt-input.component.html',
-  styleUrl: './tt-input.component.css'
+  styleUrl: './tt-input.component.scss',
 })
-export class TtInputComponent implements ControlValueAccessor {
-  @Input() showSvg = true;
-  value: string | null = null;
+class TtInputComponent implements ControlValueAccessor {
+  value: string | null = null
 
-  cdr = inject(ChangeDetectorRef);
+  cdr = inject(ChangeDetectorRef)
 
-  disabled = signal<boolean>(false);
+  disabled = signal<boolean>(false)
 
-  type = input<'text' | 'password'>('text');
-  placeholder = input<string>();
+  type = input<'text' | 'password'>('text')
+  placeholder = input<string>()
 
   onChange: any
   onTouched: any
 
   writeValue(value: string | null): void {
-    this.value = value;
-    this.cdr.detectChanges();
+    this.value = value
+    this.cdr.detectChanges()
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.onChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.onTouched = fn
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
+    this.disabled.set(isDisabled)
   }
 
   onModelChange(val: string | null): void {
-    this.onChange(val);
-    this.cdr.detectChanges();
+    this.onChange(val)
+    this.cdr.detectChanges()
   }
 }
+
+export default TtInputComponent

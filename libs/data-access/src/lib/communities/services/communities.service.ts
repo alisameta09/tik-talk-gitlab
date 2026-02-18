@@ -1,0 +1,29 @@
+import { inject, Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { communityUrl } from '@tt/shared'
+import { Pageble } from '../../profile/interfaces/pageble.interface'
+import { Community, CommunityPage } from '../interfaces/community.interface'
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CommunitiesService {
+  http = inject(HttpClient)
+
+  filterCommunities(params: Record<string, any>) {
+    return this.http.get<Pageble<Community>>(communityUrl, { params })
+  }
+
+  getCommunityById(communityId: number) {
+    return this.http.get<CommunityPage>(`${communityUrl}${communityId}`)
+  }
+
+  joinCommunity(communityId: number) {
+    return this.http.post<Community>(`${communityUrl}${communityId}/join`, {})
+  }
+
+  leaveCommunity(communityId: number) {
+    return this.http.delete<Community>(`${communityUrl}${communityId}/join`)
+  }
+
+}
