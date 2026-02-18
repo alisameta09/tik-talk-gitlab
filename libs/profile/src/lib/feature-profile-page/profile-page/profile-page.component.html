@@ -1,7 +1,7 @@
 @if (profile$ | async; as profile) {
 
   <header class="profile-page__header">
-    <app-profile-header [profile]="profile"></app-profile-header>
+    <tt-profile-header [profile]="profile"></tt-profile-header>
 
     @if (isMyPage()) {
       <a class="btn to-settings-btn" [routerLink]="['/settings']">
@@ -17,7 +17,7 @@
   </header>
 
   <main class="profile-page__body">
-    <app-post-feed></app-post-feed>
+    <tt-post-feed></tt-post-feed>
 
     <div>
       <div class="subscribers-header mb16">

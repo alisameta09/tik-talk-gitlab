@@ -8,7 +8,7 @@ import { ChatService } from '@tt/data-access/chats'
 import { ResizePageDirective } from '@tt/common-ui'
 
 @Component({
-  selector: 'app-chat-workspace',
+  selector: 'tt-chat-workspace',
   imports: [ChatHeaderComponent, ChatMessagesWrapperComponent, AsyncPipe, ResizePageDirective],
   templateUrl: './chat-workspace.component.html',
   styleUrl: './chat-workspace.component.scss',

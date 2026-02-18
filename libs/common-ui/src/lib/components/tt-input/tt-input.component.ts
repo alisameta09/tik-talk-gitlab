@@ -1,33 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  forwardRef,
-  inject,
-  Input,
-  input,
-  signal
-} from '@angular/core'
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms'
-import {SvgIconComponent} from '../svg-icon/svg-icon.component'
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input, signal } from '@angular/core'
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
+import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 
 @Component({
   selector: 'tt-input',
-  imports: [
-    SvgIconComponent,
-    FormsModule
+  imports: [FormsModule, SvgIconComponent],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => TtInputComponent),
+    },
   ],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    multi: true,
-    useExisting: forwardRef(() => TtInputComponent)
-  }],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tt-input.component.html',
-  styleUrl: './tt-input.component.scss'
+  styleUrl: './tt-input.component.scss',
 })
-export class TtInputComponent implements ControlValueAccessor {
-  @Input() showSvg = true
+class TtInputComponent implements ControlValueAccessor {
   value: string | null = null
 
   cdr = inject(ChangeDetectorRef)
@@ -62,3 +51,5 @@ export class TtInputComponent implements ControlValueAccessor {
     this.cdr.detectChanges()
   }
 }
+
+export default TtInputComponent

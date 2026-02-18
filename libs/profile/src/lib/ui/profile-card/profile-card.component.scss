@@ -32,6 +32,7 @@
 .profile-card__description {
   color: var(--light-color);
   font-weight: 500;
+  word-break: break-all;
 }
 
 .profile-card__tags {

@@ -1,10 +1,11 @@
 <div class="search-by-address">
   <tt-input
     [formControl]="innerSearchControl"
-    [showSvg]="false"
     placeholder="Введите город"
-  ></tt-input>
-  <svg icon="search" class="search-icon"></svg>
+  >
+    <svg icon="search" class="search-icon" iconRight></svg>
+  </tt-input>
+
 </div>
 
 @if (suggestions$ | async; as suggestions) {
@@ -22,7 +23,21 @@
 }
 
 <div [formGroup]="addressForm" class="address-container">
-  <tt-input formControlName="city" [showSvg]="false" placeholder="Город">Город</tt-input>
-  <tt-input formControlName="street" [showSvg]="false" placeholder="Улица">Улица</tt-input>
-  <tt-input formControlName="house" [showSvg]="false" placeholder="Дом">Дом</tt-input>
+  <tt-input
+    formControlName="city"
+    placeholder="Город"
+  >Город
+  </tt-input>
+
+  <tt-input
+    formControlName="street"
+    placeholder="Улица"
+  >Улица
+  </tt-input>
+
+  <tt-input
+    formControlName="house"
+    placeholder="Дом"
+  >Дом
+  </tt-input>
 </div>

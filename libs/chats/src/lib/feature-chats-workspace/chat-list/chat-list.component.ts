@@ -8,7 +8,7 @@ import { SvgIconComponent } from '@tt/common-ui';
 import {ChatService} from '@tt/data-access/chats';
 
 @Component({
-  selector: 'app-chat-list',
+  selector: 'tt-chat-list',
   imports: [
     ChatBtnsComponent,
     SvgIconComponent,

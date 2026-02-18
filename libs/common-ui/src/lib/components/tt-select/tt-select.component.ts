@@ -9,12 +9,13 @@ import {
   signal,
 } from '@angular/core'
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { CommunityTheme } from '@tt/shared'
 import { SvgIconComponent } from '../svg-icon/svg-icon.component'
+import { TtDropdownComponent } from '../tt-dropdown/tt-dropdown.component'
+import { PortalComponent } from '../portal/portal.component'
 
 @Component({
   selector: 'tt-select',
-  imports: [FormsModule, SvgIconComponent],
+  imports: [FormsModule, SvgIconComponent, TtDropdownComponent, PortalComponent],
   templateUrl: './tt-select.component.html',
   styleUrl: './tt-select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,7 +28,7 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component'
   ],
 })
 export class TtSelectComponent implements ControlValueAccessor {
-  themes = Object.values(CommunityTheme)
+  items = ['PROGRAMMING', 'TECHNOLOGY', 'EDUCATION', 'SPORT', 'OTHER']
 
   elementRef = inject(ElementRef)
 
@@ -38,7 +39,6 @@ export class TtSelectComponent implements ControlValueAccessor {
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
-
     if (this.isDropdownOpened() && !this.elementRef.nativeElement.contains(event.target)) {
       this.isDropdownOpened.set(false)
     }
@@ -66,9 +66,9 @@ export class TtSelectComponent implements ControlValueAccessor {
     this.isDropdownOpened.set(!this.isDropdownOpened())
   }
 
-  onSelectItem(theme: string) {
-    this.selectedItem.set(theme)
-    this.onChange(theme)
+  onSelectItem(value: string) {
+    this.selectedItem.set(value)
+    this.onChange(value)
   }
 
   onDeleteItem() {

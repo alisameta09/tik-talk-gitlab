@@ -164,6 +164,10 @@ body {
   color: var(--light-color);
 }
 
+.tt-input::placeholder {
+  color: var(--light-transparent-color);
+}
+
 .tt-form-label {
   display: flex;
   flex-direction: column;

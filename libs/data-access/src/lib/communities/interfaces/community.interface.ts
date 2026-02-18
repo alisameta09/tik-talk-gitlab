@@ -1,4 +1,4 @@
-export interface CommunityInterface {
+export interface Community {
   id: number
   admin: Admin
   name: string
@@ -12,7 +12,7 @@ export interface CommunityInterface {
   isJoined: boolean
 }
 
-interface Admin {
+export interface Admin {
   id: number
   username: string
   avatarUrl: string | null
@@ -25,6 +25,6 @@ interface Admin {
   description: string
 }
 
-export interface CommunityPageInterface extends CommunityInterface {
+export interface CommunityPage extends Community {
   posts: string[]
 }

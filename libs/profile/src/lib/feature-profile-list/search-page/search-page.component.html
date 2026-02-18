@@ -1,4 +1,4 @@
-<app-profile-filters></app-profile-filters>
+<tt-profile-filters></tt-profile-filters>
 
 <div
   class="profile-card__wrapper"
@@ -11,8 +11,8 @@
   (scrolled)="onScroll()"
 >
   @for (profile of profiles(); track profile.id) {
-    <app-profile-card
+    <tt-profile-card
       [profile]="profile"
-    ></app-profile-card>
+    ></tt-profile-card>
   }
 </div>

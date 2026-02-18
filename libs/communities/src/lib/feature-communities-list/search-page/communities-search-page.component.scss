@@ -20,9 +20,8 @@
 }
 
 .communities-list__wrapper {
-  display: grid;
-  grid-gap: 8px;
-  overflow: auto;
+  overflow-y: auto;
+  place-content: start;
 }
 
 .communities-list__wrapper::-webkit-scrollbar {

@@ -6,7 +6,7 @@ import {GlobalStoreService} from '@tt/data-access/profile';
 import {Store} from '@ngrx/store';
 
 @Component({
-  selector: 'app-post',
+  selector: 'tt-post',
   imports: [
     AvatarCircleComponent,
     SvgIconComponent,

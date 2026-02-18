@@ -7,7 +7,7 @@ import {SvgIconComponent} from '@tt/common-ui'
 import { profileActions, selectProfileFilters } from '@tt/data-access/profile'
 
 @Component({
-  selector: 'app-profile-filters',
+  selector: 'tt-profile-filters',
   imports: [ReactiveFormsModule, SvgIconComponent],
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss',

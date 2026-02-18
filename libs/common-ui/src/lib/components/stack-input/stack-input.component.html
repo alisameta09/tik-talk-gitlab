@@ -1,5 +1,6 @@
-<div class="tt-form-label">
-  <span class="tt-form-label__text">{{ labelText() }}</span>
+<div class="tt-form-label tt-form-label__text">
+
+  <ng-content></ng-content>
 
   <div class="skill-tag__container">
 
@@ -22,13 +23,10 @@
       [(ngModel)]="innerInput"
       [placeholder]="placeholder()"
       (blur)="onTouched()"
-      [class.ng-invalid]="isDuplicate()"
-      [class.ng-valid]="!isDuplicate()"
     />
     @if (this.value$.value.includes(this.innerInput.toUpperCase())) {
       <span class="validation medium-small-text">Такой {{ errorMessageName() }} уже добавлен!</span>
     }
   </div>
-
 
 </div>

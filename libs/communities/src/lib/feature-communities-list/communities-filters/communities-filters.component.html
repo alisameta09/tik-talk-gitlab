@@ -1,22 +1,26 @@
-<form class="communities-search-form mb20" [formGroup]="searchCommunityForm">
+<form class="communities-search-form mb20 pew" [formGroup]="searchCommunityForm">
 
-  <tt-form-input
+  <tt-input
+    class="community-input"
     type="text"
     placeholder="Выберите"
     formControlName="name"
-  ></tt-form-input>
+  >Название сообщества
+    <svg icon="search" class="search-icon" iconRight></svg>
+  </tt-input>
 
-    <tt-select
-      type="text"
-      placeholder="Выберите"
-      formControlName="themes"
-    ></tt-select>
+  <tt-select
+    type="text"
+    placeholder="Выберите"
+    formControlName="themes"
+  >Тема
+  </tt-select>
 
-    <stack-input
-      placeholder="Выберите"
-      formControlName="tags"
-      labelText="Теги"
-      errorMessageName="тег"
-    ></stack-input>
+  <stack-input
+    placeholder="Выберите"
+    formControlName="tags"
+    errorMessageName="тег"
+  >Теги
+  </stack-input>
 
 </form>

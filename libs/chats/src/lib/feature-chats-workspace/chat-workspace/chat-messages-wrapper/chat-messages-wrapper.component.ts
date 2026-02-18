@@ -19,7 +19,7 @@ import { PostInputComponent } from '@tt/posts'
 import { Chat, ChatService } from '@tt/data-access/chats'
 
 @Component({
-  selector: 'app-chat-messages-wrapper',
+  selector: 'tt-chat-messages-wrapper',
   imports: [ChatMessageComponent, PostInputComponent],
   templateUrl: './chat-messages-wrapper.component.html',
   styleUrl: './chat-messages-wrapper.component.scss',

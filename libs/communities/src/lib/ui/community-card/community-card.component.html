@@ -1,10 +1,9 @@
-@if (community) {
+@if (community(); as community) {
 
-  <div class="community-card__wrapper">
+  <div class="community-card__wrapper mb8">
     <div class="community-card">
-
       <img
-        [src]="community.avatarUrl | imgUrl"
+        [src]="community.avatarUrl | preview"
         alt="Логотип сообщества"
         class="community-card__logo"
       />
@@ -13,11 +12,7 @@
         <div class="community-card__info h6"
         >{{ community.name }}
           <span class="regular">
-            {{ community.subscribersAmount }}
-            {{
-              community.subscribersAmount === 1 ? 'подписчик'
-                : (community.subscribersAmount > 1 && community.subscribersAmount < 5 ? 'подписчика' : 'подписчиков')
-            }}
+            {{ subscriptionState()!.subscribersAmount | plural }}
           </span>
         </div>
         <div class="community-card__tags">
@@ -29,8 +24,8 @@
 
       <div class="community-card-button__wrapper">
 
-        @if (!(community.admin.id === me()?.id)) {
-          @if (!isJoined()) {
+        @if (!isMine()) {
+          @if (!subscriptionState()?.isJoined) {
             <button
               class="btn community-subscribe-btn"
               type="button"

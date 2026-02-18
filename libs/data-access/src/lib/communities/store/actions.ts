@@ -1,12 +1,13 @@
 import { createActionGroup, props } from '@ngrx/store'
-import { CommunityInterface } from '../interfaces/community.interface'
+import { Community } from '../interfaces/community.interface'
 
 
 export const communityActions = createActionGroup({
   source: 'community',
   events: {
+    'communities loaded': props<{ communities: Community[] }>(),
     'filter communities': props<{ filters: Record <string, any> }>(),
-    'communities loaded': props<{ communities: CommunityInterface[] }>(),
-    'save filters': props<{ filters: Record <string, any> }>()
+    'save filters': props<{ filters: Record <string, any> }>(),
+    'set page': props<{ page?: number }>(),
   }
 })
