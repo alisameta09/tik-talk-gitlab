@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      //@ts-ignore
+      // @ts-expect-error error
       this.authService.login(this.form.value).subscribe((res) => {
         this.router.navigate([''])
         console.log(res)

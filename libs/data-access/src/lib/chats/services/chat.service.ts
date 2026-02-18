@@ -4,11 +4,13 @@ import {map, Observable} from 'rxjs'
 import {chatUrl} from '@tt/shared'
 import {DateTransformPipe} from '@tt/common-ui'
 import {Chat, LastMessageRes, Message} from '../index'
-import {AuthService, GlobalStoreService, Profile} from 'libs/data-access/src'
 import {ChatWSService} from '../interfaces/chat-ws-service.interface'
 import {ChatWSMessage} from '../interfaces/chat-ws-message.interface'
 import {isNewMessage, isUnreadMessage} from '../interfaces/type-guards'
 import {ChatWSRxjsService} from './chat-ws-rxjs.service'
+import { AuthService } from '../../auth/services/auth.service'
+import { GlobalStoreService } from '../../profile/services/global-store.service'
+import { Profile } from '../../profile/interfaces/profile.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -90,7 +92,7 @@ export class ChatService {
 
       if (!me || !companion) return
 
-      let newMessage = {
+      const newMessage = {
         id: message.data.id,
         userFromId: message.data.author,
         personalChatId: chatId,

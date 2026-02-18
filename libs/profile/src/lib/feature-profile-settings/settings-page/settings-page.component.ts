@@ -49,8 +49,9 @@ export class SettingsPageComponent {
 
   constructor() {
     effect(() => {
-      // @ts-ignore
-      this.form.patchValue({
+
+      // @ts-expect-error error
+      return this.form.patchValue({
         ...this.profileService.me(),
       })
     })
@@ -69,7 +70,7 @@ export class SettingsPageComponent {
     }
 
     firstValueFrom(
-      // @ts-ignore
+      // @ts-expect-error error
       this.profileService.patchProfile({
         ...this.form.value,
       })

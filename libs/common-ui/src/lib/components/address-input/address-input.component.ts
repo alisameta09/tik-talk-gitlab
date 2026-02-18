@@ -20,7 +20,7 @@ import { DadataSuggestion, SvgIconComponent } from '../index'
 import { DadataService } from './dadata.service'
 
 @Component({
-  selector: 'address-input',
+  selector: 'tt-address-input',
   imports: [TtInputComponent, ReactiveFormsModule, AsyncPipe, SvgIconComponent],
   providers: [
     {
@@ -34,18 +34,18 @@ import { DadataService } from './dadata.service'
   styleUrl: './address-input.component.css',
 })
 export class AddressInputComponent implements ControlValueAccessor {
-  innerSearchControl = new FormControl();
+  innerSearchControl = new FormControl()
 
   addressForm = new FormGroup({
     city: new FormControl(),
     street: new FormControl(),
     house: new FormControl(),
-  });
+  })
 
-  #dadataService = inject(DadataService);
-  cdr = inject(ChangeDetectorRef);
+  #dadataService = inject(DadataService)
+  cdr = inject(ChangeDetectorRef)
 
-  isDropdownOpened = signal<boolean>(true);
+  isDropdownOpened = signal<boolean>(true)
 
   suggestions$ = this.innerSearchControl.valueChanges.pipe(
     debounceTime(500),
@@ -54,32 +54,32 @@ export class AddressInputComponent implements ControlValueAccessor {
         .getSuggestion(val)
         .pipe(tap((res) => this.isDropdownOpened.set(!!res.length)))
     )
-  );
+  )
 
-  onChange(_: any) {}
+  onChange(_: unknown) {}
 
   onTouched() {}
 
   writeValue(address: string | null): void {
-    if (!address) return;
+    if (!address) return
 
-    this.innerSearchControl.patchValue(address, { emitEvent: false });
+    this.innerSearchControl.patchValue(address, { emitEvent: false })
 
-    const [city, street, house] = address.split(', ');
+    const [city, street, house] = address.split(', ')
 
-    this.addressForm.patchValue({ city, street, house }, { emitEvent: false });
-    this.cdr.detectChanges();
+    this.addressForm.patchValue({ city, street, house }, { emitEvent: false })
+    this.cdr.detectChanges()
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
+  registerOnChange(fn: never): void {
+    this.onChange = fn
   }
 
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+  registerOnTouched(fn: never): void {
+    this.onTouched = fn
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(_isDisabled: boolean): void {}
 
   onSuggestionPick(suggest: DadataSuggestion) {
     const value = [
@@ -88,9 +88,9 @@ export class AddressInputComponent implements ControlValueAccessor {
       suggest.data.house_type + '. ' + suggest.data.house,
     ]
       .filter(Boolean)
-      .join(', ');
+      .join(', ')
 
-    this.onChange(value);
+    this.onChange(value)
 
     this.addressForm.patchValue(
       {
@@ -99,10 +99,10 @@ export class AddressInputComponent implements ControlValueAccessor {
         house: suggest.data.house,
       },
       { emitEvent: false }
-    );
+    )
 
-    this.innerSearchControl.patchValue(value, { emitEvent: false });
-    this.isDropdownOpened.set(false);
-    this.cdr.detectChanges();
+    this.innerSearchControl.patchValue(value, { emitEvent: false })
+    this.isDropdownOpened.set(false)
+    this.cdr.detectChanges()
   }
 }

@@ -4,7 +4,7 @@ import { communityActions } from '../store/actions'
 import { inject, Injectable } from '@angular/core'
 import { map, switchMap, withLatestFrom } from 'rxjs'
 import { Store } from '@ngrx/store'
-import { selectCommunitiesFilters, selectCommunitiesPageble } from '@tt/data-access/communities'
+import { selectCommunitiesFilters, selectCommunitiesPageble } from './selectors'
 
 @Injectable({
   providedIn: 'root',

@@ -11,20 +11,20 @@ import {ChatService} from '@tt/data-access/chats';
   selector: 'tt-chat-list',
   imports: [
     ChatBtnsComponent,
-    SvgIconComponent,
     ReactiveFormsModule,
     AsyncPipe,
     RouterLink,
     RouterLinkActive,
+    SvgIconComponent,
   ],
   templateUrl: './chat-list.component.html',
   styleUrl: './chat-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatListComponent {
-  chatService = inject(ChatService);
+  chatService = inject(ChatService)
 
-  chatsFilterControl = new FormControl('');
+  chatsFilterControl = new FormControl('')
 
   chats$ = this.chatService.getMyChats().pipe(
     switchMap((chats) => {
@@ -34,10 +34,10 @@ export class ChatListComponent {
           return chats.filter((chat) => {
             return `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
               .toLowerCase()
-              .includes((inputValue ?? '').toLowerCase());
-          });
+              .includes((inputValue ?? '').toLowerCase())
+          })
         })
-      );
+      )
     })
-  );
+  )
 }
