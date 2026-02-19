@@ -14,7 +14,7 @@ install_dependencies:
   cache:
     key:
       files: yarn.lock
-    path: node_modules
+    paths: node_modules
   only:
     - main
 
@@ -31,7 +31,7 @@ build_angular:
   cache:
       key:
         files: yarn.lock
-      path: node_modules
+      paths: node_modules
   only:
     - main
 
