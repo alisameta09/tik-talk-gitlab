@@ -13,8 +13,10 @@ install_dependencies:
     - yarn global add nx
   cache:
     key:
-      files: yarn.lock
-    paths: node_modules
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
   only:
     - main
 
@@ -26,12 +28,14 @@ build_angular:
   script:
     - yarn build
   artifacts:
-    path:
+    paths:
       - $CI_PROJECT_DIR/dist
   cache:
-      key:
-        files: yarn.lock
-      paths: node_modules
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
   only:
     - main
 
