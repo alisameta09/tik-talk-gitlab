@@ -7,9 +7,9 @@ import { DateTime } from 'luxon'
 export class DateTransformPipe implements PipeTransform {
   transform(
     value: string | null,
-    format: string = 'HH:mm dd.MM.yyyy',
-    relative: boolean = false,
-    calendar: boolean = false
+    format = 'HH:mm dd.MM.yyyy',
+    relative = false,
+    calendar = false
   ): string {
     if (!value) return ''
 

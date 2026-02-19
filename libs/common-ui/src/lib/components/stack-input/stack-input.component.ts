@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs'
 import { AsyncPipe } from '@angular/common'
 
 @Component({
-  selector: 'stack-input',
+  selector: 'tt-stack-input',
   imports: [SvgIconComponent, AsyncPipe, FormsModule],
   providers: [
     {

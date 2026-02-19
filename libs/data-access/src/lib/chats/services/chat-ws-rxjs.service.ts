@@ -4,7 +4,7 @@ import {webSocket} from 'rxjs/webSocket';
 import {finalize, Observable, tap} from 'rxjs';
 import {ChatWSMessage} from "../interfaces/chat-ws-message.interface";
 import {inject} from '@angular/core';
-import {AuthService} from '@tt/data-access/auth';
+import { AuthService } from '../../auth/services/auth.service'
 
 export class ChatWSRxjsService implements ChatWSService {
   #authService = inject(AuthService);

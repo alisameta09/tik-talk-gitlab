@@ -1,4 +1,4 @@
-import { Profile } from 'libs/data-access/src'
+import { Profile } from '../../profile/interfaces/profile.interface'
 
 export interface PostCreateDto {
   title: string;
