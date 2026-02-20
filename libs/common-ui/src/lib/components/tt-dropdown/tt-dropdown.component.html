@@ -2,13 +2,13 @@
   [value]="item()"
   (click)="emitItem(item())"
   [class.selected]="selectedItem() === item()"
-  class="tt-select-item"
+  class="item-list"
 >
-  <div class="tt-select-item__wrapper">
-      <span class="buttons-text tt-select-item-label"
+  <div class="item-list__wrapper">
+      <span class="buttons-text item-label"
       >{{ item() }}
       </span>
-    <svg icon="checkbox" class="svg16 tt-select-checkbox-svg"></svg>
+    <svg icon="checkbox" class="svg16 checkbox-svg"></svg>
   </div>
 </li>
 
