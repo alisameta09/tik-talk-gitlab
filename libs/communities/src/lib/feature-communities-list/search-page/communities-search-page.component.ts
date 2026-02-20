@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
-import { CommunitiesFiltersComponent } from '../index'
-import { ResizePageDirective, SvgIconComponent } from '@tt/common-ui'
+import { CommunitiesFiltersComponent, CreateCommunityModalComponent } from '../index'
+import {
+  ModalButtonComponent,
+  ModalService,
+  ResizePageDirective,
+  SvgIconComponent,
+} from '@tt/common-ui'
 import { CommunityCardComponent } from '../../ui/community-card/community-card.component'
 import { communityActions, selectFilteredCommunities } from '@tt/data-access/communities'
 import { Store } from '@ngrx/store'
@@ -16,6 +21,7 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll'
     ResizePageDirective,
     RouterOutlet,
     InfiniteScrollDirective,
+    ModalButtonComponent
   ],
   templateUrl: './communities-search-page.component.html',
   styleUrl: './communities-search-page.component.scss',
@@ -23,6 +29,7 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll'
 })
 export class CommunitiesSearchPageComponent {
   store = inject(Store)
+  #modalService = inject(ModalService)
 
   communities = this.store.selectSignal(selectFilteredCommunities)
 
@@ -32,5 +39,9 @@ export class CommunitiesSearchPageComponent {
 
   onScroll() {
     this.timeToFetch()
+  }
+
+  createCommunity() {
+    this.#modalService.show(CreateCommunityModalComponent)
   }
 }
