@@ -1,0 +1,15 @@
+<div class="overlay">
+  <div class="modal">
+    <div class="close-modal__wrapper">
+      <button
+        (click)="closeModal()"
+        class="close-modal__btn"
+        type="button"
+        aria-label="close modal"
+      >
+        <svg class="svg20" icon="cross"></svg>
+      </button>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>
