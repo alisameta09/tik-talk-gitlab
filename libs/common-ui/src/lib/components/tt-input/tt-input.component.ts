@@ -16,7 +16,7 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component'
   templateUrl: './tt-input.component.html',
   styleUrl: './tt-input.component.scss',
 })
-class TtInputComponent implements ControlValueAccessor {
+export class TtInputComponent implements ControlValueAccessor {
   value: string | null = null
 
   cdr = inject(ChangeDetectorRef)
@@ -51,5 +51,3 @@ class TtInputComponent implements ControlValueAccessor {
     this.cdr.detectChanges()
   }
 }
-
-export default TtInputComponent
