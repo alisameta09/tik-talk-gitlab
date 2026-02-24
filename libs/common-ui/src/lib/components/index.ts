@@ -11,6 +11,7 @@ import { ModalService } from './tt-modal/modal.service'
 import { ShowModalButtonComponent } from './tt-show-modal-button/tt-show-modal-button.component'
 import { ModalComponent } from './tt-modal/tt-modal.component'
 import { TtInputComponent } from './tt-input/tt-input.component'
+import { ModalHostComponent } from './tt-modal-host/tt-modal-host.component'
 
 export {
   AvatarCircleComponent,
@@ -24,7 +25,8 @@ export {
   PortalService,
   ModalService,
   ShowModalButtonComponent,
-  ModalComponent
+  ModalComponent,
+  ModalHostComponent
 }
 
 export type { DadataSuggestion }
