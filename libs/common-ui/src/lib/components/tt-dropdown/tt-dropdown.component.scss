@@ -1,18 +1,18 @@
-.tt-select-item.selected {
-  .tt-select-item-label {
+.item-list.selected {
+  .item-label {
     border: 1px solid var(--primary-color)
   }
 
-  .tt-select-checkbox-svg {
+  .checkbox-svg {
     display: block;
   }
 
-  .tt-select-item__wrapper {
+  .item-list__wrapper {
     background: var(--dark-hover-color);
   }
 }
 
-.tt-select-item__wrapper {
+.item-list__wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,13 +22,13 @@
   cursor: pointer;
 }
 
-.tt-select-item-label {
+.item-label {
   border: var(--light-border);
   border-radius: 2px;
   width: max-content;
   padding: 4px 8px;
 }
 
-.tt-select-checkbox-svg {
+.checkbox-svg {
   display: none;
 }

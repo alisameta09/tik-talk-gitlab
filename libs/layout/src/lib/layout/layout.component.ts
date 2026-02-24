@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component, inject,
+  viewChild,
+  ViewContainerRef,
+} from '@angular/core'
 import { RouterOutlet } from '@angular/router'
 import { SidebarComponent } from '../sidebar/sidebar.component'
-import { ResizePageDirective } from '@tt/common-ui'
+import { ModalService, ResizePageDirective } from '@tt/common-ui'
 
 @Component({
   selector: 'tt-layout',
@@ -10,4 +16,16 @@ import { ResizePageDirective } from '@tt/common-ui'
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent {}
+export class LayoutComponent implements AfterViewInit {
+  #modalService = inject(ModalService)
+
+  modalHost = viewChild('modalHost', { read: ViewContainerRef })
+
+  ngAfterViewInit() {
+    const modalHost = this.modalHost()
+
+    if (!modalHost) return
+
+    this.#modalService.registerContainer(modalHost)
+  }
+}

@@ -24,7 +24,7 @@ class TtInputComponent implements ControlValueAccessor {
   disabled = signal<boolean>(false)
 
   type = input<'text' | 'password'>('text')
-  placeholder = input<string>()
+  placeholder = input<string>('')
 
   onChange: any
   onTouched: any
