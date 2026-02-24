@@ -13,10 +13,11 @@ import {
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import TtInputComponent from '../tt-input/tt-input.component';
+import { TtInputComponent } from '../tt-input/tt-input.component'
 import { debounceTime, switchMap, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { DadataSuggestion, SvgIconComponent } from '../index'
+import { SvgIconComponent } from '../svg-icon/svg-icon.component'
+import { DadataSuggestion } from './dadata.interfaces'
 import { DadataService } from './dadata.service'
 
 @Component({

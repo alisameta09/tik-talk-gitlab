@@ -4,13 +4,13 @@ import { InfiniteScrollTriggerComponent } from './infinite-scroll-trigger/infini
 import { StackInputComponent } from './stack-input/stack-input.component'
 import { SvgIconComponent } from './svg-icon/svg-icon.component'
 import { TtSelectComponent } from './tt-select/tt-select.component'
-import TtInputComponent from './tt-input/tt-input.component'
 import { PortalComponent } from './portal/portal.component'
 import { PortalService } from './portal/portal.service'
 import { DadataSuggestion } from './address-input/dadata.interfaces'
 import { ModalService } from './tt-modal/modal.service'
 import { ModalButtonComponent } from './tt-modal-button/tt-modal-button.component'
 import { ModalComponent } from './tt-modal/tt-modal.component'
+import { TtInputComponent } from './tt-input/tt-input.component'
 
 export {
   AvatarCircleComponent,

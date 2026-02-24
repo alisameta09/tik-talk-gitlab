@@ -1,6 +1,6 @@
 import { Component, forwardRef, HostBinding, HostListener, input, signal } from '@angular/core'
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms'
-import { SvgIconComponent } from '../index'
+import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 import { BehaviorSubject } from 'rxjs'
 import { AsyncPipe } from '@angular/common'
 
