@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 
 @Component({
-  selector: 'tt-modal-button',
+  selector: 'tt-show-modal-button',
   imports: [SvgIconComponent],
-  templateUrl: './tt-modal-button.component.html',
-  styleUrl: './tt-modal-button.component.scss',
+  templateUrl: './tt-show-modal-button.component.html',
+  styleUrl: './tt-show-modal-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalButtonComponent {}
+export class ShowModalButtonComponent {}

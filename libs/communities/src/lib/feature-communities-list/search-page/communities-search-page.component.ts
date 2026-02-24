@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommunitiesFiltersComponent, CreateCommunityModalComponent } from '../index'
 import {
-  ModalButtonComponent,
   ModalService,
   ResizePageDirective,
+  ShowModalButtonComponent,
   SvgIconComponent,
 } from '@tt/common-ui'
 import { CommunityCardComponent } from '../../ui/community-card/community-card.component'
@@ -21,7 +21,7 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll'
     ResizePageDirective,
     RouterOutlet,
     InfiniteScrollDirective,
-    ModalButtonComponent
+    ShowModalButtonComponent,
   ],
   templateUrl: './communities-search-page.component.html',
   styleUrl: './communities-search-page.component.scss',

@@ -8,7 +8,7 @@ import { PortalComponent } from './portal/portal.component'
 import { PortalService } from './portal/portal.service'
 import { DadataSuggestion } from './address-input/dadata.interfaces'
 import { ModalService } from './tt-modal/modal.service'
-import { ModalButtonComponent } from './tt-modal-button/tt-modal-button.component'
+import { ShowModalButtonComponent } from './tt-show-modal-button/tt-show-modal-button.component'
 import { ModalComponent } from './tt-modal/tt-modal.component'
 import { TtInputComponent } from './tt-input/tt-input.component'
 
@@ -23,7 +23,7 @@ export {
   PortalComponent,
   PortalService,
   ModalService,
-  ModalButtonComponent,
+  ShowModalButtonComponent,
   ModalComponent
 }
 
