@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core'
 import { ModalComponent, StackInputComponent, SvgIconComponent, TtInputComponent, TtSelectComponent } from '@tt/common-ui'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 
@@ -17,6 +17,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateCommunityModalComponent implements OnInit {
+  r2 = inject(Renderer2)
+
   createCommunityForm = new FormGroup({
     name: new FormControl(''),
     themes: new FormControl(''),
@@ -26,5 +28,12 @@ export class CreateCommunityModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.createCommunityForm.valueChanges.subscribe((val) => console.log(val))
+  }
+
+  onTextAreaInput(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+
+    this.r2.setStyle(textarea, 'height', 'auto')
+    this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px')
   }
 }
