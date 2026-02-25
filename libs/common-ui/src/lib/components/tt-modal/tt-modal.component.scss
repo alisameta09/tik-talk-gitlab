@@ -8,12 +8,12 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 9999;
+  z-index: 1000;
 }
 
 .modal {
   width: 420px;
-  height: 511px;
+  height: 588px;
   border-radius: 2px;
   padding: 32px;
   background: var(--dark-color);

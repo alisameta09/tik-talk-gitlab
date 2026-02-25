@@ -17,6 +17,7 @@
   line-height: 16px;
   display: block;
   margin-bottom: 16px;
+  color: var(--light-transparent-color);
 }
 
 .tt-input-wrapper {
@@ -31,6 +32,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  margin-bottom: 0;
 }
 
 :host(.community-input) .tt-input-wrapper {

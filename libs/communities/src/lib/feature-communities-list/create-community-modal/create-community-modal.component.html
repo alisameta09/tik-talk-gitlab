@@ -1,3 +1,48 @@
 <tt-modal>
-  <p>Hello World!</p>
+
+  <form [formGroup]="createCommunityForm" class="create-community-form">
+
+    <div class="create-community__container">
+      <tt-input
+        class="community-input"
+        type="text"
+        placeholder="Выберите"
+        formControlName="name"
+      >Название сообщества
+      </tt-input>
+
+      <tt-select
+        type="text"
+        placeholder="Выберите"
+        formControlName="themes"
+      >Тема
+        <svg icon="search" class="search-icon" iconRight></svg>
+      </tt-select>
+
+      <tt-stack-input
+        placeholder="Выберите"
+        formControlName="tags"
+        errorMessageName="тег"
+      >Теги
+        <svg icon="search" class="search-icon" iconRight></svg>
+      </tt-stack-input>
+
+      <div class="tt-form-label">
+        <span class="tt-form-label__text">Описание</span>
+        <textarea
+          [rows]="1"
+          class="community-hidden-textarea medium-text"
+          placeholder="Выберите"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="community-btn__wrapper mt20">
+      <button class="community-cancel-btn btn">Отмена</button>
+      <button class="community-save-btn btn">Сохранить</button>
+    </div>
+
+  </form>
+
 </tt-modal>

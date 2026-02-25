@@ -1,10 +1,17 @@
 .skill-tag__container {
+  position: relative;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   border-bottom: var(--light-border);
   padding: 0 0 10px 0;
   gap: 12px;
+}
+
+.icon-right {
+  position: absolute;
+  top: 9px;
+  right: 2px;
 }
 
 .stack-tag {
