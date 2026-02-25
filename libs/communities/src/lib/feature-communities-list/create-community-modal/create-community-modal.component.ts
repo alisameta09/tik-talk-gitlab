@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core'
-import { ModalComponent, StackInputComponent, SvgIconComponent, TtInputComponent, TtSelectComponent } from '@tt/common-ui'
+import {
+  ModalComponent,
+  ModalService,
+  StackInputComponent,
+  SvgIconComponent,
+  TtInputComponent,
+  TtSelectComponent
+} from '@tt/common-ui'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'tt-create-community-modal',
@@ -18,6 +26,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 })
 export class CreateCommunityModalComponent implements OnInit {
   r2 = inject(Renderer2)
+  router = inject(Router)
+  #modalService = inject(ModalService)
 
   createCommunityForm = new FormGroup({
     name: new FormControl(''),
@@ -31,9 +41,14 @@ export class CreateCommunityModalComponent implements OnInit {
   }
 
   onTextAreaInput(event: Event) {
-    const textarea = event.target as HTMLTextAreaElement;
+    const textarea = event.target as HTMLTextAreaElement
 
     this.r2.setStyle(textarea, 'height', 'auto')
     this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px')
+  }
+
+  onCancel() {
+    this.#modalService.close()
+    this.router.navigate(['/communities'])
   }
 }
