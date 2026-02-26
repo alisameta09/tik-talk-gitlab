@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { communityUrl } from '@tt/shared'
 import { Pageble } from '../../profile/interfaces/pageble.interface'
-import { Community, CommunityPage } from '../interfaces/community.interface'
+import { Community, CommunityPage, CreateCommunityDTO } from '../interfaces/community.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +24,10 @@ export class CommunitiesService {
 
   leaveCommunity(communityId: number) {
     return this.http.delete<Community>(`${communityUrl}${communityId}/join`)
+  }
+
+  createCommunity(payload: CreateCommunityDTO) {
+    return this.http.post<CommunityPage>(communityUrl, payload)
   }
 
 }

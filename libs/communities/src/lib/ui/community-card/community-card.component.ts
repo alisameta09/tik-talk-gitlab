@@ -30,7 +30,8 @@ export class CommunityCardComponent {
   isMine = computed(() => this.me()?.id === this.community()?.admin.id)
 
   async getCommunity(communityId: number) {
-    await firstValueFrom(this.communitiesService.getCommunityById(communityId)).then((res) =>
+    await firstValueFrom(this.communitiesService.getCommunityById(communityId))
+      .then((res) =>
       this.router.navigate(['/communities', res.id])
     )
   }

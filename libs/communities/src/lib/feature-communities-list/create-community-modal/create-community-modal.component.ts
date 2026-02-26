@@ -1,14 +1,23 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject, Renderer2 } from '@angular/core'
 import {
   ModalComponent,
   ModalService,
   StackInputComponent,
   SvgIconComponent,
   TtInputComponent,
-  TtSelectComponent
+  TtSelectComponent,
 } from '@tt/common-ui'
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
 import { Router } from '@angular/router'
+import { CommunitiesService } from '@tt/data-access/communities'
+import { firstValueFrom, switchMap } from 'rxjs'
+import { CreateCommunityDTO } from '@tt/data-access/communities/interfaces/community.interface'
 
 @Component({
   selector: 'tt-create-community-modal',
@@ -24,21 +33,19 @@ import { Router } from '@angular/router'
   styleUrl: './create-community-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateCommunityModalComponent implements OnInit {
+export class CreateCommunityModalComponent {
+  fb = inject(FormBuilder)
   r2 = inject(Renderer2)
   router = inject(Router)
   #modalService = inject(ModalService)
+  #communitiesService = inject(CommunitiesService)
 
-  createCommunityForm = new FormGroup({
-    name: new FormControl(''),
-    themes: new FormControl(''),
-    tags: new FormControl(''),
-    description: new FormControl(''),
+  createCommunityForm = this.fb.nonNullable.group({
+    name: ['', [Validators.required]],
+    themes: ['', [Validators.required]],
+    tags: [[], Validators.required],
+    description: ['', [Validators.required]],
   })
-
-  ngOnInit(): void {
-    this.createCommunityForm.valueChanges.subscribe((val) => console.log(val))
-  }
 
   onTextAreaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement
@@ -50,5 +57,30 @@ export class CreateCommunityModalComponent implements OnInit {
   onCancel() {
     this.#modalService.close()
     this.router.navigate(['/communities'])
+  }
+
+  onSave(event: Event) {
+    event.preventDefault()
+
+    this.createCommunityForm.markAllAsTouched()
+    this.createCommunityForm.updateValueAndValidity()
+
+    if (this.createCommunityForm.invalid) return
+
+    const value = this.createCommunityForm.getRawValue()
+
+    const payload: CreateCommunityDTO = {
+      name: value.name,
+      themes: value.themes ? [value.themes] : [],
+      tags: value.tags,
+      description: value.description,
+    }
+
+    this.#communitiesService.createCommunity(payload).subscribe((res) => {
+      const id = res.id
+
+      this.router.navigate(['/communities/', id])
+      this.#modalService.close()
+    })
   }
 }
