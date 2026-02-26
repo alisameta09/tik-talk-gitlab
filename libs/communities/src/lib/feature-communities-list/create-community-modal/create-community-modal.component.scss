@@ -4,6 +4,10 @@
   height: 496px;
 }
 
+.validation {
+  color: tomato;
+}
+
 .create-community__container {
   display: grid;
   gap: 20px;
@@ -27,7 +31,7 @@
   outline: none;
   line-height: 21px;
   min-height: calc(21px * 1);
-  max-height: calc(21px * 5);
+  max-height: calc(21px * 4);
   overflow-y: auto;
 }
 

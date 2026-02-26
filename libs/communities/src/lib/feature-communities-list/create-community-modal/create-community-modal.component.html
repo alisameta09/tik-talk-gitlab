@@ -39,6 +39,12 @@
       </div>
     </div>
 
+    @if (createCommunityForm.invalid && createCommunityForm.touched) {
+      <small class="validation mt10"
+      >Все поля формы обязательны к заполнению!
+      </small>
+    }
+
     <div class="community-btn__wrapper mt20">
       <button class="community-cancel-btn btn" (click)="onCancel()" type="button">Отмена</button>
       <button class="community-save-btn btn" type="submit" (click)="onSave($event)">Сохранить</button>

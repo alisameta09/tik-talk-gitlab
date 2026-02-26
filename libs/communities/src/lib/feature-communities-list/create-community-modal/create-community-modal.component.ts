@@ -7,16 +7,9 @@ import {
   TtInputComponent,
   TtSelectComponent,
 } from '@tt/common-ui'
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms'
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { CommunitiesService } from '@tt/data-access/communities'
-import { firstValueFrom, switchMap } from 'rxjs'
 import { CreateCommunityDTO } from '@tt/data-access/communities/interfaces/community.interface'
 
 @Component({
@@ -68,6 +61,8 @@ export class CreateCommunityModalComponent {
     if (this.createCommunityForm.invalid) return
 
     const value = this.createCommunityForm.getRawValue()
+
+    console.log(value)
 
     const payload: CreateCommunityDTO = {
       name: value.name,
