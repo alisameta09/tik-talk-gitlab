@@ -1,1 +1,81 @@
-<p>community-page works!</p>
+@if (community$ | async; as community) {
+
+  <div class="community-page__container">
+
+    <div class="community-banner__wrapper mb24">
+      <img
+        [src]="community.bannerUrl | communityPreview"
+        alt="community-banner"
+        class="community-banner"
+        [ngClass]="{
+        'has-banner': community.bannerUrl,
+        'no-banner': !community.bannerUrl
+        }"
+      />
+    </div>
+
+    <header class="community__header mb24">
+      <div class="community-avatar-name__wrapper">
+        <img
+          [src]="community.avatarUrl | communityPreview"
+          alt="community-avatar"
+          class="community-avatar"
+        />
+        <h4 class="h4">{{ community.name }}</h4>
+      </div>
+
+      <tt-show-modal-button
+      >Редактировать
+        <svg icon="settings" class="svg16"></svg>
+      </tt-show-modal-button>
+    </header>
+
+    <main class="community-body">
+
+      <div class="community-post-wall">
+        <tt-post-input></tt-post-input>
+      </div>
+
+      <div>
+        <div class="community-subscribers-header mb16">
+          <h6 class="h6">Подписчики</h6>
+          @if (community.subscribersAmount > 0) {
+            <span class="count-badge">{{ community.subscribersAmount }}</span>
+          }
+        </div>
+
+        <div class="subscribers-wrapper mb32">
+          @if (community.subscribersAmount > 0) {
+            @for (subscriber of subscribers$ | async; track subscriber.id) {
+              <a [routerLink]="['/profile', subscriber.id]">
+                <img
+                  [src]="subscriber.avatarUrl | preview"
+                  alt="Фото подписчика"
+                  class="subscriber-avatar-btn"
+                />
+              </a>
+            }
+            <div class="to-subscribers-search">
+              <a [routerLink]="['/search']">
+                <svg icon="add" class="svg16"></svg>
+              </a>
+            </div>
+          }
+        </div>
+
+        <h6 class="h6 mb16">Тема</h6>
+
+        <div class="stack-wrapper mb32">
+          @for (theme of community.themes; track theme) {
+            <div class="skill-tag">{{ theme }}</div>
+          }
+        </div>
+
+        <h6 class="h6 mb16">Описание</h6>
+        <p class="medium-small-text about-community">{{ community.description }}</p>
+
+      </div>
+    </main>
+
+  </div>
+}

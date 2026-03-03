@@ -71,7 +71,8 @@ export class CreateCommunityModalComponent {
       description: value.description,
     }
 
-    this.#communitiesService.createCommunity(payload).subscribe((res) => {
+    this.#communitiesService.createCommunity(payload)
+      .subscribe((res) => {
       const id = res.id
 
       this.router.navigate(['/communities/', id])
