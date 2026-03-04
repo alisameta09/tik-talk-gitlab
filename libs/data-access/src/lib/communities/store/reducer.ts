@@ -8,6 +8,7 @@ export interface CommunityState {
   page: number
   size: number
   community: CommunityPage | null
+  communityId: number | null
 }
 
 export const initialState: CommunityState = {
@@ -15,7 +16,8 @@ export const initialState: CommunityState = {
   communityFilters: {},
   page: 1,
   size: 10,
-  community: null
+  community: null,
+  communityId: null
 }
 
 export const communityFeature = createFeature({
@@ -51,6 +53,6 @@ export const communityFeature = createFeature({
         ...state,
         community: payload.community
       }
-    })
-  ),
+    }),
+  )
 })

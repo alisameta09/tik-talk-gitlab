@@ -31,10 +31,8 @@ export class PostEffects {
     return this.actions$.pipe(
       ofType(postActions.createComment),
       switchMap(({ payload }) => {
-        return this.postService
-          .createComment(payload)
-          .pipe(
-            map(() => postActions.fetchComments({ postId: payload.postId })))
+        return this.postService.createComment(payload).pipe(
+          map(() => postActions.fetchComments({ postId: payload.postId })))
       })
     )
   })

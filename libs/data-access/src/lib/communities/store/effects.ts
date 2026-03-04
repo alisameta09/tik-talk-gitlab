@@ -39,9 +39,8 @@ export class CommunityEffects {
     return this.actions$.pipe(
       ofType(communityActions.createCommunity),
       switchMap(({ payload }) => {
-        return this.communitiesService
-          .createCommunity(payload)
-          .pipe(map((community) => communityActions.communityLoaded({ community })))
+        return this.communitiesService.createCommunity(payload).pipe(
+          map((community) => communityActions.communityLoaded({ community })))
       })
     )
   })
@@ -55,4 +54,12 @@ export class CommunityEffects {
       ),
     { dispatch: false }
   )
+
+  fetchCommunityById = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.fetchCommunityById),
+      switchMap(({communityId}) => this.communitiesService.getCommunityById(communityId)),
+      map((community) => communityActions.communityLoaded({ community }))
+    )
+  })
 }

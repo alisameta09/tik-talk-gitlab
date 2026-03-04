@@ -14,5 +14,6 @@ export const communityActions = createActionGroup({
     'create community': props<{ payload: CreateCommunityDTO }>(),
     'community loaded': props<{ community: CommunityPage }>(),
 
+    'fetch community by id': props<{ communityId: number }>(),
   }
 })
