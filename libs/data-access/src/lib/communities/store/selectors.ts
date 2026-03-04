@@ -25,3 +25,13 @@ export const selectSelectedCommunity = createSelector(
   communityFeature.selectCommunity,
   (community) => community
 )
+
+export const selectCommunitySubscribers = createSelector(
+  communityFeature.selectSubscribers,
+  (subscribers) => subscribers
+)
+
+export const selectSelectedSubscribers = createSelector(
+  communityFeature.selectSubscribers,
+  (subscribers) => subscribers.slice(0, 6)
+)

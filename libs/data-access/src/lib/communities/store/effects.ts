@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store'
 import { selectCommunitiesFilters, selectCommunitiesPageble } from './selectors'
 import { CommunityPage } from '@tt/data-access/communities/interfaces/community.interface'
 import { Router } from '@angular/router'
+import { profileActions } from '@tt/data-access/profile'
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +61,14 @@ export class CommunityEffects {
       ofType(communityActions.fetchCommunityById),
       switchMap(({communityId}) => this.communitiesService.getCommunityById(communityId)),
       map((community) => communityActions.communityLoaded({ community }))
+    )
+  })
+
+  fetchSubscribers = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.fetchSubscribers),
+      switchMap(({ communityId }) => this.communitiesService.getCommunitySubscribers(communityId)
+        .pipe(map(res => communityActions.subscribersLoaded({subscribers: res.items})))),
     )
   })
 }

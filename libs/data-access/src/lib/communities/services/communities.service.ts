@@ -33,8 +33,6 @@ export class CommunitiesService {
 
   getCommunitySubscribers(communityId: number) {
     return this.http.get<Pageble<Admin>>(`${communityUrl}subscribers/${communityId}`)
-      .pipe(map(res => res.items.slice(0,6))
-    )
   }
 
 }

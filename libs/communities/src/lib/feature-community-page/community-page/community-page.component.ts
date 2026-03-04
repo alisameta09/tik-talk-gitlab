@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core'
 import {
   CommunityPreviewPipe,
   PreviewPipe,
@@ -6,9 +6,12 @@ import {
   SvgIconComponent,
 } from '@tt/common-ui'
 import { PostInputComponent } from '@tt/posts'
-import { CommunitiesService, selectSelectedCommunity } from '@tt/data-access/communities'
+import {
+  communityActions,
+  selectSelectedCommunity,
+  selectSelectedSubscribers,
+} from '@tt/data-access/communities'
 import { ActivatedRoute, RouterLink } from '@angular/router'
-import { switchMap } from 'rxjs'
 import { AsyncPipe, NgClass } from '@angular/common'
 import { Store } from '@ngrx/store'
 
@@ -28,14 +31,17 @@ import { Store } from '@ngrx/store'
   styleUrl: './community-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunityPageComponent {
-  communitiesService = inject(CommunitiesService)
+export class CommunityPageComponent implements OnInit {
   route = inject(ActivatedRoute)
   store = inject(Store)
 
+  ngOnInit() {
+    this.route.params.subscribe(({ id }) => {
+      return this.store.dispatch(communityActions.fetchSubscribers({ communityId: id }))
+    })
+  }
+
   community$ = this.store.select(selectSelectedCommunity)
 
-  subscribers$ = this.route.params.pipe(
-    switchMap(({ id }) => this.communitiesService.getCommunitySubscribers(id))
-  )
+  subscribers$ = this.store.select(selectSelectedSubscribers)
 }

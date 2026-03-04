@@ -1,5 +1,10 @@
 import { createActionGroup, props } from '@ngrx/store'
-import { Community, CommunityPage, CreateCommunityDTO } from '../interfaces/community.interface'
+import {
+  Admin,
+  Community,
+  CommunityPage,
+  CreateCommunityDTO,
+} from '../interfaces/community.interface'
 
 export const communityActions = createActionGroup({
   source: 'community',
@@ -15,5 +20,8 @@ export const communityActions = createActionGroup({
     'community loaded': props<{ community: CommunityPage }>(),
 
     'fetch community by id': props<{ communityId: number }>(),
+
+    'fetch subscribers': props<{ communityId: number }>(),
+    'subscribers loaded': props<{ subscribers: Admin[] }>(),
   }
 })
