@@ -20,3 +20,8 @@ export const selectCommunitiesFilters = createSelector(
   communityFeature.selectCommunityFilters,
   (filters) => filters
 )
+
+export const selectSelectedCommunity = createSelector(
+  communityFeature.selectCommunity,
+  (community) => community
+)

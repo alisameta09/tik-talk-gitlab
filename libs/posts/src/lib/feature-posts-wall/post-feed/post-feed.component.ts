@@ -27,8 +27,7 @@ export class PostFeedComponent implements OnInit {
   onCreatePost(postText: string) {
     if (!postText.trim()) return
 
-    this.store.dispatch(
-      postActions.createPost({
+    this.store.dispatch(postActions.createPost({
         payload: {
           title: 'Клевый пост',
           content: postText.trim(),

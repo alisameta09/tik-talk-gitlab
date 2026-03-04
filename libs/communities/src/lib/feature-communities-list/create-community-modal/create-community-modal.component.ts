@@ -9,8 +9,8 @@ import {
 } from '@tt/common-ui'
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { CommunitiesService } from '@tt/data-access/communities'
-import { CreateCommunityDTO } from '@tt/data-access/communities/interfaces/community.interface'
+import { communityActions, CreateCommunityDTO } from '@tt/data-access/communities'
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'tt-create-community-modal',
@@ -31,7 +31,7 @@ export class CreateCommunityModalComponent {
   r2 = inject(Renderer2)
   router = inject(Router)
   #modalService = inject(ModalService)
-  #communitiesService = inject(CommunitiesService)
+  store = inject(Store)
 
   createCommunityForm = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
@@ -62,8 +62,6 @@ export class CreateCommunityModalComponent {
 
     const value = this.createCommunityForm.getRawValue()
 
-    console.log(value)
-
     const payload: CreateCommunityDTO = {
       name: value.name,
       themes: value.themes ? [value.themes] : [],
@@ -71,12 +69,8 @@ export class CreateCommunityModalComponent {
       description: value.description,
     }
 
-    this.#communitiesService.createCommunity(payload)
-      .subscribe((res) => {
-      const id = res.id
+    this.store.dispatch(communityActions.createCommunity({ payload }))
 
-      this.router.navigate(['/communities/', id])
-      this.#modalService.close()
-    })
+    this.#modalService.close()
   }
 }

@@ -15,10 +15,6 @@ export class CommunitiesService {
     return this.http.get<Pageble<Community>>(communityUrl, { params })
   }
 
-  getCommunityById(communityId: number) {
-    return this.http.get<CommunityPage>(`${communityUrl}${communityId}`)
-  }
-
   joinCommunity(communityId: number) {
     return this.http.post<Community>(`${communityUrl}${communityId}/join`, {})
   }
@@ -29,6 +25,10 @@ export class CommunitiesService {
 
   createCommunity(payload: CreateCommunityDTO) {
     return this.http.post<CommunityPage>(communityUrl, payload)
+  }
+
+  getCommunityById(communityId: number) {
+    return this.http.get<CommunityPage>(`${communityUrl}${communityId}`)
   }
 
   getCommunitySubscribers(communityId: number) {
