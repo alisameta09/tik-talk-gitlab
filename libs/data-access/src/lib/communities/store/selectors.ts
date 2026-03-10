@@ -11,7 +11,7 @@ export const selectCommunitiesPageble = createSelector(
   (state) => {
     return {
       page: state.page,
-      size: state.size
+      size: state.size,
     }
   }
 )
@@ -22,13 +22,8 @@ export const selectCommunitiesFilters = createSelector(
 )
 
 export const selectSelectedCommunity = createSelector(
-  communityFeature.selectCommunity,
-  (community) => community
-)
-
-export const selectCommunitySubscribers = createSelector(
-  communityFeature.selectSubscribers,
-  (subscribers) => subscribers
+  communityFeature.selectCommunityPage,
+  (communityPage) => communityPage
 )
 
 export const selectSelectedSubscribers = createSelector(

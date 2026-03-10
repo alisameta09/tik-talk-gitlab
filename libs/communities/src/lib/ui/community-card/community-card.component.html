@@ -29,7 +29,7 @@
             <button
               class="btn community-subscribe-btn"
               type="button"
-              (click)="joinCommunity(community.id)"
+              (click)="onJoinCommunity(community.id)"
             >Подписаться
               <svg icon="subscribe" class="svg16 subscribe-svg"></svg>
             </button>
@@ -37,7 +37,7 @@
             <button
               class="btn community-subscribe-btn"
               type="button"
-              (click)="leaveCommunity(community.id)"
+              (click)="onLeaveCommunity(community.id)"
             >Отписаться
             </button>
           }
@@ -45,7 +45,7 @@
 
         <button
           class="btn to-community-link"
-          (click)="getCommunity(community.id)"
+          (click)="onCommunityClick(community.id)"
         >
           <svg icon="go-arrow" class="svg16"></svg>
         </button>

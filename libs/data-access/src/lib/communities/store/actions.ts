@@ -16,12 +16,19 @@ export const communityActions = createActionGroup({
 
     'set page': props<{ page?: number }>(),
 
+    'load community': props<{ id: number }>(),
+    'load community success': props<{ communityPage: CommunityPage }>(),
+
+    'load subscribers': props<{ id: number }>(),
+    'load subscribers success': props<{ subscribers: Admin[] }>(),
+
     'create community': props<{ payload: CreateCommunityDTO }>(),
-    'community loaded': props<{ community: CommunityPage }>(),
 
-    'fetch community by id': props<{ communityId: number }>(),
+    'navigate to community': props<{ id: number }>(),
 
-    'fetch subscribers': props<{ communityId: number }>(),
-    'subscribers loaded': props<{ subscribers: Admin[] }>(),
+    'join community': props<{ id: number }>(),
+    'leave community': props<{ id: number }>(),
+
+    'update community': props<{ community: Community }>(),
   }
 })

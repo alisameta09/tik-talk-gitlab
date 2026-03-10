@@ -7,9 +7,8 @@ export interface CommunityState {
   communityFilters: Record<string, any>
   page: number
   size: number
-  community: CommunityPage | null
-  communityId: number | null
   subscribers: Admin[]
+  communityPage: CommunityPage | null
 }
 
 export const initialState: CommunityState = {
@@ -17,9 +16,8 @@ export const initialState: CommunityState = {
   communityFilters: {},
   page: 1,
   size: 10,
-  community: null,
-  communityId: null,
   subscribers: [],
+  communityPage: null
 }
 
 export const communityFeature = createFeature({
@@ -50,17 +48,29 @@ export const communityFeature = createFeature({
         page,
       }
     }),
-    on(communityActions.communityLoaded, (state, payload) => {
+    on(communityActions.loadCommunitySuccess, (state, payload) => {
       return {
         ...state,
-        community: payload.community
+        communityPage: payload.communityPage,
       }
     }),
-    on(communityActions.subscribersLoaded, (state, payload) => {
+    on(communityActions.loadSubscribersSuccess, (state, payload) => {
       return {
         ...state,
-        subscribers: payload.subscribers
+        subscribers: payload.subscribers,
       }
-    })
+    }),
+    on(communityActions.updateCommunity, (state, { community }) => ({
+      ...state,
+      communities: state.communities.map(c =>
+        c.id === community.id
+          ? {
+            ...c,
+            isJoined: community.isJoined,
+            subscribersAmount: c.subscribersAmount + (community.isJoined ? 1 : -1)
+          }
+          : c
+      )
+    }))
   )
 })

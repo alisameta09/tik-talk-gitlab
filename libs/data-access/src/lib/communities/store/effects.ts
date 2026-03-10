@@ -2,12 +2,10 @@ import { CommunitiesService } from '../services/communities.service'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { communityActions } from '../store/actions'
 import { inject, Injectable } from '@angular/core'
-import { map, switchMap, tap, withLatestFrom } from 'rxjs'
+import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { selectCommunitiesFilters, selectCommunitiesPageble } from './selectors'
-import { CommunityPage } from '@tt/data-access/communities/interfaces/community.interface'
 import { Router } from '@angular/router'
-import { profileActions } from '@tt/data-access/profile'
 
 @Injectable({
   providedIn: 'root',
@@ -39,36 +37,65 @@ export class CommunityEffects {
   createCommunity = createEffect(() => {
     return this.actions$.pipe(
       ofType(communityActions.createCommunity),
-      switchMap(({ payload }) => {
-        return this.communitiesService.createCommunity(payload).pipe(
-          map((community) => communityActions.communityLoaded({ community })))
-      })
+      switchMap(({ payload }) =>
+        this.communitiesService.createCommunity(payload)
+          .pipe(
+            switchMap(communityPage => [
+              communityActions.navigateToCommunity({ id: communityPage.id }),
+            ])
+          )
+      )
     )
   })
 
-  navigateAfterCreate$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(communityActions.communityLoaded),
-        tap(({ community }) => {
-          this.router.navigate(['/communities', community.id])
-        })
-      ),
+  navigateToCommunity = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(communityActions.navigateToCommunity),
+        tap(({ id }) =>
+          this.router.navigate(['/communities', id]))
+      )
+    },
     { dispatch: false }
   )
 
-  fetchCommunityById = createEffect(() => {
+  loadCommunity = createEffect(() => {
     return this.actions$.pipe(
-      ofType(communityActions.fetchCommunityById),
-      switchMap(({communityId}) => this.communitiesService.getCommunityById(communityId)),
-      map((community) => communityActions.communityLoaded({ community }))
+      ofType(communityActions.loadCommunity),
+      switchMap(({ id }) =>
+        this.communitiesService.getCommunityById(id)),
+      map(communityPage => communityActions.loadCommunitySuccess({ communityPage }))
     )
   })
 
-  fetchSubscribers = createEffect(() => {
+  loadSubscribers = createEffect(() => {
     return this.actions$.pipe(
-      ofType(communityActions.fetchSubscribers),
-      switchMap(({ communityId }) => this.communitiesService.getCommunitySubscribers(communityId)
-        .pipe(map(res => communityActions.subscribersLoaded({subscribers: res.items})))),
+      ofType(communityActions.loadSubscribers),
+      switchMap(({ id }) =>
+        this.communitiesService.getCommunitySubscribers(id)
+          .pipe(map(res =>
+            communityActions.loadSubscribersSuccess({ subscribers: res.items })))
+      )
+    )
+  })
+
+  joinCommunity = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.joinCommunity),
+      switchMap(({ id }) =>
+        this.communitiesService.joinCommunity(id)),
+      map(community =>
+        communityActions.updateCommunity({ community }))
+    )
+  })
+
+  leaveCommunity = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.leaveCommunity),
+      switchMap(({ id }) =>
+        this.communitiesService.leaveCommunity(id)),
+      map((community) =>
+        communityActions.updateCommunity({ community }))
     )
   })
 }

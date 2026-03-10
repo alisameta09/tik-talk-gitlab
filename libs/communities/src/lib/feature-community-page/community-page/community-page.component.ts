@@ -36,12 +36,14 @@ export class CommunityPageComponent implements OnInit {
   store = inject(Store)
 
   ngOnInit() {
-    this.route.params.subscribe(({ id }) => {
-      return this.store.dispatch(communityActions.fetchSubscribers({ communityId: id }))
+    this.route.params.subscribe((params) => {
+      const id = Number(params['id'])
+
+      this.store.dispatch(communityActions.loadCommunity({ id }))
+      this.store.dispatch(communityActions.loadSubscribers({ id }))
     })
   }
 
   community$ = this.store.select(selectSelectedCommunity)
-
   subscribers$ = this.store.select(selectSelectedSubscribers)
 }
