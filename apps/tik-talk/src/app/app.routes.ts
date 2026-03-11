@@ -35,7 +35,6 @@ export const routes: Routes = [
       },
       {
         path: 'communities',
-        pathMatch: 'full',
         loadChildren: () => communitiesRoutes,
         providers: [provideState(communityFeature), provideEffects(CommunityEffects)],
       },

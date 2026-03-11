@@ -28,3 +28,10 @@ export interface Admin {
 export interface CommunityPage extends Community {
   posts: string[]
 }
+
+export interface CreateCommunityDTO {
+  name: string,
+  themes: string[],
+  tags: string[],
+  description: string
+}

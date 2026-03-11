@@ -7,10 +7,10 @@ import {
   linkedSignal,
 } from '@angular/core'
 import { PluralPipe, PreviewPipe, SvgIconComponent } from '@tt/common-ui'
-import { CommunitiesService, Community } from '@tt/data-access/communities'
+import { CommunitiesService, Community, communityActions } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
-import { firstValueFrom } from 'rxjs'
 import { GlobalStoreService } from '@tt/data-access/profile'
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'tt-community-card',
@@ -25,18 +25,19 @@ export class CommunityCardComponent {
   router = inject(Router)
   communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
+  store = inject(Store)
 
   subscriptionState = linkedSignal(this.community)
   isMine = computed(() => this.me()?.id === this.community()?.admin.id)
 
-  async getCommunity(communityId: number) {
-    await firstValueFrom(this.communitiesService.getCommunityById(communityId)).then((res) =>
-      this.router.navigate(['/communities', res.id])
-    )
+  onCommunityClick(id: number) {
+    this.store.dispatch(communityActions.navigateToCommunity({ id }))
+    this.store.dispatch(communityActions.loadCommunity({ id }))
+    this.store.dispatch(communityActions.loadSubscribers({ id }))
   }
 
-  async joinCommunity(communityId: number) {
-    await firstValueFrom(this.communitiesService.joinCommunity(communityId))
+  onJoinCommunity(id: number) {
+    this.store.dispatch(communityActions.joinCommunity({ id }))
 
     this.subscriptionState.update((community) =>
       community
@@ -45,8 +46,8 @@ export class CommunityCardComponent {
     )
   }
 
-  async leaveCommunity(communityId: number) {
-    await firstValueFrom(this.communitiesService.leaveCommunity(communityId))
+  onLeaveCommunity(id: number) {
+    this.store.dispatch(communityActions.leaveCommunity({ id }))
 
     this.subscriptionState.update((community) =>
       community

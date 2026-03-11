@@ -27,6 +27,11 @@
     @if (this.value$.value.includes(this.innerInput.toUpperCase())) {
       <span class="validation medium-small-text">Такой {{ errorMessageName() }} уже добавлен!</span>
     }
+
+    <div class="icon-right">
+      <ng-content select="[iconRight]"></ng-content>
+    </div>
+
   </div>
 
 </div>

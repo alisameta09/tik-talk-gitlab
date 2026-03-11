@@ -2,7 +2,12 @@ import { inject, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { communityUrl } from '@tt/shared'
 import { Pageble } from '../../profile/interfaces/pageble.interface'
-import { Community, CommunityPage } from '../interfaces/community.interface'
+import {
+  Admin,
+  Community,
+  CommunityPage,
+  CreateCommunityDTO,
+} from '../interfaces/community.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +19,6 @@ export class CommunitiesService {
     return this.http.get<Pageble<Community>>(communityUrl, { params })
   }
 
-  getCommunityById(communityId: number) {
-    return this.http.get<CommunityPage>(`${communityUrl}${communityId}`)
-  }
-
   joinCommunity(communityId: number) {
     return this.http.post<Community>(`${communityUrl}${communityId}/join`, {})
   }
@@ -26,4 +27,15 @@ export class CommunitiesService {
     return this.http.delete<Community>(`${communityUrl}${communityId}/join`)
   }
 
+  createCommunity(payload: CreateCommunityDTO) {
+    return this.http.post<CommunityPage>(communityUrl, payload)
+  }
+
+  getCommunityById(communityId: number) {
+    return this.http.get<CommunityPage>(`${communityUrl}${communityId}`)
+  }
+
+  getCommunitySubscribers(communityId: number) {
+    return this.http.get<Pageble<Admin>>(`${communityUrl}subscribers/${communityId}`)
+  }
 }

@@ -26,20 +26,22 @@
     >Выберите
     </button>
 
-      @if (isDropdownOpened()) {
-        <tt-portal [host]="anchor">
-          <ul class="tt-select-dropdown-list">
-            @for (item of items; track item) {
-          <tt-dropdown
-            [item]="item"
-            [selectedItem]="selectedItem()"
-            (itemChange)="onSelectItem($event)"
-          ></tt-dropdown>
-            }
-          </ul>
-        </tt-portal>
-      }
-
+    @if (isDropdownOpened()) {
+      <tt-portal [host]="anchor">
+        <ul class="tt-select-dropdown-list">
+          @for (item of items; track item) {
+            <tt-dropdown
+              [item]="item"
+              [selectedItem]="selectedItem()"
+              (itemChange)="onSelectItem($event)"
+            ></tt-dropdown>
+          }
+        </ul>
+      </tt-portal>
+    }
+    <div class="icon-right">
+      <ng-content select="[iconRight]"></ng-content>
+    </div>
   </div>
 
 </div>
