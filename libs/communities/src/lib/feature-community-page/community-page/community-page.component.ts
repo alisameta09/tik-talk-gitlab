@@ -1,18 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core'
-import {
-  CommunityPreviewPipe,
-  PreviewPipe,
-  ShowModalButtonComponent,
-  SvgIconComponent,
-} from '@tt/common-ui'
+import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core'
+import { CommunityPreviewPipe, PreviewPipe, ShowModalButtonComponent, SvgIconComponent } from '@tt/common-ui'
 import { PostInputComponent } from '@tt/posts'
-import {
-  communityActions,
-  selectSelectedCommunity,
-  selectSelectedSubscribers,
-} from '@tt/data-access/communities'
-import { ActivatedRoute, RouterLink } from '@angular/router'
-import { AsyncPipe, NgClass } from '@angular/common'
+import { communityActions, selectSelectedCommunity, selectSelectedSubscribers } from '@tt/data-access/communities'
+import { RouterLink } from '@angular/router'
+import { NgClass } from '@angular/common'
 import { Store } from '@ngrx/store'
 
 @Component({
@@ -21,7 +12,6 @@ import { Store } from '@ngrx/store'
     ShowModalButtonComponent,
     SvgIconComponent,
     PostInputComponent,
-    AsyncPipe,
     RouterLink,
     PreviewPipe,
     CommunityPreviewPipe,
@@ -31,19 +21,22 @@ import { Store } from '@ngrx/store'
   styleUrl: './community-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunityPageComponent implements OnInit {
-  route = inject(ActivatedRoute)
+export class CommunityPageComponent {
   store = inject(Store)
 
-  ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const id = Number(params['id'])
+  id = input<string>()
+
+  constructor() {
+    effect(() => {
+      const id = Number(this.id())
+
+      if (!id) return
 
       this.store.dispatch(communityActions.loadCommunity({ id }))
       this.store.dispatch(communityActions.loadSubscribers({ id }))
     })
   }
 
-  community$ = this.store.select(selectSelectedCommunity)
-  subscribers$ = this.store.select(selectSelectedSubscribers)
+  community = this.store.selectSignal(selectSelectedCommunity)
+  subscribers = this.store.selectSignal(selectSelectedSubscribers)
 }

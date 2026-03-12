@@ -1,4 +1,4 @@
-@if (community$ | async; as community) {
+@if (community(); as community) {
 
   <div class="community-page__container">
 
@@ -46,7 +46,7 @@
 
         <div class="subscribers-wrapper mb32">
           @if (community.subscribersAmount > 0) {
-            @for (subscriber of subscribers$ | async; track subscriber.id) {
+            @for (subscriber of subscribers(); track subscriber.id) {
               <a [routerLink]="['/profile', subscriber.id]">
                 <img
                   [src]="subscriber.avatarUrl | preview"
