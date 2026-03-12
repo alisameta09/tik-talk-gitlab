@@ -7,7 +7,7 @@ import {
   linkedSignal,
 } from '@angular/core'
 import { PluralPipe, PreviewPipe, SvgIconComponent } from '@tt/common-ui'
-import { CommunitiesService, Community, communityActions } from '@tt/data-access/communities'
+import { Community, communityActions } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
 import { GlobalStoreService } from '@tt/data-access/profile'
 import { Store } from '@ngrx/store'
@@ -23,7 +23,6 @@ export class CommunityCardComponent {
   community = input<Community>()
 
   router = inject(Router)
-  communitiesService = inject(CommunitiesService)
   me = inject(GlobalStoreService).me
   store = inject(Store)
 

@@ -24,16 +24,21 @@
         <h4 class="h4">{{ community.name }}</h4>
       </div>
 
-      <tt-show-modal-button
-      >Редактировать
-        <svg icon="settings" class="svg16"></svg>
-      </tt-show-modal-button>
+      @if (isMine()) {
+        <tt-show-modal-button
+        >Редактировать
+          <svg icon="settings" class="svg16"></svg>
+        </tt-show-modal-button>
+      }
     </header>
 
     <main class="community-body">
 
       <div class="community-post-wall">
-        <tt-post-input></tt-post-input>
+
+        @if (isMine()) {
+          <tt-post-input></tt-post-input>
+        }
       </div>
 
       <div>

@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core'
 import { CommunityPreviewPipe, PreviewPipe, ShowModalButtonComponent, SvgIconComponent } from '@tt/common-ui'
 import { PostInputComponent } from '@tt/posts'
 import { communityActions, selectSelectedCommunity, selectSelectedSubscribers } from '@tt/data-access/communities'
 import { RouterLink } from '@angular/router'
 import { NgClass } from '@angular/common'
 import { Store } from '@ngrx/store'
+import { GlobalStoreService } from '@tt/data-access/profile'
 
 @Component({
   selector: 'tt-community-page',
@@ -23,8 +24,11 @@ import { Store } from '@ngrx/store'
 })
 export class CommunityPageComponent {
   store = inject(Store)
+  me = inject(GlobalStoreService).me
 
   id = input<string>()
+
+  isMine = computed(() => this.me()?.id === this.community()?.admin.id)
 
   constructor() {
     effect(() => {
