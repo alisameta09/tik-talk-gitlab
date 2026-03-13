@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, Renderer2 } from '@angular/core'
-import { postActions, selectFetchedPosts } from '@tt/data-access/posts'
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core'
+import { Post } from '@tt/data-access/posts'
 import { PostInputComponent } from '../../ui'
 import { PostComponent } from '../post'
 import { GlobalStoreService } from '@tt/data-access/profile'
-import { Store } from '@ngrx/store'
 import { ResizePageDirective } from '@tt/common-ui'
 
 @Component({
@@ -13,28 +12,15 @@ import { ResizePageDirective } from '@tt/common-ui'
   styleUrl: './post-feed.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostFeedComponent implements OnInit {
-  r2 = inject(Renderer2)
-  store = inject(Store)
+export class PostFeedComponent {
   profile = inject(GlobalStoreService).me
 
-  feed = this.store.selectSignal(selectFetchedPosts)
-
-  ngOnInit() {
-    this.store.dispatch(postActions.fetchPosts())
-  }
+  feed = input<Post[]>([])
+  createPost = output<string>()
 
   onCreatePost(postText: string) {
     if (!postText.trim()) return
 
-    this.store.dispatch(postActions.createPost({
-        payload: {
-          title: 'Клевый пост',
-          content: postText.trim(),
-          authorId: this.profile()!.id,
-          communityId: 0,
-        },
-      })
-    )
+    this.createPost.emit(postText.trim())
   }
 }
