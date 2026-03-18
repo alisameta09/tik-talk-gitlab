@@ -5,6 +5,7 @@ import {
   CommunityPage,
   CreateCommunityDTO,
 } from '../interfaces/community.interface'
+import { CommunityPostCreateDto, Post, PostCreateDto } from '../../posts/interfaces/post.interface'
 
 export const communityActions = createActionGroup({
   source: 'community',
@@ -21,6 +22,10 @@ export const communityActions = createActionGroup({
 
     'load subscribers': props<{ id: number }>(),
     'load subscribers success': props<{ subscribers: Admin[] }>(),
+
+    'create community post': props<{ payload: CommunityPostCreateDto }>(),
+    'load community posts': props<{ id: number }>(),
+    'load community posts success': props<{ posts: Post[] }>(),
 
     'create community': props<{ payload: CreateCommunityDTO }>(),
 

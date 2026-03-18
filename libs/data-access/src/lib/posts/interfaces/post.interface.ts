@@ -4,6 +4,9 @@ export interface PostCreateDto {
   title: string;
   content: string;
   authorId: number;
+}
+
+export interface CommunityPostCreateDto extends PostCreateDto {
   communityId: number;
 }
 

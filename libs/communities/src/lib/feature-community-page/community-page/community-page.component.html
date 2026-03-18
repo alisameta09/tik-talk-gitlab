@@ -36,9 +36,9 @@
 
       <div class="community-post-wall">
 
-        @if (isMine()) {
-          <tt-post-input></tt-post-input>
-        }
+        <tt-community-feed-page
+          [id]="id()"
+        ></tt-community-feed-page>
 
       </div>
 

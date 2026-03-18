@@ -8,6 +8,8 @@ import {
   CommunityPage,
   CreateCommunityDTO,
 } from '../interfaces/community.interface'
+import { map } from 'rxjs'
+import { Post } from '../../posts/interfaces/post.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -38,4 +40,9 @@ export class CommunitiesService {
   getCommunitySubscribers(communityId: number) {
     return this.http.get<Pageble<Admin>>(`${communityUrl}subscribers/${communityId}`)
   }
+
+  getCommunityPosts(communityId: number) {
+    return this.http.get<Pageble<Post>>(`${communityUrl}${communityId}/posts`)
+  }
+
 }

@@ -1,6 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store'
 import { Admin, Community, CommunityPage } from '../interfaces/community.interface'
 import { communityActions } from './actions'
+import { Post } from '../../posts/interfaces/post.interface'
 
 export interface CommunityState {
   communities: Community[]
@@ -9,6 +10,7 @@ export interface CommunityState {
   size: number
   subscribers: Admin[]
   communityPage: CommunityPage | null
+  posts: Post[]
 }
 
 export const initialState: CommunityState = {
@@ -17,7 +19,8 @@ export const initialState: CommunityState = {
   page: 1,
   size: 10,
   subscribers: [],
-  communityPage: null
+  communityPage: null,
+  posts: [],
 }
 
 export const communityFeature = createFeature({
@@ -71,6 +74,12 @@ export const communityFeature = createFeature({
           }
           : c
       )
-    }))
+    })),
+    on(communityActions.loadCommunityPostsSuccess, (state, payload) => {
+      return {
+        ...state,
+        posts: payload.posts,
+      }
+    }),
   )
 })

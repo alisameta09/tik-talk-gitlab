@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router'
 import { NgClass } from '@angular/common'
 import { Store } from '@ngrx/store'
 import { GlobalStoreService } from '@tt/data-access/profile'
+import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
 
 @Component({
   selector: 'tt-community-page',
@@ -26,6 +27,7 @@ import { GlobalStoreService } from '@tt/data-access/profile'
     PreviewPipe,
     CommunityPreviewPipe,
     NgClass,
+    CommunityFeedPageComponent,
   ],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',
@@ -35,7 +37,7 @@ export class CommunityPageComponent {
   store = inject(Store)
   me = inject(GlobalStoreService).me
 
-  id = input<string>()
+  id = input.required<string>()
 
   isMine = computed(() => this.me()?.id === this.community()?.admin.id)
 

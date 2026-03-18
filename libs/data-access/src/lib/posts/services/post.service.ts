@@ -3,7 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {Post, PostComment} from '../index';
 import {map} from 'rxjs';
 import {baseApiUrl} from '@tt/shared';
-import {CommentCreateDto, PostCreateDto} from '../interfaces/post.interface';
+import {
+  CommentCreateDto,
+  CommunityPostCreateDto,
+  PostCreateDto,
+} from '../interfaces/post.interface'
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +15,7 @@ import {CommentCreateDto, PostCreateDto} from '../interfaces/post.interface';
 export class PostService {
   #http = inject(HttpClient);
 
-  createPost(payload: PostCreateDto) {
+  createPost(payload: PostCreateDto | CommunityPostCreateDto) {
     return this.#http.post<Post>(`${baseApiUrl}post/`, payload)
   }
 

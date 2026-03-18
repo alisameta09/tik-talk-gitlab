@@ -24,13 +24,11 @@ export class FeedPageComponent implements OnInit {
   createPost(postText: string) {
     if (!postText.trim()) return
 
-    this.store.dispatch(
-      postActions.createPost({
+    this.store.dispatch(postActions.createPost({
         payload: {
           title: 'Клевый пост',
           content: postText.trim(),
-          authorId: this.profile()!.id,
-          communityId: 0,
+          authorId: this.profile()!.id
         },
       })
     )

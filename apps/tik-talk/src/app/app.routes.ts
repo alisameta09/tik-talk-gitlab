@@ -38,10 +38,6 @@ export const routes: Routes = [
         loadChildren: () => communitiesRoutes,
         providers: [provideState(communityFeature), provideEffects(CommunityEffects)],
       },
-      {
-        path: 'communities/:id',
-        component: CommunityPageComponent,
-      },
     ],
     canActivate: [canActivateAuth],
   },
