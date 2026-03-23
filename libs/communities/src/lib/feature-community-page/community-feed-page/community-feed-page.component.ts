@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store'
 import { communityActions, selectSelectedCommunityPosts } from '@tt/data-access/communities'
 import { PostFeedComponent } from '@tt/posts'
 import { GlobalStoreService } from '@tt/data-access/profile'
+import { postActions } from '@tt/data-access/posts'
 
 @Component({
   selector: 'tt-community-feed-page',
@@ -25,6 +26,7 @@ export class CommunityFeedPageComponent implements OnInit {
     if (!id) return
 
     this.store.dispatch(communityActions.loadCommunityPosts({ id }))
+    this.store.dispatch(postActions.fetchComments({ postId: id }))
   }
 
   createPost(postText: string) {

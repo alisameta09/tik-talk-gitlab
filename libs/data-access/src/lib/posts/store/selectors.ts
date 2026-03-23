@@ -8,5 +8,5 @@ export const selectFetchedPosts = createSelector(
 
 export const selectCreatedComments = (postId: number) => createSelector(
   postFeature.selectComments,
-  (comments) => comments[postId]
+  (comments) => comments?.[postId] ?? []
 )
