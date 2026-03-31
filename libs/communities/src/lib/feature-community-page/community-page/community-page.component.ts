@@ -1,33 +1,25 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core'
-import {
-  CommunityPreviewPipe,
-  PreviewPipe,
-  ShowModalButtonComponent,
-  SvgIconComponent,
-} from '@tt/common-ui'
-import { PostInputComponent } from '@tt/posts'
+import { ImgPreviewUrlPipe, ShowModalButtonComponent, SvgIconComponent } from '@tt/common-ui'
 import {
   communityActions,
   selectSelectedCommunity,
   selectSelectedSubscribers,
 } from '@tt/data-access/communities'
 import { RouterLink } from '@angular/router'
-import { NgClass } from '@angular/common'
 import { Store } from '@ngrx/store'
 import { GlobalStoreService } from '@tt/data-access/profile'
 import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
+import { NgClass } from '@angular/common'
 
 @Component({
   selector: 'tt-community-page',
   imports: [
     ShowModalButtonComponent,
     SvgIconComponent,
-    PostInputComponent,
     RouterLink,
-    PreviewPipe,
-    CommunityPreviewPipe,
-    NgClass,
     CommunityFeedPageComponent,
+    ImgPreviewUrlPipe,
+    NgClass,
   ],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',

@@ -1,12 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  linkedSignal,
-} from '@angular/core'
-import { PluralPipe, PreviewPipe, SvgIconComponent } from '@tt/common-ui'
+import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal } from '@angular/core'
+import { ImgPreviewUrlPipe, PluralPipe, SvgIconComponent } from '@tt/common-ui'
 import { Community, communityActions } from '@tt/data-access/communities'
 import { Router } from '@angular/router'
 import { GlobalStoreService } from '@tt/data-access/profile'
@@ -14,7 +7,7 @@ import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'tt-community-card',
-  imports: [SvgIconComponent, PreviewPipe, PluralPipe],
+  imports: [SvgIconComponent, PluralPipe, ImgPreviewUrlPipe],
   templateUrl: './community-card.component.html',
   styleUrl: './community-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

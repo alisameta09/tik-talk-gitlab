@@ -39,11 +39,11 @@
 
 <footer class="sidebar__footer mb20">
   @if (me(); as me) {
-    @if (me.avatarUrl) {
-      <img [src]="me.avatarUrl | imgUrl" alt="Фото профиля" class="sidebar-avatar"/>
-    } @else {
-      <img src="/assets/images/avatar-placeholder.png" alt="Фото профиля" class="sidebar-avatar"/>
-    }
+    <img
+      [src]="me.avatarUrl | imgPreviewUrl: 'profile'"
+      alt="Фото профиля"
+      class="sidebar-avatar"
+    />
     <span class="sidebar-username">{{ me.username }}</span>
     <a [routerLink]="['/settings']" class="sidebar-settings-icon">
       <svg icon="settings" class="svg16"></svg>

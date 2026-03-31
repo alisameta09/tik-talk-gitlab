@@ -4,8 +4,8 @@ import { switchMap } from 'rxjs'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { AsyncPipe } from '@angular/common'
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component'
-import { FeedPageComponent, PostFeedComponent } from '@tt/posts'
-import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
+import { FeedPageComponent } from '@tt/posts'
+import { ImgPreviewUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { ProfileService } from '@tt/data-access/profile'
 
 @Component({
@@ -15,9 +15,8 @@ import { ProfileService } from '@tt/data-access/profile'
     AsyncPipe,
     SvgIconComponent,
     RouterLink,
-    ImgUrlPipe,
-    PostFeedComponent,
     FeedPageComponent,
+    ImgPreviewUrlPipe,
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',

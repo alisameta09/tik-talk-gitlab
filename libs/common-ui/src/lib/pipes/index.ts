@@ -1,13 +1,9 @@
-import { CommunityPreviewPipe } from './community-preview.pipe'
 import { DateTransformPipe } from './date-transform.pipe'
-import { ImgUrlPipe } from './img-url.pipe'
 import { PluralPipe } from './plural.pipe'
-import { PreviewPipe } from './preview.pipe'
+import { ImgPreviewUrlPipe } from './img-url.pipe'
 
 export {
   DateTransformPipe,
-  ImgUrlPipe,
-  PreviewPipe,
-  PluralPipe,
-  CommunityPreviewPipe
+  ImgPreviewUrlPipe,
+  PluralPipe
 }

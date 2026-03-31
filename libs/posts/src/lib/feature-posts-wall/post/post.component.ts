@@ -1,9 +1,23 @@
-import {ChangeDetectionStrategy, Component, computed, inject, input, OnInit, Signal} from '@angular/core';
-import {Post, postActions, PostComment, selectCreatedComments} from '@tt/data-access/posts';
-import {CommentComponent, PostInputComponent} from '../../ui';
-import {AvatarCircleComponent, DateTransformPipe, SvgIconComponent} from '@tt/common-ui';
-import {GlobalStoreService} from '@tt/data-access/profile';
-import {Store} from '@ngrx/store';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  Signal,
+} from '@angular/core'
+import { Post, postActions, PostComment, selectCreatedComments } from '@tt/data-access/posts'
+import { CommentComponent, PostInputComponent } from '../../ui'
+import {
+  AvatarCircleComponent,
+  DateTransformPipe,
+  ImgPreviewUrlPipe,
+  SvgIconComponent,
+} from '@tt/common-ui'
+import { GlobalStoreService } from '@tt/data-access/profile'
+import { Store } from '@ngrx/store'
+import { Community } from '@tt/data-access/communities'
 
 @Component({
   selector: 'tt-post',
@@ -13,20 +27,20 @@ import {Store} from '@ngrx/store';
     PostInputComponent,
     CommentComponent,
     DateTransformPipe,
+    ImgPreviewUrlPipe,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent implements OnInit {
-  post = input<Post>();
+  profile = inject(GlobalStoreService).me
+  store = inject(Store)
+
+  post = input<Post>()
   comments!: Signal<PostComment[]>
 
-  profile = inject(GlobalStoreService).me;
-  store = inject(Store);
-
   comments2 = computed(() => {
-
     if (this.comments()?.length) {
       return this.comments()
     }
@@ -35,18 +49,21 @@ export class PostComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.comments = this.store.selectSignal(selectCreatedComments(this.post()!.id));
+    this.comments = this.store.selectSignal(selectCreatedComments(this.post()!.id))
+    console.log(this.post()?.author.avatarUrl)
   }
 
   onCreateComment(commentText: string) {
-    if (!commentText.trim()) return;
+    if (!commentText.trim()) return
 
-    this.store.dispatch(postActions.createComment({
-      payload: {
-        text: commentText,
-        authorId: this.profile()!.id,
-        postId: this.post()!.id,
-      }
-    }))
+    this.store.dispatch(
+      postActions.createComment({
+        payload: {
+          text: commentText,
+          authorId: this.profile()!.id,
+          postId: this.post()!.id,
+        },
+      })
+    )
   }
 }

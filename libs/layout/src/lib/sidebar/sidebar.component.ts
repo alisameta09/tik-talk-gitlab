@@ -3,7 +3,7 @@ import { SubscriberCardComponent } from './subscriber-card/subscriber-card.compo
 import { RouterLink, RouterLinkActive } from '@angular/router'
 import { AsyncPipe } from '@angular/common'
 import { firstValueFrom, Subscription, timer } from 'rxjs'
-import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
+import { ImgPreviewUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { ProfileService } from '@tt/data-access/profile'
 import { ChatService, isErrorMessage } from '@tt/data-access/chats'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -15,8 +15,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     SubscriberCardComponent,
     RouterLink,
     AsyncPipe,
-    ImgUrlPipe,
     RouterLinkActive,
+    ImgPreviewUrlPipe,
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',

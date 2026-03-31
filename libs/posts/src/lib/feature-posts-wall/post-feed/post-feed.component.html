@@ -4,7 +4,9 @@
 
 <div class="post_wrapper" resizePage>
   @for (post of feed(); track post.id) {
-    <tt-post [post]="post"></tt-post>
+    <tt-post
+      [post]="post"
+    ></tt-post>
   }
 </div>
 

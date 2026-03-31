@@ -28,7 +28,7 @@
         @for (subscriber of subscribers$ | async; track subscriber.id) {
           <a [routerLink]="['/profile', subscriber.id]">
             <img
-              [src]="subscriber.avatarUrl | imgUrl"
+              [src]="subscriber.avatarUrl | imgPreviewUrl: 'profile'"
               alt="Фото подписчика"
               class="subscriber-avatar-btn"
             />
