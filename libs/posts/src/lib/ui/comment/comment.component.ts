@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {AvatarCircleComponent, DateTransformPipe} from '@tt/common-ui';
+import {AvatarCircleComponent, DateTransformPipe, ImgPreviewUrlPipe } from '@tt/common-ui';
 import {PostComment} from '@tt/data-access/posts';
 
 @Component({
   selector: 'tt-comment',
-  imports: [AvatarCircleComponent, DateTransformPipe],
+  imports: [AvatarCircleComponent, DateTransformPipe, ImgPreviewUrlPipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentComponent {
-  comment = input<PostComment>();
+  comment = input<PostComment>()
 }

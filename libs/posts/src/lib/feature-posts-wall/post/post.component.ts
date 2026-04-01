@@ -18,6 +18,7 @@ import {
 import { GlobalStoreService } from '@tt/data-access/profile'
 import { Store } from '@ngrx/store'
 import { Community } from '@tt/data-access/communities'
+import { JsonPipe } from '@angular/common'
 
 @Component({
   selector: 'tt-post',
@@ -28,6 +29,7 @@ import { Community } from '@tt/data-access/communities'
     CommentComponent,
     DateTransformPipe,
     ImgPreviewUrlPipe,
+    JsonPipe,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
@@ -38,6 +40,7 @@ export class PostComponent implements OnInit {
   store = inject(Store)
 
   post = input<Post>()
+  community = input<Community | null>()
   comments!: Signal<PostComment[]>
 
   comments2 = computed(() => {
@@ -50,7 +53,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.comments = this.store.selectSignal(selectCreatedComments(this.post()!.id))
-    console.log(this.post()?.author.avatarUrl)
+    console.log(this.community()?.avatarUrl)
   }
 
   onCreateComment(commentText: string) {

@@ -1,40 +1,42 @@
 @if (post(); as post) {
-<tt-avatar-circle
-  class="size32"
-  [avatarUrl]="post.author.avatarUrl"
-></tt-avatar-circle>
+  <tt-avatar-circle
+    class="size32"
+    [avatarUrl]="(community()?.avatarUrl || post.author.avatarUrl)
+      | imgPreviewUrl: (community() ? 'community' : 'profile')"
+  ></tt-avatar-circle>
 
-<main class="post-body">
-  <div class="post-header">
-    <strong class="post__author">
-      {{ post.author.firstName }} {{ post.author.lastName }}
-      <span class="post-created-at">{{ post.createdAt | dateTransform : '' : true }} </span>
-    </strong>
-  </div>
-  <p class="medium-small-text">{{ post.content }}</p>
+  <main class="post-body">
+    <div class="post-header">
+      <strong class="post__author">
+        {{ post.author.firstName }} {{ post.author.lastName }}
+        <span class="post-created-at">{{ post.createdAt | dateTransform : '' : true }} </span>
+      </strong>
+    </div>
+    <p class="medium-small-text">{{ post.content }}</p>
 
-  <div class="post-counters">
+    <div class="post-counters">
     <span class="comment-amount">
       <svg icon="comment" class="svg16 comment-icon"></svg>
-      <span class="comment-length">{{ comments2()?.length ?? 0}}</span>
+      <span class="comment-length">{{ comments2()?.length ?? 0 }}</span>
     </span>
 
-    <span class="likes-amount">
+      <span class="likes-amount">
       <svg icon="likes" class="svg16 likes-icon"></svg>
       <span class="likes-count">{{ post.likes }}</span>
     </span>
-  </div>
+    </div>
 
-  <div class="post__comments-wrapper">
-    @for (comment of comments2(); track comment.id) {
-    <tt-comment [comment]="comment"></tt-comment>
-    }
-  </div>
+    <div class="post__comments-wrapper">
+      @for (comment of comments2(); track comment.id) {
+        <tt-comment [comment]="comment"></tt-comment>
+      }
+    </div>
 
-  <tt-post-input
-    (postCreated)="onCreateComment($event)"
-    [postId]="post.id"
-    [isCommentInput]="true"
-  ></tt-post-input>
-</main>
+    <tt-post-input
+      (postCreated)="onCreateComment($event)"
+      [postId]="post.id"
+      [isCommentInput]="true"
+    ></tt-post-input>
+  </main>
 }
+

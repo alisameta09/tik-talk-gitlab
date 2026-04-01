@@ -10,7 +10,7 @@ export class ImgPreviewUrlPipe implements PipeTransform {
         case 'profile':
           return '/assets/images/avatar-placeholder.png'
         case 'community':
-          return '/assets/images/banner.png'
+          return 'assets/images/banner.png'
         default:
           return '/assets/images/avatar-placeholder.png'
       }
