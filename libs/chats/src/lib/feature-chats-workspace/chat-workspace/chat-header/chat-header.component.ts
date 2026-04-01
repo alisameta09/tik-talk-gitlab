@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {AvatarCircleComponent, SvgIconComponent} from '@tt/common-ui';
+import {AvatarCircleComponent, ImgPreviewUrlPipe, SvgIconComponent} from '@tt/common-ui';
 import {Profile} from "@tt/data-access/profile";
 
 @Component({
   selector: 'tt-chat-header',
-  imports: [AvatarCircleComponent, SvgIconComponent],
+  imports: [AvatarCircleComponent, SvgIconComponent, ImgPreviewUrlPipe],
   templateUrl: './chat-header.component.html',
   styleUrl: './chat-header.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatHeaderComponent {
-  profile = input.required<Profile>();
+  profile = input.required<Profile>()
 }
