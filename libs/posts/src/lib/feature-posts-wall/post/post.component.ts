@@ -1,24 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  OnInit,
-  Signal,
-} from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit, Signal } from '@angular/core'
 import { Post, postActions, PostComment, selectCreatedComments } from '@tt/data-access/posts'
 import { CommentComponent, PostInputComponent } from '../../ui'
-import {
-  AvatarCircleComponent,
-  DateTransformPipe,
-  ImgPreviewUrlPipe,
-  SvgIconComponent,
-} from '@tt/common-ui'
+import { AvatarCircleComponent, DateTransformPipe, ImgPreviewUrlPipe, SvgIconComponent } from '@tt/common-ui'
 import { GlobalStoreService } from '@tt/data-access/profile'
 import { Store } from '@ngrx/store'
 import { Community } from '@tt/data-access/communities'
-import { JsonPipe } from '@angular/common'
 
 @Component({
   selector: 'tt-post',
@@ -28,8 +14,6 @@ import { JsonPipe } from '@angular/common'
     PostInputComponent,
     CommentComponent,
     DateTransformPipe,
-    ImgPreviewUrlPipe,
-    JsonPipe,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',

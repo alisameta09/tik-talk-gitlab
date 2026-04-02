@@ -7,7 +7,11 @@
   <main class="post-body">
     <div class="post-header">
       <strong class="post__author">
-        {{ post.author.firstName }} {{ post.author.lastName }}
+        @if (community()) {
+          {{ community()?.name }}
+        } @else {
+          {{ post.author.firstName }} {{ post.author.lastName }}
+        }
         <span class="post-created-at">{{ post.createdAt | dateTransform : '' : true }} </span>
       </strong>
     </div>
