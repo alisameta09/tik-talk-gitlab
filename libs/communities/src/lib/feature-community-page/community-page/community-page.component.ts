@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
 import { ImgPreviewUrlPipe, ShowModalButtonComponent, SvgIconComponent } from '@tt/common-ui'
 import {
   communityActions,
@@ -25,7 +34,7 @@ import { NgClass } from '@angular/common'
   styleUrl: './community-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunityPageComponent {
+export class CommunityPageComponent implements OnDestroy {
   store = inject(Store)
   me = inject(GlobalStoreService).me
 
@@ -46,4 +55,8 @@ export class CommunityPageComponent {
 
   community = this.store.selectSignal(selectSelectedCommunity)
   subscribers = this.store.selectSignal(selectSelectedSubscribers)
+
+  ngOnDestroy() {
+    this.store.dispatch(communityActions.clearSelectedCommunity())
+  }
 }

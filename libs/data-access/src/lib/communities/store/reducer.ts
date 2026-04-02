@@ -81,5 +81,11 @@ export const communityFeature = createFeature({
         posts: payload.posts,
       }
     }),
+    on(communityActions.clearSelectedCommunity, (state) => {
+      return {
+        ...state,
+        communityPage: null
+      }
+    })
   )
 })

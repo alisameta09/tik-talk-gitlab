@@ -1,11 +1,11 @@
-import { createActionGroup, props } from '@ngrx/store'
+import { createActionGroup, emptyProps, props } from '@ngrx/store'
 import {
   Admin,
   Community,
   CommunityPage,
   CreateCommunityDTO,
 } from '../interfaces/community.interface'
-import { CommunityPostCreateDto, Post, PostCreateDto } from '../../posts/interfaces/post.interface'
+import { CommunityPostCreateDto, Post } from '../../posts/interfaces/post.interface'
 
 export const communityActions = createActionGroup({
   source: 'community',
@@ -19,6 +19,7 @@ export const communityActions = createActionGroup({
 
     'load community': props<{ id: number }>(),
     'load community success': props<{ communityPage: CommunityPage }>(),
+    'clear selected community': emptyProps(),
 
     'load subscribers': props<{ id: number }>(),
     'load subscribers success': props<{ subscribers: Admin[] }>(),
