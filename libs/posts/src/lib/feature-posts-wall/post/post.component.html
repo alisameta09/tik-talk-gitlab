@@ -1,8 +1,7 @@
 @if (post(); as post) {
   <tt-avatar-circle
     class="size32"
-    [avatarUrl]="(community()?.avatarUrl || post.author.avatarUrl)
-      | imgPreviewUrl: (community() ? 'community' : 'profile')"
+    [avatarUrl]="postAuthor()"
   ></tt-avatar-circle>
 
   <main class="post-body">

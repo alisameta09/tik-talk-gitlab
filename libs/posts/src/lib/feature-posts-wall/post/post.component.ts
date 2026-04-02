@@ -38,6 +38,7 @@ import { JsonPipe } from '@angular/common'
 export class PostComponent implements OnInit {
   profile = inject(GlobalStoreService).me
   store = inject(Store)
+  imgPreviewUrlPipe = inject(ImgPreviewUrlPipe)
 
   post = input<Post>()
   community = input<Community | null>()
@@ -51,9 +52,18 @@ export class PostComponent implements OnInit {
     return this.post()?.comments
   })
 
+  postAuthor = computed(() => {
+    const post = this.post()
+    const community = this.community()
+
+    const type = community ? 'community' : 'profile'
+    const url = community?.avatarUrl || post?.author.avatarUrl || null
+
+    return this.imgPreviewUrlPipe.transform(url, type)
+  })
+
   ngOnInit() {
     this.comments = this.store.selectSignal(selectCreatedComments(this.post()!.id))
-    console.log(this.community()?.avatarUrl)
   }
 
   onCreateComment(commentText: string) {
