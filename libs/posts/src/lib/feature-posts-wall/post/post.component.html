@@ -35,6 +35,7 @@
       (postCreated)="onCreateComment($event)"
       [postId]="post.id"
       [isCommentInput]="true"
+      [avatarUrl]="imgPreviewUrlPipe.transform(profile()?.avatarUrl ?? null, 'profile')"
     ></tt-post-input>
   </main>
 }

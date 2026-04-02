@@ -3,7 +3,7 @@ import { Post } from '@tt/data-access/posts'
 import { PostInputComponent } from '../../ui'
 import { PostComponent } from '../post'
 import { GlobalStoreService } from '@tt/data-access/profile'
-import { ResizePageDirective } from '@tt/common-ui'
+import { ImgPreviewUrlPipe, ResizePageDirective } from '@tt/common-ui'
 import { selectSelectedCommunity } from '@tt/data-access/communities'
 import { Store } from '@ngrx/store'
 import { ActivatedRoute } from '@angular/router'
@@ -20,14 +20,15 @@ import { map } from 'rxjs'
 export class PostFeedComponent {
   store = inject(Store)
   route = inject(ActivatedRoute)
+  imgPreviewUrlPipe = inject(ImgPreviewUrlPipe)
 
   profile = inject(GlobalStoreService).me
 
   community = this.store.selectSignal(selectSelectedCommunity)
 
-  routeId = toSignal(this.route.paramMap.pipe(
-    map(params => params.get('id')),
-  ))
+  routeId = toSignal(this.route.paramMap.pipe(map((params) => params.get('id'))))
+
+  isProfilePage = computed(() => this.routeId() === 'me')
 
   isMine = computed(() => {
     const routeId = this.routeId()
@@ -39,8 +40,24 @@ export class PostFeedComponent {
     if (!profileId || !adminId) return false
 
     return profileId === adminId
-  }
-)
+  })
+
+  postInputAvatar = computed(() => {
+    const community = this.community()
+    const profile = this.profile()
+
+    if (this.isProfilePage()) {
+      return this.imgPreviewUrlPipe.transform(
+        profile?.avatarUrl || null,
+        'profile'
+      )
+    }
+
+    return this.imgPreviewUrlPipe.transform(
+      community?.avatarUrl || null,
+      'community'
+    )
+  })
 
   feed = input<Post[]>([])
   createPost = output<string>()

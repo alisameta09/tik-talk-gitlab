@@ -1,5 +1,7 @@
 @if (profile(); as profile) {
-  <tt-avatar-circle class="size32" [avatarUrl]="profile.avatarUrl | imgPreviewUrl: 'profile'"
+  <tt-avatar-circle
+    class="size32"
+    [avatarUrl]="avatarUrl()"
   ></tt-avatar-circle>
 }
 

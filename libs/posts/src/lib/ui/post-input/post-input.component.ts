@@ -25,6 +25,7 @@ export class PostInputComponent {
 
   isCommentInput = input<boolean>(false)
   postId = input<number>(0)
+  avatarUrl = input<string | null>()
 
   postText = ''
 

@@ -1,6 +1,7 @@
 @if (isMine()) {
   <tt-post-input
     (postCreated)="onCreatePost($event)"
+    [avatarUrl]="postInputAvatar()"
   ></tt-post-input>
 }
 
