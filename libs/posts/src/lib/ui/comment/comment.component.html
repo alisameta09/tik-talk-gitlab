@@ -1,5 +1,8 @@
 @if (comment(); as comment) {
-<tt-avatar-circle class="size32" [avatarUrl]="comment.author.avatarUrl"></tt-avatar-circle>
+<tt-avatar-circle
+  class="size32"
+  [avatarUrl]="comment.author.avatarUrl | imgPreviewUrl: 'profile'"
+></tt-avatar-circle>
 
 <div class="comment-body">
   <header class="comment-header">

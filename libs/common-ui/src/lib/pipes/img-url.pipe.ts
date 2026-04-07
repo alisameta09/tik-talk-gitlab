@@ -1,14 +1,20 @@
-import { Pipe, PipeTransform } from '@angular/core'
+import { Injectable, Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
-  name: 'imgUrl',
+  name: 'imgPreviewUrl',
 })
-export class ImgUrlPipe implements PipeTransform {
-  transform(value: string | null): string | null {
+@Injectable({
+  providedIn: 'root',
+})
+export class ImgPreviewUrlPipe implements PipeTransform {
+  transform(value: string | null, type: 'profile' | 'community'): string {
 
     if (!value) {
-      return null
+      return type === 'community'
+        ? 'assets/images/community-avatar-placeholder.png'
+        : '/assets/images/avatar-placeholder.png'
     }
+
     return `https://icherniakov.ru/yt-course/${value}`
   }
 }

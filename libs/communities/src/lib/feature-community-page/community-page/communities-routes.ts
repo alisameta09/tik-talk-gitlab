@@ -1,6 +1,11 @@
 import { Route } from '@angular/router'
 import { CommunitiesSearchPageComponent } from '../../feature-communities-list/search-page/communities-search-page.component'
 import { CommunityPageComponent } from './community-page.component'
+import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
+import { provideState } from '@ngrx/store'
+import { provideEffects } from '@ngrx/effects'
+import { CommunityEffects, communityFeature } from '@tt/data-access/communities'
+import { PostEffects, postFeature } from '@tt/data-access/posts'
 
 export const communitiesRoutes: Route[] = [
   {
@@ -10,5 +15,19 @@ export const communitiesRoutes: Route[] = [
   {
     path: ':id',
     component: CommunityPageComponent,
+    providers: [
+      provideState(communityFeature),
+      provideEffects(CommunityEffects),
+    ],
+    children: [
+      {
+        path: '',
+        component: CommunityFeedPageComponent,
+        providers: [
+          provideState(postFeature),
+          provideEffects(PostEffects)
+        ],
+      }
+    ]
   },
 ]

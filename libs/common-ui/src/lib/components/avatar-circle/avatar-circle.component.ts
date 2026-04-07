@@ -1,13 +1,13 @@
-import {ChangeDetectionStrategy, Component, input} from '@angular/core';
-import {ImgUrlPipe} from '../../pipes';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { ImgPreviewUrlPipe } from '../../pipes'
 
 @Component({
   selector: 'tt-avatar-circle',
-  imports: [ImgUrlPipe],
+  imports: [ImgPreviewUrlPipe],
   templateUrl: './avatar-circle.component.html',
   styleUrl: './avatar-circle.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarCircleComponent {
-  avatarUrl = input<string | null>();
+  avatarUrl = input<string | null>()
 }

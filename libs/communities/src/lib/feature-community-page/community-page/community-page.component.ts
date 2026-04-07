@@ -1,49 +1,62 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core'
 import {
-  CommunityPreviewPipe,
-  PreviewPipe,
-  ShowModalButtonComponent,
-  SvgIconComponent,
-} from '@tt/common-ui'
-import { PostInputComponent } from '@tt/posts'
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core'
+import { ImgPreviewUrlPipe, ShowModalButtonComponent, SvgIconComponent } from '@tt/common-ui'
 import {
   communityActions,
   selectSelectedCommunity,
   selectSelectedSubscribers,
 } from '@tt/data-access/communities'
-import { ActivatedRoute, RouterLink } from '@angular/router'
-import { AsyncPipe, NgClass } from '@angular/common'
+import { RouterLink } from '@angular/router'
 import { Store } from '@ngrx/store'
+import { GlobalStoreService } from '@tt/data-access/profile'
+import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
+import { NgClass } from '@angular/common'
 
 @Component({
   selector: 'tt-community-page',
   imports: [
     ShowModalButtonComponent,
     SvgIconComponent,
-    PostInputComponent,
-    AsyncPipe,
     RouterLink,
-    PreviewPipe,
-    CommunityPreviewPipe,
+    CommunityFeedPageComponent,
+    ImgPreviewUrlPipe,
     NgClass,
   ],
   templateUrl: './community-page.component.html',
   styleUrl: './community-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunityPageComponent implements OnInit {
-  route = inject(ActivatedRoute)
+export class CommunityPageComponent implements OnDestroy {
   store = inject(Store)
+  me = inject(GlobalStoreService).me
 
-  ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const id = Number(params['id'])
+  id = input.required<string>()
+
+  isMine = computed(() => this.me()?.id === this.community()?.admin.id)
+
+  constructor() {
+    effect(() => {
+      const id = Number(this.id())
+
+      if (!id) return
 
       this.store.dispatch(communityActions.loadCommunity({ id }))
       this.store.dispatch(communityActions.loadSubscribers({ id }))
     })
   }
 
-  community$ = this.store.select(selectSelectedCommunity)
-  subscribers$ = this.store.select(selectSelectedSubscribers)
+  community = this.store.selectSignal(selectSelectedCommunity)
+  subscribers = this.store.selectSignal(selectSelectedSubscribers)
+
+  ngOnDestroy() {
+    this.store.dispatch(communityActions.clearSelectedCommunity())
+  }
 }

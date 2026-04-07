@@ -1,8 +1,16 @@
-<tt-post-input (postCreated)="onCreatePost($event)"></tt-post-input>
+@if (isMine()) {
+  <tt-post-input
+    (postCreated)="onCreatePost($event)"
+    [avatarUrl]="postInputAvatar()"
+  ></tt-post-input>
+}
 
 <div class="post_wrapper" resizePage>
   @for (post of feed(); track post.id) {
-    <tt-post [post]="post"></tt-post>
+    <tt-post
+      [post]="post"
+      [community]="community()"
+    ></tt-post>
   }
 </div>
 

@@ -2,16 +2,18 @@ import { CommunitiesService } from '../services/communities.service'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
 import { communityActions } from '../store/actions'
 import { inject, Injectable } from '@angular/core'
-import { map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs'
+import { map, switchMap, tap, withLatestFrom } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { selectCommunitiesFilters, selectCommunitiesPageble } from './selectors'
 import { Router } from '@angular/router'
+import {PostService } from '../../posts/services/post.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommunityEffects {
   communitiesService = inject(CommunitiesService)
+  postService = inject(PostService)
   actions$ = inject(Actions)
   store = inject(Store)
   router = inject(Router)
@@ -96,6 +98,27 @@ export class CommunityEffects {
         this.communitiesService.leaveCommunity(id)),
       map((community) =>
         communityActions.updateCommunity({ community }))
+    )
+  })
+
+  createCommunityPost = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.createCommunityPost),
+      switchMap(({ payload }) => this.postService.createPost(payload)
+        .pipe(map(() => communityActions.loadCommunityPosts({ id: payload.communityId }))
+        )
+      )
+    )
+  })
+
+  loadCommunityPosts = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.loadCommunityPosts),
+      switchMap(({ id }) =>
+        this.communitiesService.getCommunityPosts(id).pipe(
+          map(res =>
+            communityActions.loadCommunityPostsSuccess({ posts: res.items })))
+      )
     )
   })
 }

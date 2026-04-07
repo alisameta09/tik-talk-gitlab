@@ -1,18 +1,18 @@
 import {ChangeDetectionStrategy, Component, inject, input} from '@angular/core';
-import {AvatarCircleComponent, DateTransformPipe} from '@tt/common-ui';
+import {AvatarCircleComponent, DateTransformPipe, ImgPreviewUrlPipe } from '@tt/common-ui';
 import {ChatService, LastMessageRes} from '@tt/data-access/chats';
 
 @Component({
   selector: 'button[chats]',
-  imports: [AvatarCircleComponent, DateTransformPipe],
+  imports: [AvatarCircleComponent, DateTransformPipe, ImgPreviewUrlPipe],
   templateUrl: './chat-btns.component.html',
   styleUrl: './chat-btns.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatBtnsComponent {
-  #chatService = inject(ChatService);
+  #chatService = inject(ChatService)
 
-  unreadMessagesByChat = this.#chatService.unreadMessagesByChat;
+  unreadMessagesByChat = this.#chatService.unreadMessagesByChat
 
-  chat = input<LastMessageRes>();
+  chat = input<LastMessageRes>()
 }

@@ -1,10 +1,10 @@
-@if (community$ | async; as community) {
+@if (community(); as community) {
 
   <div class="community-page__container">
 
     <div class="community-banner__wrapper mb24">
       <img
-        [src]="community.bannerUrl | communityPreview"
+        [src]="community.bannerUrl | imgPreviewUrl: 'community'"
         alt="community-banner"
         class="community-banner"
         [ngClass]="{
@@ -17,23 +17,29 @@
     <header class="community__header mb24">
       <div class="community-avatar-name__wrapper">
         <img
-          [src]="community.avatarUrl | communityPreview"
+          [src]="community.avatarUrl | imgPreviewUrl: 'community'"
           alt="community-avatar"
           class="community-avatar"
         />
         <h4 class="h4">{{ community.name }}</h4>
       </div>
 
-      <tt-show-modal-button
-      >Редактировать
-        <svg icon="settings" class="svg16"></svg>
-      </tt-show-modal-button>
+      @if (isMine()) {
+        <tt-show-modal-button
+        >Редактировать
+          <svg icon="settings" class="svg16"></svg>
+        </tt-show-modal-button>
+      }
     </header>
 
     <main class="community-body">
 
       <div class="community-post-wall">
-        <tt-post-input></tt-post-input>
+
+        <tt-community-feed-page
+          [id]="id()"
+        ></tt-community-feed-page>
+
       </div>
 
       <div>
@@ -46,10 +52,10 @@
 
         <div class="subscribers-wrapper mb32">
           @if (community.subscribersAmount > 0) {
-            @for (subscriber of subscribers$ | async; track subscriber.id) {
+            @for (subscriber of subscribers(); track subscriber.id) {
               <a [routerLink]="['/profile', subscriber.id]">
                 <img
-                  [src]="subscriber.avatarUrl | preview"
+                  [src]="subscriber.avatarUrl | imgPreviewUrl: 'profile'"
                   alt="Фото подписчика"
                   class="subscriber-avatar-btn"
                 />

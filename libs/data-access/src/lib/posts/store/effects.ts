@@ -23,7 +23,9 @@ export class PostEffects {
     return this.actions$.pipe(
       ofType(postActions.fetchPosts),
       switchMap(() => this.postService.fetchPosts()),
-      map((posts) => postActions.postsLoaded({ posts }))
+      map((posts) => postActions.postsLoaded({
+        posts: posts.filter(post => !post.communityId)
+      }))
     )
   })
 

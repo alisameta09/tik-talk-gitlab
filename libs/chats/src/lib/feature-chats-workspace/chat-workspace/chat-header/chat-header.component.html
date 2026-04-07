@@ -1,15 +1,18 @@
 @if (profile(); as profile) {
-<div class="companion-header__wrapper">
-  <a class="icon-btn">
-    <svg class="icon-input" icon="back"></svg>
-  </a>
-  <div class="companion-username-info">
-    <tt-avatar-circle class="size32" [avatarUrl]="profile.avatarUrl"></tt-avatar-circle>
+  <div class="companion-header__wrapper">
+    <a class="icon-btn">
+      <svg class="icon-input" icon="back"></svg>
+    </a>
+    <div class="companion-username-info">
+      <tt-avatar-circle
+        class="size32"
+        [avatarUrl]="profile.avatarUrl | imgPreviewUrl: 'profile'"
+      ></tt-avatar-circle>
 
-    <strong class="header-username">{{ profile.firstName }} {{ profile.lastName }}</strong>
+      <strong class="header-username">{{ profile.firstName }} {{ profile.lastName }}</strong>
+    </div>
+    <a class="icon-btn">
+      <svg class="icon-input" icon="menu"></svg>
+    </a>
   </div>
-  <a class="icon-btn">
-    <svg class="icon-input" icon="menu"></svg>
-  </a>
-</div>
 }

@@ -30,3 +30,8 @@ export const selectSelectedSubscribers = createSelector(
   communityFeature.selectSubscribers,
   (subscribers) => subscribers.slice(0, 6)
 )
+
+export const selectSelectedCommunityPosts = createSelector(
+    communityFeature.selectPosts,
+    (posts) => posts
+)

@@ -1,5 +1,8 @@
 @if (message(); as message) {
-  <tt-avatar-circle class="size32" [avatarUrl]="message.user?.avatarUrl"></tt-avatar-circle>
+  <tt-avatar-circle
+    class="size32"
+    [avatarUrl]="(message.user?.avatarUrl ?? null) | imgPreviewUrl: 'profile'"
+  ></tt-avatar-circle>
 
   <div class="medium-small-text message-container">
     <div class="mb8 message-header">
