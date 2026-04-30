@@ -1,0 +1,65 @@
+.edit-community-form {
+  display: flex;
+  flex-direction: column;
+  height: 496px;
+}
+
+.edit-community__container {
+  display: grid;
+  gap: 20px;
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  right: 0;
+  color: var(--light-transparent-color)
+}
+
+.community-hidden-textarea {
+  font-family: 'JetBrains Mono', sans-serif;
+  resize: none;
+  background: var(--dark-color);
+  color: var(--light-color);
+  border: none;
+  border-bottom: var(--light-border);
+  padding: 12px 0;
+  outline: none;
+  line-height: 21px;
+  min-height: calc(21px * 1);
+  max-height: calc(21px * 4);
+  overflow-y: auto;
+}
+
+.community-hidden-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.community-hidden-textarea::placeholder {
+  color: var(--light-transparent-color);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.community-btn__wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.community-cancel-btn {
+  width: 91px;
+  height: 44px;
+  background: none;
+  color: var(--light-color);
+  border: var(--light-border);
+  cursor: pointer;
+}
+
+.community-save-btn {
+  width: 116px;
+  height: 44px;
+  cursor: pointer;
+}
