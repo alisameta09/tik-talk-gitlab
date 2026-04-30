@@ -45,6 +45,17 @@
 .community-btn__wrapper {
   margin-top: auto;
   display: flex;
+  flex-direction: row;
+  place-content: space-between;
+}
+
+.community-delete-btn {
+  background: var(--dark-color);
+  border: none;
+}
+
+.cancel-save-btn__container {
+  display: flex;
   justify-content: flex-end;
   gap: 20px;
 }

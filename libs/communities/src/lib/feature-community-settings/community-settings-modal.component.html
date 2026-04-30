@@ -39,16 +39,24 @@
     </div>
 
     <div class="community-btn__wrapper mt20">
-      <button
-        class="community-cancel-btn btn"
-        type="button"
-      >Отмена
+
+      <button class="community-delete-btn">
+        <svg icon="delete" class="icon-btn"></svg>
       </button>
-      <button
-        class="community-save-btn btn"
-        type="submit"
-      >Сохранить
-      </button>
+
+      <div class="cancel-save-btn__container">
+        <button
+          class="community-cancel-btn btn"
+          type="button"
+          (click)="onCancel()"
+        >Отмена
+        </button>
+        <button
+          class="community-save-btn btn"
+          type="submit"
+        >Сохранить
+        </button>
+      </div>
     </div>
 
   </form>

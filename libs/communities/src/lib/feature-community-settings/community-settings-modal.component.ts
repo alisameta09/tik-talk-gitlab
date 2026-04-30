@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, effect, inject, Renderer2 } from '@angular/core'
 import {
   ModalComponent,
+  ModalService,
   StackInputComponent,
   SvgIconComponent,
   TtInputComponent,
-  TtSelectComponent,
+  TtSelectComponent
 } from '@tt/common-ui'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
@@ -29,6 +30,7 @@ export class CommunitySettingsModalComponent {
   fb = inject(FormBuilder)
   r2 = inject(Renderer2)
   store = inject(Store)
+  #modalService = inject(ModalService)
 
   community = this.store.selectSignal(selectSelectedCommunity)
 
@@ -61,4 +63,7 @@ export class CommunitySettingsModalComponent {
     })
   }
 
+  onCancel() {
+    this.#modalService.close()
+  }
 }
