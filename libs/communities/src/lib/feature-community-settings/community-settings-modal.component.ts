@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, effect, inject, Renderer2 } from '@angular/core'
 import {
   ModalComponent,
   StackInputComponent,
@@ -7,6 +7,8 @@ import {
   TtSelectComponent,
 } from '@tt/common-ui'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Store } from '@ngrx/store'
+import { selectSelectedCommunity } from '@tt/data-access/communities'
 
 @Component({
   selector: 'tt-community-settings-modal',
@@ -25,11 +27,38 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 })
 export class CommunitySettingsModalComponent {
   fb = inject(FormBuilder)
+  r2 = inject(Renderer2)
+  store = inject(Store)
+
+  community = this.store.selectSignal(selectSelectedCommunity)
 
   editCommunityForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required]],
-    themes: ['', [Validators.required]],
-    tags: [[], Validators.required],
+    name: ['value', [Validators.required]],
+    themes: [[''], [Validators.required]],
+    tags: [[''], Validators.required],
     description: ['', [Validators.required]],
   })
+
+  onTextAreaInput(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement
+
+    this.r2.setStyle(textarea, 'height', 'auto')
+    this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px')
+  }
+
+  constructor() {
+    effect(() => {
+      const community = this.community()
+
+      if (community) {
+        this.editCommunityForm.patchValue({
+          name: community.name,
+          themes: community.themes,
+          tags: community.tags,
+          description: community.description,
+        })
+      }
+    })
+  }
+
 }
