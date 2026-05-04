@@ -57,6 +57,12 @@ export const communityFeature = createFeature({
         communityPage: payload.communityPage,
       }
     }),
+    on(communityActions.editCommunitySuccess, (state, payload) => {
+      return {
+        ...state,
+        communityPage: payload.communityPage,
+      }
+    }),
     on(communityActions.loadSubscribersSuccess, (state, payload) => {
       return {
         ...state,

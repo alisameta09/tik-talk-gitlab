@@ -11,7 +11,7 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 export class TtDropdownComponent {
   item = input<string>('')
 
-  selectedItem = input<string>('')
+  selectedItems = input<string[]>([])
   itemChange = output<string>()
 
   emitItem(item: string) {

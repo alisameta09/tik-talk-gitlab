@@ -7,7 +7,7 @@
 
   <div class="tt-form-input tt-select-ghost-input">
 
-    @if (selectedItem()) {
+    @if (selectedItems().length) {
       <div class="skill-tag tt-select-tag">
         <button
           type="button"
@@ -16,7 +16,7 @@
         >
           <svg class="svg10" icon="cross"></svg>
         </button>
-        <span>{{ selectedItem() }}</span>
+        <span>{{ selectedItems()[0] }}</span>
       </div>
     }
 
@@ -32,7 +32,7 @@
           @for (item of items; track item) {
             <tt-dropdown
               [item]="item"
-              [selectedItem]="selectedItem()"
+              [selectedItems]="selectedItems()"
               (itemChange)="onSelectItem($event)"
             ></tt-dropdown>
           }

@@ -35,8 +35,8 @@ export class CreateCommunityModalComponent {
 
   createCommunityForm = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
-    themes: ['', [Validators.required]],
-    tags: [[], Validators.required],
+    themes: [<string[]>[], [Validators.required]],
+    tags: [<string[]>[], Validators.required],
     description: ['', [Validators.required]],
   })
 
@@ -60,16 +60,9 @@ export class CreateCommunityModalComponent {
 
     if (this.createCommunityForm.invalid) return
 
-    const value = this.createCommunityForm.getRawValue()
-
-    const payload: CreateCommunityDTO = {
-      name: value.name,
-      themes: value.themes ? [value.themes] : [],
-      tags: value.tags,
-      description: value.description,
-    }
-
-    this.store.dispatch(communityActions.createCommunity({ payload }))
+    this.store.dispatch(communityActions.createCommunity({
+      payload: this.createCommunityForm.getRawValue()
+    }))
 
     this.#modalService.close()
   }

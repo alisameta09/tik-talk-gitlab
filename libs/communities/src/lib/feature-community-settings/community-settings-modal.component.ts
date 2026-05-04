@@ -5,11 +5,17 @@ import {
   StackInputComponent,
   SvgIconComponent,
   TtInputComponent,
-  TtSelectComponent
+  TtSelectComponent,
 } from '@tt/common-ui'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import { selectSelectedCommunity } from '@tt/data-access/communities'
+import {
+  CommunitiesService,
+  communityActions,
+  CreateCommunityDTO,
+  selectSelectedCommunity,
+} from '@tt/data-access/communities'
+import { firstValueFrom } from 'rxjs'
 
 @Component({
   selector: 'tt-community-settings-modal',
@@ -31,13 +37,14 @@ export class CommunitySettingsModalComponent {
   r2 = inject(Renderer2)
   store = inject(Store)
   #modalService = inject(ModalService)
+  #communitiesService = inject(CommunitiesService)
 
   community = this.store.selectSignal(selectSelectedCommunity)
 
   editCommunityForm = this.fb.nonNullable.group({
     name: ['value', [Validators.required]],
-    themes: [[''], [Validators.required]],
-    tags: [[''], Validators.required],
+    themes: [<string[]>[], [Validators.required]],
+    tags: [<string[]>[], Validators.required],
     description: ['', [Validators.required]],
   })
 
@@ -64,6 +71,23 @@ export class CommunitySettingsModalComponent {
   }
 
   onCancel() {
+    this.#modalService.close()
+  }
+
+  onSave(event: Event) {
+    event.preventDefault()
+
+    if (this.editCommunityForm.invalid) return
+
+    const community = this.community()
+
+    if (!community) return
+
+    this.store.dispatch(communityActions.editCommunity({
+      id: community.id,
+      payload: this.editCommunityForm.getRawValue()
+    }))
+
     this.#modalService.close()
   }
 }

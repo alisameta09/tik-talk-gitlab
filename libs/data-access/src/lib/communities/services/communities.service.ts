@@ -8,7 +8,6 @@ import {
   CommunityPage,
   CreateCommunityDTO,
 } from '../interfaces/community.interface'
-import { map } from 'rxjs'
 import { Post } from '../../posts/interfaces/post.interface'
 
 @Injectable({
@@ -31,6 +30,10 @@ export class CommunitiesService {
 
   createCommunity(payload: CreateCommunityDTO) {
     return this.http.post<CommunityPage>(communityUrl, payload)
+  }
+
+  editCommunity(communityId: number, payload: CreateCommunityDTO) {
+    return this.http.patch<CommunityPage>(`${communityUrl}${communityId}`, payload)
   }
 
   getCommunityById(communityId: number) {

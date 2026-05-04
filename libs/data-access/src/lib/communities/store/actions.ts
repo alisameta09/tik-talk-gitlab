@@ -30,6 +30,9 @@ export const communityActions = createActionGroup({
 
     'create community': props<{ payload: CreateCommunityDTO }>(),
 
+    'edit community': props<{ id: number, payload: CreateCommunityDTO }>(),
+    'edit community success': props<{ communityPage: CommunityPage }>(),
+
     'navigate to community': props<{ id: number }>(),
 
     'join community': props<{ id: number }>(),

@@ -50,6 +50,15 @@ export class CommunityEffects {
     )
   })
 
+  editCommunity = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.editCommunity),
+      switchMap(({ id, payload }) =>
+        this.communitiesService.editCommunity(id, payload)),
+      map(communityPage => communityActions.editCommunitySuccess({communityPage}))
+    )
+  })
+
   navigateToCommunity = createEffect(
     () => {
       return this.actions$.pipe(
