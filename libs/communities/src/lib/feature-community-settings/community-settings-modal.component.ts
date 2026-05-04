@@ -9,13 +9,7 @@ import {
 } from '@tt/common-ui'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import {
-  CommunitiesService,
-  communityActions,
-  CreateCommunityDTO,
-  selectSelectedCommunity,
-} from '@tt/data-access/communities'
-import { firstValueFrom } from 'rxjs'
+import { communityActions, selectSelectedCommunity } from '@tt/data-access/communities'
 
 @Component({
   selector: 'tt-community-settings-modal',
@@ -37,7 +31,6 @@ export class CommunitySettingsModalComponent {
   r2 = inject(Renderer2)
   store = inject(Store)
   #modalService = inject(ModalService)
-  #communitiesService = inject(CommunitiesService)
 
   community = this.store.selectSignal(selectSelectedCommunity)
 
@@ -83,10 +76,12 @@ export class CommunitySettingsModalComponent {
 
     if (!community) return
 
-    this.store.dispatch(communityActions.editCommunity({
-      id: community.id,
-      payload: this.editCommunityForm.getRawValue()
-    }))
+    this.store.dispatch(
+      communityActions.editCommunity({
+        id: community.id,
+        payload: this.editCommunityForm.getRawValue(),
+      })
+    )
 
     this.#modalService.close()
   }
