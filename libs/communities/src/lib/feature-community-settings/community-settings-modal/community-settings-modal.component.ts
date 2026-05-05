@@ -10,6 +10,7 @@ import {
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { communityActions, selectSelectedCommunity } from '@tt/data-access/communities'
+import { DeleteConfirmationModal } from '../delete-confirmation-modal/delete-confirmation-modal.component'
 
 @Component({
   selector: 'tt-community-settings-modal',
@@ -26,7 +27,7 @@ import { communityActions, selectSelectedCommunity } from '@tt/data-access/commu
   styleUrl: './community-settings-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunitySettingsModalComponent {
+export class CommunitySettingsModal {
   fb = inject(FormBuilder)
   r2 = inject(Renderer2)
   store = inject(Store)
@@ -84,5 +85,9 @@ export class CommunitySettingsModalComponent {
     )
 
     this.#modalService.close()
+  }
+
+  onDelete() {
+    this.#modalService.show(DeleteConfirmationModal)
   }
 }

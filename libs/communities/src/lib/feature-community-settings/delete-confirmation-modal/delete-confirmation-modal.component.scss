@@ -1,0 +1,34 @@
+.confirm-modal__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.delete-confirmation-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cancel-save-btn__container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.community-cancel-btn {
+  width: 91px;
+  height: 44px;
+  background: none;
+  color: var(--light-color);
+  border: var(--light-border);
+  cursor: pointer;
+}
+
+.community-save-btn {
+  width: 116px;
+  height: 44px;
+  cursor: pointer;
+}

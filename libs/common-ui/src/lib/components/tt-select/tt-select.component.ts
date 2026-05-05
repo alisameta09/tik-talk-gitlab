@@ -84,8 +84,4 @@ export class TtSelectComponent implements ControlValueAccessor {
     this.selectedItems.set([])
     this.onChange([])
   }
-
-  get selectedItem(): string {
-    return this.selectedItems()[0] ?? ''
-  }
 }

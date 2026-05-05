@@ -20,6 +20,10 @@
   border: var(--light-border);
 }
 
+:host(.delete-community-modal) .modal {
+  height: max-content;
+}
+
 .close-modal__wrapper {
   display: flex;
   justify-content: flex-end;

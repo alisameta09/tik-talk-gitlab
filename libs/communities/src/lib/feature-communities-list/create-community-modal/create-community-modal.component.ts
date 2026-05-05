@@ -60,9 +60,11 @@ export class CreateCommunityModalComponent {
 
     if (this.createCommunityForm.invalid) return
 
-    this.store.dispatch(communityActions.createCommunity({
-      payload: this.createCommunityForm.getRawValue()
-    }))
+    this.store.dispatch(
+      communityActions.createCommunity({
+        payload: this.createCommunityForm.getRawValue(),
+      })
+    )
 
     this.#modalService.close()
   }
