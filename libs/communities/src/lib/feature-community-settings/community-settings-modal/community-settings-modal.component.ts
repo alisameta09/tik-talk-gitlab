@@ -9,8 +9,13 @@ import {
 } from '@tt/common-ui'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import { communityActions, selectSelectedCommunity } from '@tt/data-access/communities'
+import {
+  CommunitiesService,
+  communityActions,
+  selectSelectedCommunity,
+} from '@tt/data-access/communities'
 import { DeleteConfirmationModal } from '../delete-confirmation-modal/delete-confirmation-modal.component'
+import { firstValueFrom } from 'rxjs'
 
 @Component({
   selector: 'tt-community-settings-modal',
@@ -87,7 +92,14 @@ export class CommunitySettingsModal {
     this.#modalService.close()
   }
 
-  onDelete() {
-    this.#modalService.show(DeleteConfirmationModal)
+  async onDelete() {
+    const res = await firstValueFrom(this.#modalService.show(DeleteConfirmationModal))
+
+    if (!res) return
+
+    const community = this.community()
+    if (!community) return
+
+    this.store.dispatch(communityActions.deleteCommunity({id: community.id}))
   }
 }

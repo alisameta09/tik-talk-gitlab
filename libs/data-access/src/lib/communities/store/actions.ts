@@ -39,5 +39,8 @@ export const communityActions = createActionGroup({
     'leave community': props<{ id: number }>(),
 
     'update community': props<{ community: Community }>(),
+
+    'delete community': props<{ id: number }>(),
+    'delete community success': props<{ id: number }>(),
   }
 })

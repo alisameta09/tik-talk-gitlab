@@ -48,4 +48,7 @@ export class CommunitiesService {
     return this.http.get<Pageble<Post>>(`${communityUrl}${communityId}/posts`)
   }
 
+  deleteCommunity(communityId: number) {
+    return this.http.delete(`${communityUrl}${communityId}`)
+  }
 }

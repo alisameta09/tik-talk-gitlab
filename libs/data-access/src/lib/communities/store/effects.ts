@@ -130,4 +130,15 @@ export class CommunityEffects {
       )
     )
   })
+
+  deleteCommunity = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.deleteCommunity),
+      switchMap(({ id }) =>
+        this.communitiesService.deleteCommunity(id).pipe(
+          map(() => communityActions.deleteCommunitySuccess({ id }))
+        )
+      )
+    )
+  })
 }

@@ -3,7 +3,7 @@
   <div class="confirm-modal__container">
     <header class="h6 delete-confirmation-question mb24">Уверены, что хотите удалить?</header>
 
-    <div class="cancel-save-btn__container">
+    <div class="cancel-delete-btn__container">
       <button
         class="community-cancel-btn btn"
         type="button"
@@ -11,8 +11,9 @@
       >Нет
       </button>
       <button
-        class="community-save-btn btn"
+        class="community-delete-btn btn"
         type="submit"
+        (click)="onDelete()"
       >Да
       </button>
     </div>
