@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import { ImgPreviewUrlPipe} from '@tt/common-ui';
-import {Profile} from '@tt/data-access/profile';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { ImgPreviewUrlPipe } from '@tt/common-ui'
+import { Profile } from '@tt/data-access/profile'
 
 @Component({
   selector: 'tt-subscriber-card',
@@ -10,5 +10,5 @@ import {Profile} from '@tt/data-access/profile';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubscriberCardComponent {
-  @Input() profile!: Profile
+  profile = input<Profile>()
 }

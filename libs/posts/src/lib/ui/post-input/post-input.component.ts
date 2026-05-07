@@ -1,20 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostBinding,
   inject,
   input,
-  Output,
+  output,
   Renderer2,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {AvatarCircleComponent, ImgPreviewUrlPipe, SvgIconComponent} from '@tt/common-ui';
-import {GlobalStoreService} from '@tt/data-access/profile';
+} from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui'
+import { GlobalStoreService } from '@tt/data-access/profile'
 
 @Component({
   selector: 'tt-post-input',
-  imports: [AvatarCircleComponent, SvgIconComponent, FormsModule, ImgPreviewUrlPipe],
+  imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
   templateUrl: './post-input.component.html',
   styleUrl: './post-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +28,7 @@ export class PostInputComponent {
 
   postText = ''
 
-  @Output() postCreated = new EventEmitter()
+  postCreated = output<string>()
 
   @HostBinding('class.comment')
   get isComment() {
