@@ -34,8 +34,7 @@ export const routes: Routes = [
       },
       {
         path: 'communities',
-        loadChildren: () => communitiesRoutes,
-        providers: [provideState(communityFeature), provideEffects(CommunityEffects)],
+        loadChildren: () => communitiesRoutes
       },
     ],
     canActivate: [canActivateAuth],

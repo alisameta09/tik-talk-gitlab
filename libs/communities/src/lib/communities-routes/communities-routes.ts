@@ -10,15 +10,11 @@ import { PostEffects, postFeature } from '@tt/data-access/posts'
 export const communitiesRoutes: Route[] = [
   {
     path: '',
-    component: CommunitiesSearchPageComponent,
+    component: CommunitiesSearchPageComponent
   },
   {
     path: ':id',
     component: CommunityPageComponent,
-    providers: [
-      provideState(communityFeature),
-      provideEffects(CommunityEffects),
-    ],
     children: [
       {
         path: '',
