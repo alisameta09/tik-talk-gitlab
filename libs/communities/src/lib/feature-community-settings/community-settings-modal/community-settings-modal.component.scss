@@ -17,18 +17,21 @@
 }
 
 .community-hidden-textarea {
+  width: 100%;
   font-family: 'JetBrains Mono', sans-serif;
-  resize: none;
+  font-size: 14px;
+  line-height: 21px;
   background: var(--dark-color);
   color: var(--light-color);
   border: none;
   border-bottom: var(--light-border);
-  padding: 12px 0;
   outline: none;
-  line-height: 21px;
-  min-height: calc(21px * 1);
+  resize: none;
+  padding: 0 0 10px 0;
+  min-height: 21px;
   max-height: calc(21px * 4);
   overflow-y: auto;
+  field-sizing: content;
 }
 
 .community-hidden-textarea::-webkit-scrollbar {

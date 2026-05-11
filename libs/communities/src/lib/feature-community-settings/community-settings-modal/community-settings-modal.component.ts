@@ -9,11 +9,7 @@ import {
 } from '@tt/common-ui'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store'
-import {
-  CommunitiesService,
-  communityActions,
-  selectSelectedCommunity,
-} from '@tt/data-access/communities'
+import { communityActions, selectSelectedCommunity } from '@tt/data-access/communities'
 import { DeleteConfirmationModal } from '../delete-confirmation-modal/delete-confirmation-modal.component'
 import { firstValueFrom } from 'rxjs'
 
@@ -46,13 +42,6 @@ export class CommunitySettingsModal {
     tags: [<string[]>[], Validators.required],
     description: ['', [Validators.required]],
   })
-
-  onTextAreaInput(event: Event) {
-    const textarea = event.target as HTMLTextAreaElement
-
-    this.r2.setStyle(textarea, 'height', 'auto')
-    this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px')
-  }
 
   constructor() {
     effect(() => {
@@ -100,6 +89,6 @@ export class CommunitySettingsModal {
     const community = this.community()
     if (!community) return
 
-    this.store.dispatch(communityActions.deleteCommunity({id: community.id}))
+    this.store.dispatch(communityActions.deleteCommunity({ id: community.id }))
   }
 }

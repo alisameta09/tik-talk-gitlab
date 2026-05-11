@@ -8,7 +8,6 @@ import { LayoutComponent } from '@tt/layout'
 import { FormsExperimentComponent } from '@tt/experimental'
 import { ProfileEffects, profileFeature } from '@tt/data-access/profile'
 import { PostEffects, postFeature } from '@tt/data-access/posts'
-import { CommunityEffects, communityFeature } from '@tt/data-access/communities'
 import { communitiesRoutes } from '@tt/communities'
 
 export const routes: Routes = [
@@ -34,7 +33,7 @@ export const routes: Routes = [
       },
       {
         path: 'communities',
-        loadChildren: () => communitiesRoutes
+        loadChildren: () => communitiesRoutes,
       },
     ],
     canActivate: [canActivateAuth],
