@@ -13,16 +13,16 @@ export class DeleteConfirmationModal {
   #modalService = inject(ModalService)
   router = inject(Router)
 
-  decision = output<boolean>()
+  result = output<boolean>()
 
   onDelete() {
-    this.decision.emit(true)
+    this.result.emit(true)
     this.#modalService.closeAll()
     this.router.navigate(['/communities'])
   }
 
   onCancel() {
-    this.decision.emit(false)
+    this.result.emit(false)
     this.#modalService.close()
   }
 }
