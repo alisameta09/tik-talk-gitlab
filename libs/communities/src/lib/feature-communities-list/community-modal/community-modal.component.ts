@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, inject, Renderer2 } from '@angular/core'
 import {
+  DeleteConfirmationModal,
   ModalComponent,
   ModalService,
   StackInputComponent,
@@ -7,37 +8,37 @@ import {
   TtInputComponent,
   TtSelectComponent,
 } from '@tt/common-ui'
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
-import { Store } from '@ngrx/store'
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 import { communityActions, selectSelectedCommunity } from '@tt/data-access/communities'
-import { DeleteConfirmationModal } from '../delete-confirmation-modal/delete-confirmation-modal.component'
+import { Store } from '@ngrx/store'
 import { firstValueFrom } from 'rxjs'
 
 @Component({
-  selector: 'tt-community-settings-modal',
+  selector: 'tt-community-modal',
   imports: [
     ModalComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    StackInputComponent,
-    SvgIconComponent,
     TtInputComponent,
     TtSelectComponent,
+    StackInputComponent,
+    ReactiveFormsModule,
+    SvgIconComponent,
   ],
-  templateUrl: './community-settings-modal.component.html',
-  styleUrl: './community-settings-modal.component.scss',
+  templateUrl: './community-modal.component.html',
+  styleUrl: './community-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommunitySettingsModal {
+export class CommunityModalComponent {
   fb = inject(FormBuilder)
   r2 = inject(Renderer2)
-  store = inject(Store)
+  router = inject(Router)
   #modalService = inject(ModalService)
+  store = inject(Store)
 
   community = this.store.selectSignal(selectSelectedCommunity)
 
-  editCommunityForm = this.fb.nonNullable.group({
-    name: ['value', [Validators.required]],
+  communityForm = this.fb.nonNullable.group({
+    name: ['', [Validators.required]],
     themes: [<string[]>[], [Validators.required]],
     tags: [<string[]>[], Validators.required],
     description: ['', [Validators.required]],
@@ -48,7 +49,7 @@ export class CommunitySettingsModal {
       const community = this.community()
 
       if (community) {
-        this.editCommunityForm.patchValue({
+        this.communityForm.patchValue({
           name: community.name,
           themes: community.themes,
           tags: community.tags,
@@ -63,21 +64,30 @@ export class CommunitySettingsModal {
   }
 
   onSave(event: Event) {
-    event.preventDefault()
-
-    if (this.editCommunityForm.invalid) return
-
     const community = this.community()
 
-    if (!community) return
+    if (!community) {
+      event.preventDefault()
 
-    this.store.dispatch(
-      communityActions.editCommunity({
-        id: community.id,
-        payload: this.editCommunityForm.getRawValue(),
-      })
-    )
+      this.communityForm.markAllAsTouched()
+      this.communityForm.updateValueAndValidity()
 
+      if (this.communityForm.invalid) return
+
+      this.store.dispatch(
+        communityActions.createCommunity({
+          payload: this.communityForm.getRawValue(),
+        })
+      )
+    }
+     else {
+       this.store.dispatch(
+         communityActions.editCommunity({
+           id: community.id,
+           payload: this.communityForm.getRawValue(),
+         })
+       )
+     }
     this.#modalService.close()
   }
 
