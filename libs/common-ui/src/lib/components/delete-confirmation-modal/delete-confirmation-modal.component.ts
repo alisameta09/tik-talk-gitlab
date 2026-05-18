@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core'
-import { ModalComponent, ModalService } from '@tt/common-ui'
 import { Router } from '@angular/router'
+import { ModalService } from '../tt-modal/modal.service'
+import { ModalComponent } from '../tt-modal/tt-modal.component'
 
 @Component({
   selector: 'tt-delete-confirmation-modal',

@@ -77,7 +77,7 @@ export class TtSelectComponent implements ControlValueAccessor {
 
     this.selectedItems.set(newValue)
     this.onChange(newValue)
-    this.onTouched() // зачем?
+    this.onTouched()
   }
 
   onDeleteItem() {

@@ -12,6 +12,7 @@ import { ShowModalButtonComponent } from './tt-show-modal-button/tt-show-modal-b
 import { ModalComponent } from './tt-modal/tt-modal.component'
 import { TtInputComponent } from './tt-input/tt-input.component'
 import { ModalHostComponent } from './tt-modal-host/tt-modal-host.component'
+import { DeleteConfirmationModal } from './delete-confirmation-modal/delete-confirmation-modal.component'
 
 export {
   AvatarCircleComponent,
@@ -26,7 +27,8 @@ export {
   ModalService,
   ShowModalButtonComponent,
   ModalComponent,
-  ModalHostComponent
+  ModalHostComponent,
+  DeleteConfirmationModal
 }
 
 export type { DadataSuggestion }
