@@ -34,7 +34,7 @@ export class TtSelectComponent implements ControlValueAccessor {
 
   placeholder = input<string>('')
 
-  selectedItem = signal<string>('')
+  selectedItems = signal<string[]>([])
   isDropdownOpened = signal<boolean>(false)
 
   @HostListener('document:click', ['$event'])
@@ -44,12 +44,18 @@ export class TtSelectComponent implements ControlValueAccessor {
     }
   }
 
-  onChange(val: string | null) {}
+  onChange(val: string[]) {}
 
   onTouched() {}
 
-  writeValue(value: string): void {
-    this.selectedItem.set(value)
+  writeValue(value: string[] | string | null): void {
+    if (Array.isArray(value)) {
+      this.selectedItems.set(value)
+    } else if (typeof value === 'string') {
+      this.selectedItems.set(value ? [value] : [])
+    } else {
+      this.selectedItems.set([])
+    }
   }
 
   registerOnChange(fn: any): void {
@@ -67,12 +73,15 @@ export class TtSelectComponent implements ControlValueAccessor {
   }
 
   onSelectItem(value: string) {
-    this.selectedItem.set(value)
-    this.onChange(value)
+    const newValue = [value]
+
+    this.selectedItems.set(newValue)
+    this.onChange(newValue)
+    this.onTouched()
   }
 
   onDeleteItem() {
-    this.selectedItem.set('')
-    this.onChange(this.selectedItem())
+    this.selectedItems.set([])
+    this.onChange([])
   }
 }

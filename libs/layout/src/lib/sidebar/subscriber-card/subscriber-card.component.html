@@ -1,7 +1,9 @@
-<img
-  class="subscriber-avatar"
-  [src]="profile.avatarUrl | imgPreviewUrl: 'profile'"
-  [alt]="profile.lastName"
-/>
+@if (profile(); as profile) {
+  <img
+    class="subscriber-avatar"
+    [src]="profile.avatarUrl | imgPreviewUrl: 'profile'"
+    [alt]="profile.lastName"
+  />
 
-<strong class="subtitle">{{ profile.firstName }} {{ profile.lastName }}</strong>
+  <strong class="subtitle">{{ profile.firstName }} {{ profile.lastName }}</strong>
+}

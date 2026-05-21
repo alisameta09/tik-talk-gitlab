@@ -1,7 +1,7 @@
 <li
   [value]="item()"
   (click)="emitItem(item())"
-  [class.selected]="selectedItem() === item()"
+  [class.selected]="selectedItems().includes(item())"
   class="item-list"
 >
   <div class="item-list__wrapper">

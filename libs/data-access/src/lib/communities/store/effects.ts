@@ -50,6 +50,15 @@ export class CommunityEffects {
     )
   })
 
+  editCommunity = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.editCommunity),
+      switchMap(({ id, payload }) =>
+        this.communitiesService.editCommunity(id, payload)),
+      map(communityPage => communityActions.editCommunitySuccess({communityPage}))
+    )
+  })
+
   navigateToCommunity = createEffect(
     () => {
       return this.actions$.pipe(
@@ -118,6 +127,17 @@ export class CommunityEffects {
         this.communitiesService.getCommunityPosts(id).pipe(
           map(res =>
             communityActions.loadCommunityPostsSuccess({ posts: res.items })))
+      )
+    )
+  })
+
+  deleteCommunity = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(communityActions.deleteCommunity),
+      switchMap(({ id }) =>
+        this.communitiesService.deleteCommunity(id).pipe(
+          map(() => communityActions.deleteCommunitySuccess({ id }))
+        )
       )
     )
   })

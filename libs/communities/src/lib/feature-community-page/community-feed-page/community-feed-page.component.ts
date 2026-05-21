@@ -26,7 +26,6 @@ export class CommunityFeedPageComponent implements OnInit {
     if (!id) return
 
     this.store.dispatch(communityActions.loadCommunityPosts({ id }))
-    this.store.dispatch(postActions.fetchComments({ postId: id }))
   }
 
   createPost(postText: string) {

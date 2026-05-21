@@ -6,9 +6,13 @@ import {
   inject,
   input,
   OnDestroy,
-  OnInit,
 } from '@angular/core'
-import { ImgPreviewUrlPipe, ShowModalButtonComponent, SvgIconComponent } from '@tt/common-ui'
+import {
+  ImgPreviewUrlPipe,
+  ModalService,
+  ShowModalButtonComponent,
+  SvgIconComponent,
+} from '@tt/common-ui'
 import {
   communityActions,
   selectSelectedCommunity,
@@ -19,6 +23,7 @@ import { Store } from '@ngrx/store'
 import { GlobalStoreService } from '@tt/data-access/profile'
 import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
 import { NgClass } from '@angular/common'
+import { CommunityModalComponent } from '../../feature-communities-list/community-modal/community-modal.component'
 
 @Component({
   selector: 'tt-community-page',
@@ -37,6 +42,7 @@ import { NgClass } from '@angular/common'
 export class CommunityPageComponent implements OnDestroy {
   store = inject(Store)
   me = inject(GlobalStoreService).me
+  #modalService = inject(ModalService)
 
   id = input.required<string>()
 
@@ -58,5 +64,9 @@ export class CommunityPageComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.store.dispatch(communityActions.clearSelectedCommunity())
+  }
+
+  editCommunity() {
+    this.#modalService.show(CommunityModalComponent)
   }
 }

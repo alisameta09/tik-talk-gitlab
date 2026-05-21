@@ -6,8 +6,8 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core'
-import { RouterOutlet } from '@angular/router';
-import { PortalService } from '@tt/common-ui'
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router'
+import { ModalService, PortalService } from '@tt/common-ui'
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,10 @@ import { PortalService } from '@tt/common-ui'
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
   #portalService = inject(PortalService)
+  #router = inject(Router)
+  #modalService = inject(ModalService)
 
   portalHost = viewChild('portalHost', { read: ViewContainerRef })
 
@@ -29,4 +31,11 @@ export class AppComponent implements AfterViewInit{
     this.#portalService.registerContainer(portalHost)
   }
 
+  constructor() {
+    this.#router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.#modalService.close()
+      }
+    })
+  }
 }

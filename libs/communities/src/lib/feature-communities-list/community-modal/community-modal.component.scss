@@ -1,4 +1,4 @@
-.create-community-form {
+.community-modal__form {
   display: flex;
   flex-direction: column;
   height: 496px;
@@ -8,7 +8,7 @@
   color: tomato;
 }
 
-.create-community__container {
+.community-modal__container {
   display: grid;
   gap: 20px;
 }
@@ -21,18 +21,21 @@
 }
 
 .community-hidden-textarea {
+  width: 100%;
   font-family: 'JetBrains Mono', sans-serif;
-  resize: none;
+  font-size: 14px;
+  line-height: 21px;
   background: var(--dark-color);
   color: var(--light-color);
   border: none;
   border-bottom: var(--light-border);
-  padding: 12px 0;
   outline: none;
-  line-height: 21px;
-  min-height: calc(21px * 1);
+  resize: none;
+  padding: 0 0 10px 0;
+  min-height: 21px;
   max-height: calc(21px * 4);
   overflow-y: auto;
+  field-sizing: content;
 }
 
 .community-hidden-textarea::-webkit-scrollbar {
@@ -49,7 +52,18 @@
 .community-btn__wrapper {
   margin-top: auto;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  place-content: end;
+  gap: 82px;
+}
+
+.community-delete-btn {
+  background: var(--dark-color);
+  border: none;
+}
+
+.cancel-save-btn__container {
+  display: flex;
   gap: 20px;
 }
 

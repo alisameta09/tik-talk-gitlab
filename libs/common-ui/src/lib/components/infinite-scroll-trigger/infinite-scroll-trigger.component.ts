@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, output } from '@angular/core'
 
 @Component({
   selector: 'tt-infinite-scroll-trigger',
@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfiniteScrollTriggerComponent implements OnInit {
-  @Output() loaded = new EventEmitter<void>();
+  loaded = output()
 
   ngOnInit() {
     this.loaded.emit()

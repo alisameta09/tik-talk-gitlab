@@ -26,6 +26,7 @@
 
       @if (isMine()) {
         <tt-show-modal-button
+          (click)="editCommunity()"
         >Редактировать
           <svg icon="settings" class="svg16"></svg>
         </tt-show-modal-button>

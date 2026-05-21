@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
-import { CommunitiesFiltersComponent, CreateCommunityModalComponent } from '../index'
+import { CommunitiesFiltersComponent, CommunityModalComponent } from '../index'
 import {
   ModalService,
   ResizePageDirective,
@@ -42,6 +42,6 @@ export class CommunitiesSearchPageComponent {
   }
 
   createCommunity() {
-    this.#modalService.show(CreateCommunityModalComponent)
+    this.#modalService.show(CommunityModalComponent)
   }
 }

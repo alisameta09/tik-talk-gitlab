@@ -10,6 +10,8 @@ install_dependencies:
   image: node:22-alpine
   tags:
     - docker
+  before_script:
+        - yarn config set network-timeout 600000
   script:
     - yarn
     - yarn global add nx

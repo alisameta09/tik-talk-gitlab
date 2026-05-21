@@ -1,10 +1,10 @@
-import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@angular/core'
+import { Directive, HostBinding, HostListener, output } from '@angular/core'
 
 @Directive({
   selector: '[dnd]',
 })
 export class DndDirective {
-  @Output() fileDropped = new EventEmitter<File>()
+  fileDropped = output<File | undefined>()
 
   @HostBinding('class.fileover')
   fileover = false

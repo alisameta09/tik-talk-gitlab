@@ -57,6 +57,15 @@ export const communityFeature = createFeature({
         communityPage: payload.communityPage,
       }
     }),
+    on(communityActions.editCommunitySuccess, (state, { communityPage }) => {
+      return {
+        ...state,
+        communityPage,
+        communities: state.communities.map((c) =>
+          c.id === communityPage.id ? { ...c, ...communityPage } : c
+        ),
+      }
+    }),
     on(communityActions.loadSubscribersSuccess, (state, payload) => {
       return {
         ...state,
@@ -65,15 +74,15 @@ export const communityFeature = createFeature({
     }),
     on(communityActions.updateCommunity, (state, { community }) => ({
       ...state,
-      communities: state.communities.map(c =>
+      communities: state.communities.map((c) =>
         c.id === community.id
           ? {
-            ...c,
-            isJoined: community.isJoined,
-            subscribersAmount: c.subscribersAmount + (community.isJoined ? 1 : -1)
-          }
+              ...c,
+              isJoined: community.isJoined,
+              subscribersAmount: c.subscribersAmount + (community.isJoined ? 1 : -1),
+            }
           : c
-      )
+      ),
     })),
     on(communityActions.loadCommunityPostsSuccess, (state, payload) => {
       return {
@@ -84,8 +93,17 @@ export const communityFeature = createFeature({
     on(communityActions.clearSelectedCommunity, (state) => {
       return {
         ...state,
-        communityPage: null
+        communityPage: null,
+      }
+    }),
+    on(communityActions.deleteCommunitySuccess, (state, { id }) => {
+      return {
+        ...state,
+        communityPage: null,
+        communities: state.communities.filter((c) => c.id !== id),
+        subscribers: [],
+        posts: [],
       }
     })
-  )
+  ),
 })
