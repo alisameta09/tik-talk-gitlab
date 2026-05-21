@@ -24,6 +24,7 @@ import { GlobalStoreService } from '@tt/data-access/profile'
 import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
 import { NgClass } from '@angular/common'
 import { CommunityModalComponent } from '../../feature-communities-list/community-modal/community-modal.component'
+import { ShareCommunityModalComponent } from '../share-community-modal/share-community-modal.component'
 
 @Component({
   selector: 'tt-community-page',
@@ -68,5 +69,9 @@ export class CommunityPageComponent implements OnDestroy {
 
   editCommunity() {
     this.#modalService.show(CommunityModalComponent)
+  }
+
+  shareCommunity() {
+    this.#modalService.show(ShareCommunityModalComponent)
   }
 }
