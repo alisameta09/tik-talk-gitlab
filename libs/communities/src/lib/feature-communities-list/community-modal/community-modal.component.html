@@ -1,8 +1,8 @@
 <tt-modal>
 
-  <form [formGroup]="createCommunityForm" class="create-community-form">
+  <form [formGroup]="communityForm" class="community-modal__form">
 
-    <div class="create-community__container">
+    <div class="community-modal__container">
       <tt-input
         class="community-input"
         type="text"
@@ -34,20 +34,30 @@
           class="community-hidden-textarea medium-text"
           placeholder="Выберите"
           formControlName="description"
-          (input)="onTextAreaInput($event)"
         ></textarea>
       </div>
     </div>
 
-    @if (createCommunityForm.invalid && createCommunityForm.touched) {
+    @if (communityForm.invalid && communityForm.touched) {
       <small class="validation mt10"
       >Все поля формы обязательны к заполнению!
       </small>
     }
 
     <div class="community-btn__wrapper mt20">
-      <button class="community-cancel-btn btn" (click)="onCancel()" type="button">Отмена</button>
-      <button class="community-save-btn btn" type="submit" (click)="onSave($event)">Сохранить</button>
+      @if (community()) {
+        <button
+          class="community-delete-btn"
+          (click)="onDelete()"
+        >
+          <svg icon="delete" class="icon-btn"></svg>
+        </button>
+      }
+
+      <div class="cancel-save-btn__container">
+        <button class="community-cancel-btn btn" (click)="onCancel()" type="button">Отмена</button>
+        <button class="community-save-btn btn" type="submit" (click)="onSave($event)">Сохранить</button>
+      </div>
     </div>
 
   </form>
