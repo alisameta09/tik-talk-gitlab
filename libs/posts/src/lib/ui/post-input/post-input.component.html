@@ -6,14 +6,16 @@
 }
 
 <textarea
+  #textarea
+  [rows]="1"
   name="textarea-post"
   [(ngModel)]="postText"
   class="hidden-textarea medium-text"
   (input)="onTextAreaInput($event)"
-  (keyup.enter)="onPostSend()"
-  placeholder="Напишите что-нибудь"
+  (keyup.enter)="onPostSend(textarea)"
+  [placeholder]="placeholder()"
 ></textarea>
 
-<button class="icon-btn" (click)="onPostSend()">
+<button class="icon-btn" (click)="onPostSend(textarea)">
   <svg icon="send-message" class="svg16"></svg>
 </button>
