@@ -29,6 +29,11 @@
   justify-content: flex-end;
 }
 
+:host(.share-community__header) .close-modal__wrapper {
+  justify-content: space-between;
+  align-items: center;
+}
+
 .close-modal__btn {
   background: none;
   border: none;
@@ -37,6 +42,15 @@
   height: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.share__header {
+  display: none;
+}
+
+:host(.share-community__header) .share__header {
+  display: block;
   align-items: center;
 }
 

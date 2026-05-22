@@ -1,0 +1,70 @@
+.share-community-modal {
+  display: grid;
+  gap: 20px;
+  height: 496px;
+}
+
+.share-community__container {
+  display: grid;
+  gap: 20px;
+}
+
+.radio-btns__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.share-community__radio-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 13px;
+  border: var(--light-border);
+  padding: 6px;
+  background: none;
+  cursor: pointer;
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  right: 0;
+  color: var(--light-transparent-color)
+}
+
+.subscribers-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.subscriber-avatar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.cancel-send-btn__container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: auto;
+}
+
+.community-cancel-btn {
+  width: 91px;
+  height: 44px;
+  background: none;
+  color: var(--light-color);
+  border: var(--light-border);
+  cursor: pointer;
+}
+
+.community-send-btn {
+  width: 140px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
