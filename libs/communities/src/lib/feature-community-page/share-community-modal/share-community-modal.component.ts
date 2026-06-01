@@ -1,12 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
-import {
-  ImgPreviewUrlPipe,
-  ModalComponent,
-  StackInputComponent,
-  SvgIconComponent,
-  TtInputComponent,
-  TtSelectComponent,
-} from '@tt/common-ui'
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core'
+import { ImgPreviewUrlPipe, ModalComponent, SvgIconComponent, TtInputComponent } from '@tt/common-ui'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterLink } from '@angular/router'
 import { selectSelectedSubscribers } from '@tt/data-access/communities'
@@ -19,10 +12,8 @@ import { PostInputComponent } from '@tt/posts'
     ModalComponent,
     FormsModule,
     ReactiveFormsModule,
-    StackInputComponent,
     SvgIconComponent,
     TtInputComponent,
-    TtSelectComponent,
     ImgPreviewUrlPipe,
     RouterLink,
     PostInputComponent,
@@ -33,6 +24,8 @@ import { PostInputComponent } from '@tt/posts'
 })
 export class ShareCommunityModalComponent {
   store = inject(Store)
+
+  selected = signal<'page' | 'message'>('page')
 
   subscribers = this.store.selectSignal(selectSelectedSubscribers)
 }

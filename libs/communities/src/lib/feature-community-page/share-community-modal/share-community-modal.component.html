@@ -3,14 +3,34 @@
   <div class="share-community-modal">
 
     <div class="share-community__container">
-      <div class="radio-btns__wrapper mt16">
-        <button type="button" aria-label="Переключить" class="share-community__radio-btn"></button>
+
+      <label
+        class="radio-option mt16 active"
+        [class.active]="selected() === 'page'"
+      >
+        <input
+          type="radio"
+          class="hidden-radio"
+          [checked]="selected() === 'page'"
+          (click)="selected.set('page')"
+        >
+        <span class="custom-radio"></span>
         <span class="medium-text">На своей странице</span>
-      </div>
-      <div class="radio-btns__wrapper">
-        <button type="button" aria-label="Переключить" class="share-community__radio-btn"></button>
+      </label>
+
+      <label
+        class="radio-option"
+        [class.active]="selected() === 'message'"
+      >
+        <input
+          type="radio"
+          class="hidden-radio"
+          [checked]="selected() === 'message'"
+          (click)="selected.set('message')"
+        >
+        <span class="custom-radio"></span>
         <span class="medium-text">В личном сообщении</span>
-      </div>
+      </label>
 
       <tt-input
         class="community-input"

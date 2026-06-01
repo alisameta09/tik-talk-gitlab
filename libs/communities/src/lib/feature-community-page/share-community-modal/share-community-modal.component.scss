@@ -9,20 +9,40 @@
   gap: 20px;
 }
 
-.radio-btns__wrapper {
+.radio-option {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
-.share-community__radio-btn {
+.hidden-radio {
+  display: none;
+}
+
+.custom-radio {
+  position: relative;
   width: 20px;
   height: 20px;
-  border-radius: 13px;
+  border-radius: 50%;
   border: var(--light-border);
-  padding: 6px;
-  background: none;
-  cursor: pointer;
+}
+
+.radio-option.active .custom-radio {
+  background: var(--primary-color);
+  border: var(--primary-color);
+}
+
+.radio-option.active .custom-radio::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dark-color);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .search-icon {
