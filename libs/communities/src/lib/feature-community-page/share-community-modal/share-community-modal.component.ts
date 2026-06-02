@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core'
-import { ImgPreviewUrlPipe, ModalComponent, SvgIconComponent, TtInputComponent } from '@tt/common-ui'
+import {
+  ImgPreviewUrlPipe,
+  ModalComponent,
+  SvgIconComponent,
+  TtInputComponent,
+} from '@tt/common-ui'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { RouterLink } from '@angular/router'
 import { selectSelectedSubscribers } from '@tt/data-access/communities'
 import { Store } from '@ngrx/store'
 import { PostInputComponent } from '@tt/posts'
@@ -15,7 +19,6 @@ import { PostInputComponent } from '@tt/posts'
     SvgIconComponent,
     TtInputComponent,
     ImgPreviewUrlPipe,
-    RouterLink,
     PostInputComponent,
   ],
   templateUrl: './share-community-modal.component.html',

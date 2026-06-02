@@ -32,25 +32,34 @@
         <span class="medium-text">В личном сообщении</span>
       </label>
 
-      <tt-input
-        class="community-input"
-        type="text"
-        placeholder="Выберите"
-      >Подписчики
-        <svg icon="search" class="search-icon" iconRight></svg>
-      </tt-input>
+      <div
+        class="subscribers__wrapper"
+        [class.hidden]="selected() === 'page'"
+      >
+        <tt-input
+          class="community-input"
+          type="text"
+          placeholder="Выберите"
+        >Подписчики
+          <svg icon="search" class="search-icon" iconRight></svg>
+        </tt-input>
 
-      <div class="subscribers-wrapper mb16">
-        @for (subscriber of subscribers(); track subscriber.id) {
-          <a [routerLink]="['/profile', subscriber.id]">
-            <img
-              [src]="subscriber.avatarUrl | imgPreviewUrl: 'profile'"
-              alt="Фото подписчика"
+        <div class="subscribers mb16">
+          @for (subscriber of subscribers(); track subscriber.id) {
+            <button
+              type="button"
               class="subscriber-avatar-btn"
-            />
-          </a>
-        }
+            >
+              <img
+                [src]="subscriber.avatarUrl | imgPreviewUrl: 'profile'"
+                alt="Фото подписчика"
+                class="subscriber-avatar"
+              />
+            </button>
+          }
+        </div>
       </div>
+
     </div>
 
     <tt-post-input
