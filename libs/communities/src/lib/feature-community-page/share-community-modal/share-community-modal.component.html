@@ -62,15 +62,25 @@
 
     </div>
 
-    <tt-post-input
-      class="share-community-post-input"
-      [isCommentInput]="true"
-      placeholder="Напишите что-нибудь"
-    ></tt-post-input>
+    <div class="share-community-message__wrapper">
+    <textarea
+      [(ngModel)]="postText"
+      class="hidden-textarea medium-text"
+      placeholder="Напишите комментарий"
+    ></textarea>
+    </div>
 
     <div class="cancel-send-btn__container">
-      <button class="community-cancel-btn btn" type="button">Отмена</button>
-      <button class="community-send-btn btn" type="submit"
+      <button
+        class="community-cancel-btn btn"
+        type="button"
+        (click)="onCancel()"
+      >Отмена
+      </button>
+      <button
+        class="community-send-btn btn"
+        type="button"
+        (click)="onSend()"
       >Отправить
         <svg icon="send-message" class="send-icon svg16" iconRight></svg>
       </button>

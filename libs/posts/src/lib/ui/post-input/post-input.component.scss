@@ -8,11 +8,6 @@
   align-items: center;
 }
 
-:host(.share-community-post-input) {
-  display: flex;
-  gap: 0;
-}
-
 .hidden-textarea {
   font-family: 'JetBrains Mono', sans-serif;
   resize: none;
@@ -26,22 +21,10 @@
   }
 }
 
-:host(.share-community-post-input) .hidden-textarea {
-  width: 100%;
-  min-height: 21px;
-  max-height: calc(21px * 4);
-  overflow-y: auto;
-  field-sizing: content;
-}
-
 .icon-btn {
   background: var(--primary-color);
   border: 1px solid var(--dark-color);
   display: block;
-}
-
-:host(.share-community-post-input) .icon-btn{
-  display: none;
 }
 
 .hidden-textarea::placeholder {
