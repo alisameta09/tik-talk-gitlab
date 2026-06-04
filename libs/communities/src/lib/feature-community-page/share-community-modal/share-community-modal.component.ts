@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, output, signal } from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, inject, output, signal } from '@angular/core'
 import {
   ImgPreviewUrlPipe,
   ModalComponent,
@@ -6,11 +6,13 @@ import {
   SvgIconComponent,
   TtInputComponent,
 } from '@tt/common-ui'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { selectSelectedCommunity, selectSelectedSubscribers } from '@tt/data-access/communities'
 import { Store } from '@ngrx/store'
 import { postActions } from '@tt/data-access/posts'
 import { GlobalStoreService } from '@tt/data-access/profile'
+import { combineLatest, debounceTime, map, startWith, throttleTime } from 'rxjs'
+import { toSignal } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'tt-share-community-modal',
@@ -33,6 +35,8 @@ export class ShareCommunityModalComponent {
 
   postText = ''
 
+  filterSubscribers = new FormControl()
+
   selected = signal<'page' | 'message'>('page')
   postCreated = output<string>()
 
@@ -40,6 +44,25 @@ export class ShareCommunityModalComponent {
   community = this.store.selectSignal(selectSelectedCommunity)
 
   communityLink = `${window.location.origin}/community/${this.community()!.id}`
+
+  inputValue = toSignal(
+    this.filterSubscribers.valueChanges.pipe(startWith(''), debounceTime(300)),
+    { initialValue: '' }
+  )
+
+  filteredSubscribers = computed(() => {
+    const search = this.inputValue().toLowerCase().trim()
+    const allSubscribers = this.subscribers()
+
+    if (!search) {
+      return allSubscribers.slice(0, 8)
+    }
+
+    return allSubscribers.filter((subscriber) =>
+      `${subscriber.firstName} ${subscriber.lastName}`
+        .toLowerCase().includes(search.toLowerCase())
+    )
+  })
 
   onCancel() {
     this.modalService.close()

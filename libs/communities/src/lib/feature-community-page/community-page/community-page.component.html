@@ -53,7 +53,7 @@
 
         <div class="subscribers-wrapper mb32">
           @if (community.subscribersAmount > 0) {
-            @for (subscriber of subscribers(); track subscriber.id) {
+            @for (subscriber of selectedSubscribers(); track subscriber.id) {
               <a [routerLink]="['/profile', subscriber.id]">
                 <img
                   [src]="subscriber.avatarUrl | imgPreviewUrl: 'profile'"

@@ -1,12 +1,14 @@
 import { createSelector } from '@ngrx/store'
 import { communityFeature } from './reducer'
 
-export const selectFilteredCommunities = createSelector(
+export const selectFilteredCommunities =
+  createSelector(
   communityFeature.selectCommunities,
   (communities) => communities
 )
 
-export const selectCommunitiesPageble = createSelector(
+export const selectCommunitiesPageble =
+  createSelector(
   communityFeature.selectCommunityFeatureState,
   (state) => {
     return {
@@ -16,22 +18,26 @@ export const selectCommunitiesPageble = createSelector(
   }
 )
 
-export const selectCommunitiesFilters = createSelector(
+export const selectCommunitiesFilters =
+  createSelector(
   communityFeature.selectCommunityFilters,
   (filters) => filters
 )
 
-export const selectSelectedCommunity = createSelector(
+export const selectSelectedCommunity =
+  createSelector(
   communityFeature.selectCommunityPage,
   (communityPage) => communityPage
 )
 
-export const selectSelectedSubscribers = createSelector(
+export const selectSelectedSubscribers =
+  createSelector(
   communityFeature.selectSubscribers,
-  (subscribers) => subscribers.slice(0, 6)
+  (subscribers) => subscribers
 )
 
-export const selectSelectedCommunityPosts = createSelector(
+export const selectSelectedCommunityPosts =
+  createSelector(
     communityFeature.selectPosts,
     (posts) => posts
 )

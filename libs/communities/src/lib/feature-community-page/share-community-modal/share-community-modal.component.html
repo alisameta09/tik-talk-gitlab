@@ -37,6 +37,7 @@
         [class.hidden]="selected() === 'page'"
       >
         <tt-input
+          [formControl]="filterSubscribers"
           class="community-input"
           type="text"
           placeholder="Выберите"
@@ -45,7 +46,7 @@
         </tt-input>
 
         <div class="subscribers mb16">
-          @for (subscriber of subscribers(); track subscriber.id) {
+          @for (subscriber of filteredSubscribers(); track subscriber.id) {
             <button
               type="button"
               class="subscriber-avatar-btn"

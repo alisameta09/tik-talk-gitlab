@@ -45,9 +45,13 @@ export class CommunityPageComponent implements OnDestroy {
   me = inject(GlobalStoreService).me
   #modalService = inject(ModalService)
 
+  community = this.store.selectSignal(selectSelectedCommunity)
+  subscribers = this.store.selectSignal(selectSelectedSubscribers)
+
   id = input.required<string>()
 
   isMine = computed(() => this.me()?.id === this.community()?.admin.id)
+  selectedSubscribers = computed(() => this.subscribers().slice(0, 6))
 
   constructor() {
     effect(() => {
@@ -59,9 +63,6 @@ export class CommunityPageComponent implements OnDestroy {
       this.store.dispatch(communityActions.loadSubscribers({ id }))
     })
   }
-
-  community = this.store.selectSignal(selectSelectedCommunity)
-  subscribers = this.store.selectSignal(selectSelectedSubscribers)
 
   ngOnDestroy() {
     this.store.dispatch(communityActions.clearSelectedCommunity())
