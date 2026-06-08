@@ -11,8 +11,9 @@ import { selectSelectedCommunity, selectSelectedSubscribers } from '@tt/data-acc
 import { Store } from '@ngrx/store'
 import { postActions } from '@tt/data-access/posts'
 import { GlobalStoreService } from '@tt/data-access/profile'
-import { combineLatest, debounceTime, map, startWith, throttleTime } from 'rxjs'
+import { startWith, tap } from 'rxjs'
 import { toSignal } from '@angular/core/rxjs-interop'
+import { Admin } from '@tt/data-access/communities/interfaces/community.interface'
 
 @Component({
   selector: 'tt-share-community-modal',
@@ -35,8 +36,9 @@ export class ShareCommunityModalComponent {
 
   postText = ''
 
-  filterSubscribers = new FormControl()
+  filterSubscribers = new FormControl('', { nonNullable: true })
 
+  selectedSubscriberId = signal<number | null>(null)
   selected = signal<'page' | 'message'>('page')
   postCreated = output<string>()
 
@@ -46,7 +48,10 @@ export class ShareCommunityModalComponent {
   communityLink = `${window.location.origin}/community/${this.community()!.id}`
 
   inputValue = toSignal(
-    this.filterSubscribers.valueChanges.pipe(startWith(''), debounceTime(300)),
+    this.filterSubscribers.valueChanges.pipe(
+      tap(() => this.selectedSubscriberId.set(null)),
+      startWith('')
+    ),
     { initialValue: '' }
   )
 
@@ -63,6 +68,10 @@ export class ShareCommunityModalComponent {
         .toLowerCase().includes(search.toLowerCase())
     )
   })
+
+  onSubscriberClick(subscriber: Admin) {
+    this.selectedSubscriberId.set(subscriber.id)
+  }
 
   onCancel() {
     this.modalService.close()

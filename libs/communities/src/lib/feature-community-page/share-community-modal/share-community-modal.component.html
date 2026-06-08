@@ -45,16 +45,21 @@
           <svg icon="search" class="search-icon" iconRight></svg>
         </tt-input>
 
-        <div class="subscribers mb16">
+        <div
+          class="subscribers mb16"
+        >
           @for (subscriber of filteredSubscribers(); track subscriber.id) {
             <button
               type="button"
               class="subscriber-avatar-btn"
+              (click)="onSubscriberClick(subscriber)"
+
             >
               <img
                 [src]="subscriber.avatarUrl | imgPreviewUrl: 'profile'"
                 alt="Фото подписчика"
                 class="subscriber-avatar"
+                [class.selected]="selectedSubscriberId() === subscriber.id"
               />
             </button>
           }
