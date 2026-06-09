@@ -48,7 +48,7 @@ export class ShareCommunityModalComponent {
   subscribers = this.store.selectSignal(selectSelectedSubscribers)
   community = this.store.selectSignal(selectSelectedCommunity)
 
-  communityLink = `${window.location.origin}/community/${this.community()!.id}`
+  communityLink = `${window.location.origin}/communities/${this.community()!.id}`
 
   inputValue = toSignal(
     this.filterSubscribers.valueChanges.pipe(

@@ -4,13 +4,12 @@ import { CommunityPageComponent } from '../feature-community-page/community-page
 import { CommunityFeedPageComponent } from '../feature-community-page/community-feed-page/community-feed-page.component'
 import { provideState } from '@ngrx/store'
 import { provideEffects } from '@ngrx/effects'
-import { CommunityEffects, communityFeature } from '@tt/data-access/communities'
 import { PostEffects, postFeature } from '@tt/data-access/posts'
 
 export const communitiesRoutes: Route[] = [
   {
     path: '',
-    component: CommunitiesSearchPageComponent
+    component: CommunitiesSearchPageComponent,
   },
   {
     path: ':id',
@@ -19,11 +18,8 @@ export const communitiesRoutes: Route[] = [
       {
         path: '',
         component: CommunityFeedPageComponent,
-        providers: [
-          provideState(postFeature),
-          provideEffects(PostEffects)
-        ],
-      }
-    ]
+        providers: [provideState(postFeature), provideEffects(PostEffects)],
+      },
+    ],
   },
 ]
