@@ -76,6 +76,12 @@
     ></textarea>
     </div>
 
+
+      <small
+        [class.hidden]="!(selected() === 'message' && showValidation())"
+        class="validation_error medium-text"
+      >Выберите подписчика!</small>
+
     <div class="cancel-send-btn__container">
       <button
         class="community-cancel-btn btn"

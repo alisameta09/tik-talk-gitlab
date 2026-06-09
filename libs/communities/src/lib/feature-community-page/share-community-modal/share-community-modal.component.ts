@@ -40,6 +40,7 @@ export class ShareCommunityModalComponent {
 
   filterSubscribers = new FormControl('', { nonNullable: true })
 
+  showValidation = signal<boolean>(false)
   selectedSubscriberId = signal<number | null>(null)
   selected = signal<'page' | 'message'>('page')
   postCreated = output<string>()
@@ -73,6 +74,7 @@ export class ShareCommunityModalComponent {
 
   onSubscriberClick(subscriber: Admin) {
     this.selectedSubscriberId.set(subscriber.id)
+    this.showValidation.set(false)
   }
 
   onCancel() {
@@ -98,6 +100,12 @@ export class ShareCommunityModalComponent {
         })
       )
     } else {
+
+      if (!subscriberId) {
+        this.showValidation.set(true)
+        return
+      }
+
       this.router.navigate(['/chats', 'new'],
         { queryParams: { userId: subscriberId, text: text } }
       )
