@@ -32,6 +32,7 @@
 .message-text {
   padding: 8px 16px;
   background: var(--dark-message-color);
-  width: max-content;
+  width: fit-content;
   clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  word-break: break-all;
 }

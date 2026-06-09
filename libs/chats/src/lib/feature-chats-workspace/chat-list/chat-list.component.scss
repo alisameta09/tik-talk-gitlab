@@ -24,3 +24,11 @@
   position: absolute;
   right: 0;
 }
+
+.chat-btns__wrapper {
+  overflow-y: auto;
+}
+
+.chat-btns__wrapper::-webkit-scrollbar {
+  display: none;
+}

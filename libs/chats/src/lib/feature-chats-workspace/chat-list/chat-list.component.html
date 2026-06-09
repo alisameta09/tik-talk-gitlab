@@ -12,12 +12,14 @@
   </label>
 </div>
 
-@for (chat of chats$ | async; track chat.id) {
-  <button
-    [routerLink]="[chat.id]"
-    routerLinkActive="active"
-    [chat]="chat"
-    chats
-    aria-label="Close"
-  ></button>
-}
+<div class="chat-btns__wrapper" resizePage>
+  @for (chat of chats$ | async; track chat.id) {
+    <button
+      [routerLink]="[chat.id]"
+      routerLinkActive="active"
+      [chat]="chat"
+      chats
+      aria-label="Close"
+    ></button>
+  }
+</div>

@@ -17,6 +17,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { ChatMessageComponent } from './chat-message/chat-message.component'
 import { PostInputComponent } from '@tt/posts'
 import { Chat, ChatService } from '@tt/data-access/chats'
+import { GlobalStoreService } from '@tt/data-access/profile'
+import { ImgPreviewUrlPipe } from '@tt/common-ui'
 
 @Component({
   selector: 'tt-chat-messages-wrapper',
@@ -29,6 +31,8 @@ export class ChatMessagesWrapperComponent implements OnChanges, AfterViewInit {
   chatService = inject(ChatService)
   r2 = inject(Renderer2)
   destroyRef = inject(DestroyRef)
+  profile = inject(GlobalStoreService).me
+  imgPreviewUrlPipe = inject(ImgPreviewUrlPipe)
 
   chat = input.required<Chat>()
 

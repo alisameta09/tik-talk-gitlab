@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { map, startWith, switchMap } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ChatBtnsComponent } from '../chats-btns/chat-btns.component';
-import { SvgIconComponent } from '@tt/common-ui';
+import { ResizePageDirective, SvgIconComponent } from '@tt/common-ui';
 import {ChatService} from '@tt/data-access/chats';
 
 @Component({
@@ -16,6 +16,7 @@ import {ChatService} from '@tt/data-access/chats';
     RouterLink,
     RouterLinkActive,
     SvgIconComponent,
+    ResizePageDirective,
   ],
   templateUrl: './chat-list.component.html',
   styleUrl: './chat-list.component.scss',

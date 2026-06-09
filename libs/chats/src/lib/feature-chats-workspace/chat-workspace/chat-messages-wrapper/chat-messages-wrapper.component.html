@@ -1,12 +1,20 @@
 <div #messagesContainer class="messages__wrapper">
   @for (group of messages(); track group.label) {
-  <div class="chat-messages-date__wrapper">
-    <div class="chat-messages-date medium-small-text mb32">{{ group.label }}</div>
-  </div>
+    <div class="chat-messages-date__wrapper">
+      <div class="chat-messages-date medium-small-text mb32">{{ group.label }}</div>
+    </div>
 
-  @for (message of group.messages; track message.id; let last = $last) {
-  <tt-chat-message [message]="message" [class.last-message]="last" #lastMessage></tt-chat-message>
-  } }
+    @for (message of group.messages; track message.id; let last = $last) {
+      <tt-chat-message
+        [message]="message"
+        [class.last-message]="last"
+        #lastMessage
+      ></tt-chat-message>
+    }
+  }
 </div>
 
-<tt-post-input (postCreated)="onSendMessage($event)"></tt-post-input>
+<tt-post-input
+  (postCreated)="onSendMessage($event)"
+  [avatarUrl]="imgPreviewUrlPipe.transform(profile()?.avatarUrl ?? null, 'profile')"
+></tt-post-input>
