@@ -14,6 +14,7 @@ import { GlobalStoreService } from '@tt/data-access/profile'
 import { startWith, tap } from 'rxjs'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { Admin } from '@tt/data-access/communities/interfaces/community.interface'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'tt-share-community-modal',
@@ -33,6 +34,7 @@ export class ShareCommunityModalComponent {
   store = inject(Store)
   modalService = inject(ModalService)
   profile = inject(GlobalStoreService).me
+  router = inject(Router)
 
   postText = ''
 
@@ -79,6 +81,7 @@ export class ShareCommunityModalComponent {
 
   onSend() {
     const text = this.postText.trim()
+    const subscriberId = this.selectedSubscriberId()
 
     if (!text) return
 
@@ -93,6 +96,10 @@ export class ShareCommunityModalComponent {
             authorId: this.profile()!.id,
           },
         })
+      )
+    } else {
+      this.router.navigate(['/chats', 'new'],
+        { queryParams: { userId: subscriberId, text: text } }
       )
     }
 

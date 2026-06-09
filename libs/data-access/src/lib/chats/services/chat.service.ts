@@ -1,13 +1,13 @@
-import {inject, Injectable, signal} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
-import {map, Observable} from 'rxjs'
-import {chatUrl} from '@tt/shared'
-import {DateTransformPipe} from '@tt/common-ui'
-import {Chat, LastMessageRes, Message} from '../index'
-import {ChatWSService} from '../interfaces/chat-ws-service.interface'
-import {ChatWSMessage} from '../interfaces/chat-ws-message.interface'
-import {isNewMessage, isUnreadMessage} from '../interfaces/type-guards'
-import {ChatWSRxjsService} from './chat-ws-rxjs.service'
+import { inject, Injectable, signal } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { map, Observable } from 'rxjs'
+import { chatUrl } from '@tt/shared'
+import { DateTransformPipe } from '@tt/common-ui'
+import { Chat, LastMessageRes, Message } from '../index'
+import { ChatWSService } from '../interfaces/chat-ws-service.interface'
+import { ChatWSMessage } from '../interfaces/chat-ws-message.interface'
+import { isNewMessage, isUnreadMessage } from '../interfaces/type-guards'
+import { ChatWSRxjsService } from './chat-ws-rxjs.service'
 import { AuthService } from '../../auth/services/auth.service'
 import { GlobalStoreService } from '../../profile/services/global-store.service'
 import { Profile } from '../../profile/interfaces/profile.interface'
@@ -28,28 +28,41 @@ export class ChatService {
   unreadMessagesCount = signal(0)
   unreadMessagesByChat = signal<Record<number, number>>({})
 
+  setChatInfo(chat: Chat) {
+    const companion = chat.userFirst.id === this.me()!.id
+      ? chat.userSecond
+      : chat.userFirst
+
+    this.chatInfo.update((info) => ({
+      ...info,
+      [chat.id]: { companion }
+    }))
+
+    return companion
+  }
+
   setCurrentChatId(chatId: number) {
     this.currentChatId.set(chatId)
 
-    this.activeChats.update(chats => {
+    this.activeChats.update((chats) => {
       const groups = chats[chatId] ?? []
-      const updatedGroup = groups.map(group => ({
+      const updatedGroup = groups.map((group) => ({
         ...group,
-        messages: group.messages.map(message => ({
+        messages: group.messages.map((message) => ({
           ...message,
-          isRead: true
-        }))
+          isRead: true,
+        })),
       }))
 
       return {
         ...chats,
-        [chatId]: updatedGroup
+        [chatId]: updatedGroup,
       }
     })
 
-    this.unreadMessagesByChat.update(state => ({
+    this.unreadMessagesByChat.update((state) => ({
       ...state,
-      [chatId]: 0
+      [chatId]: 0,
     }))
 
     this.unreadMessagesCount.set(this.calculateUnreadMessages())
@@ -59,19 +72,17 @@ export class ChatService {
     return this.wsAdapter.connect({
       url: `${chatUrl}ws`,
       token: this.#authService.token ?? '',
-      handleMessage: this.handleWsMessage
+      handleMessage: this.handleWsMessage,
     }) as Observable<ChatWSMessage>
   }
 
   calculateUnreadMessages() {
-    return Object.values(this.activeChats())
-      .reduce((acc, groups) => {
-        for (const group of groups) {
-          acc += group.messages
-            .reduce((sum, message) => sum + (message.isRead ? 0 : 1), 0)
-        }
-        return acc
-      }, 0)
+    return Object.values(this.activeChats()).reduce((acc, groups) => {
+      for (const group of groups) {
+        acc += group.messages.reduce((sum, message) => sum + (message.isRead ? 0 : 1), 0)
+      }
+      return acc
+    }, 0)
   }
 
   handleWsMessage = (message: ChatWSMessage) => {
@@ -86,7 +97,7 @@ export class ChatService {
       const me = this.me()
       const isMine = message.data.author === me?.id
       const openedChat = this.currentChatId()
-      const companion = this.chatInfo()[chatId].companion
+      const companion = this.chatInfo()[chatId]?.companion
       const currentCount = this.unreadMessagesByChat()[chatId] || 0
       const newCount = currentCount + 1
 
@@ -100,28 +111,25 @@ export class ChatService {
         createdAt: message.data.created_at,
         isRead: chatId === openedChat,
         isMine,
-        user: isMine ? me! : companion
+        user: isMine ? me! : companion,
       }
 
-      this.activeChats.update(chats => {
+      this.activeChats.update((chats) => {
         const groups = chats[chatId] ?? []
-        const flat = groups.flatMap(group => group.messages)
-        const updated = [
-          ...flat,
-          newMessage
-        ]
+        const flat = groups.flatMap((group) => group.messages)
+        const updated = [...flat, newMessage]
         const regrouped = this.groupMessagesByDay(updated)
 
         return {
           ...chats,
-          [chatId]: regrouped
+          [chatId]: regrouped,
         }
       })
 
       if (chatId !== openedChat) {
-        this.unreadMessagesByChat.update(state => ({
+        this.unreadMessagesByChat.update((state) => ({
           ...state,
-          [chatId]: newCount
+          [chatId]: newCount,
         }))
       }
     }
@@ -134,7 +142,7 @@ export class ChatService {
   getChatById(chatId: number) {
     return this.http.get<Chat>(`${chatUrl}${chatId}`).pipe(
       map((chat) => {
-        const companion = chat.userFirst.id === this.me()!.id ? chat.userSecond : chat.userFirst
+        const companion = this.setChatInfo(chat)
 
         const patchedMessages = chat.messages.map((message) => {
           return {
@@ -146,14 +154,9 @@ export class ChatService {
 
         const groupedMessages = this.groupMessagesByDay(patchedMessages)
 
-        this.activeChats.update(chats => ({
+        this.activeChats.update((chats) => ({
           ...chats,
-          [chatId]: groupedMessages
-        }))
-
-        this.chatInfo.update(info => ({
-          ...info,
-          [chatId]: {companion}
+          [chatId]: groupedMessages,
         }))
 
         return {
