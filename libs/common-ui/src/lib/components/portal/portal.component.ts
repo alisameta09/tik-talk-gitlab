@@ -27,6 +27,7 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
   portalContent = viewChild('portalContent', { read: TemplateRef })
 
   host = input<HTMLElement>()
+  centered = input<boolean>(false)
 
   top = signal<number>(0)
   left = signal<number>(0)
@@ -37,11 +38,12 @@ export class PortalComponent implements AfterViewInit, OnDestroy {
 
       if (!host) return
 
-      const {bottom, left} = host.getBoundingClientRect()
+      const {bottom, left, width} = host.getBoundingClientRect()
       const indent = bottom + this.indent
+      const centerLeft = this.centered() ? left + width / 2 : left
 
+      this.left.set(centerLeft)
       this.top.set(indent)
-      this.left.set(left)
     })
   }
 

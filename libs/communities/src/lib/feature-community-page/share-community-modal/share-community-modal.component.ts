@@ -3,6 +3,7 @@ import {
   ImgPreviewUrlPipe,
   ModalComponent,
   ModalService,
+  PortalComponent,
   SvgIconComponent,
   TtInputComponent,
 } from '@tt/common-ui'
@@ -25,6 +26,7 @@ import { Router } from '@angular/router'
     SvgIconComponent,
     TtInputComponent,
     ImgPreviewUrlPipe,
+    PortalComponent,
   ],
   templateUrl: './share-community-modal.component.html',
   styleUrl: './share-community-modal.component.scss',
@@ -40,15 +42,15 @@ export class ShareCommunityModalComponent {
 
   filterSubscribers = new FormControl('', { nonNullable: true })
 
+  hoveredSubscriberId = signal<number | null>(null)
   showValidation = signal<boolean>(false)
   selectedSubscriberId = signal<number | null>(null)
   selected = signal<'page' | 'message'>('page')
-  postCreated = output<string>()
 
   subscribers = this.store.selectSignal(selectSelectedSubscribers)
   community = this.store.selectSignal(selectSelectedCommunity)
 
-  communityLink = `${window.location.origin}/communities/${this.community()!.id}`
+  communityLink = computed(() => `${window.location.origin}/communities/${this.community()?.id}`)
 
   inputValue = toSignal(
     this.filterSubscribers.valueChanges.pipe(
@@ -68,7 +70,7 @@ export class ShareCommunityModalComponent {
 
     return allSubscribers.filter((subscriber) =>
       `${subscriber.firstName} ${subscriber.lastName}`
-        .toLowerCase().includes(search.toLowerCase())
+        .toLowerCase().includes(search)
     )
   })
 
@@ -94,21 +96,18 @@ export class ShareCommunityModalComponent {
             title: 'Клевый комментарий',
             content: `${text}
 
-          ${this.communityLink}`,
+          ${this.communityLink()}`,
             authorId: this.profile()!.id,
           },
         })
       )
     } else {
-
       if (!subscriberId) {
         this.showValidation.set(true)
         return
       }
 
-      this.router.navigate(['/chats', 'new'],
-        { queryParams: { userId: subscriberId, text: text } }
-      )
+      this.router.navigate(['/chats', 'new'], { queryParams: { userId: subscriberId, text: text } })
     }
 
     this.postText = ''
