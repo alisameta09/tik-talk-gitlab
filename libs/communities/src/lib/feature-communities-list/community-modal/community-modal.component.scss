@@ -1,10 +1,14 @@
-.edit-community-form {
+.community-modal__form {
   display: flex;
   flex-direction: column;
   height: 496px;
 }
 
-.edit-community__container {
+.validation {
+  color: tomato;
+}
+
+.community-modal__container {
   display: grid;
   gap: 20px;
 }
@@ -49,7 +53,8 @@
   margin-top: auto;
   display: flex;
   flex-direction: row;
-  place-content: space-between;
+  place-content: end;
+  gap: 82px;
 }
 
 .community-delete-btn {
@@ -59,7 +64,6 @@
 
 .cancel-save-btn__container {
   display: flex;
-  justify-content: flex-end;
   gap: 20px;
 }
 

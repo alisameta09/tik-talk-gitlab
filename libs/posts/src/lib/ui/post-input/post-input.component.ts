@@ -29,6 +29,7 @@ export class PostInputComponent {
   postText = ''
 
   postCreated = output<string>()
+  placeholder = input<string>('')
 
   @HostBinding('class.comment')
   get isComment() {
@@ -42,10 +43,11 @@ export class PostInputComponent {
     this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px')
   }
 
-  onPostSend() {
+  onPostSend(textarea: HTMLTextAreaElement) {
     if (this.postText.trim()) {
       this.postCreated.emit(this.postText)
       this.postText = ''
+      this.r2.setStyle(textarea, 'height', 'auto')
     }
   }
 }

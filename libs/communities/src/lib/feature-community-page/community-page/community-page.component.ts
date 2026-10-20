@@ -23,7 +23,7 @@ import { Store } from '@ngrx/store'
 import { GlobalStoreService } from '@tt/data-access/profile'
 import { CommunityFeedPageComponent } from '../community-feed-page/community-feed-page.component'
 import { NgClass } from '@angular/common'
-import { CommunitySettingsModal } from '../../feature-community-settings/community-settings-modal/community-settings-modal.component'
+import { CommunityModalComponent } from '../../feature-communities-list/community-modal/community-modal.component'
 
 @Component({
   selector: 'tt-community-page',
@@ -67,6 +67,6 @@ export class CommunityPageComponent implements OnDestroy {
   }
 
   editCommunity() {
-    this.#modalService.show(CommunitySettingsModal)
+    this.#modalService.show(CommunityModalComponent)
   }
 }

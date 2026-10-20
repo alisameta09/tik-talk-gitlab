@@ -2,8 +2,8 @@ import { ComponentRef, Injectable, OutputRef, Type, ViewContainerRef } from '@an
 import { outputToObservable } from '@angular/core/rxjs-interop'
 import { Observable, take } from 'rxjs'
 
-interface ConfirmModal {
-  decision: OutputRef<boolean>
+interface ConfirmWithResult {
+  result: OutputRef<boolean>
 }
 
 @Injectable({
@@ -17,7 +17,7 @@ export class ModalService {
     this.#container = vcr
   }
 
-  show(component: Type<ConfirmModal>): Observable<boolean>
+  show(component: Type<ConfirmWithResult>): Observable<boolean>
   show<T>(component: Type<T>): ComponentRef<T>
 
   show<T>(component: Type<T>) {
@@ -26,10 +26,10 @@ export class ModalService {
     const ref = this.#container?.createComponent(component)
     this.#stack.push(ref)
 
-    if (ref.instance && typeof ref?.instance === 'object' && 'decision' in ref.instance) {
-      const instance = ref?.instance as ConfirmModal
+    if (ref.instance && typeof ref?.instance === 'object' && 'result' in ref.instance) {
+      const instance = ref?.instance as ConfirmWithResult
 
-      return outputToObservable(instance.decision).pipe(take(1))
+      return outputToObservable(instance.result).pipe(take(1))
     }
 
     return ref
